@@ -1,0 +1,105 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection('blog');
+  return blogPosts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+type Props = {
+  post: CollectionEntry<'blog'>;
+};
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('vi-VN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(date);
+};
+---
+
+<BlogLayout title={post.data.title} description={post.data.excerpt}>
+  <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+    <!-- Featured Image -->
+    {post.data.featuredImage && (
+      <div class="aspect-video overflow-hidden">
+        <img 
+          src={post.data.featuredImage} 
+          alt={post.data.title}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    )}
+    
+    <!-- Article Header -->
+    <header class="p-8 border-b border-gray-200">
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-2 mb-4">
+        {post.data.tags.map(tag => (
+          <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
+            #{tag}
+          </span>
+        ))}
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        {post.data.title}
+      </h1>
+      
+      <!-- Meta Info -->
+      <div class="flex items-center text-gray-600 space-x-4">
+        <time datetime={post.data.date.toISOString()}>
+          {formatDate(post.data.date)}
+        </time>
+        <span>•</span>
+        <span>WEBACELA</span>
+      </div>
+    </header>
+    
+    <!-- Article Content -->
+    <div class="p-8 prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-strong:text-gray-900 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:rounded-lg">
+      <Content />
+    </div>
+  </article>
+  
+  <!-- Back to Blog -->
+  <div class="mt-8 text-center">
+    <a 
+      href="/blog"
+      class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+    >
+      ← Quay lại blog
+    </a>
+  </div>
+  
+  <!-- CTA Section -->
+  <section class="mt-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 text-white text-center">
+    <h2 class="text-2xl font-bold mb-4">Bạn cần thiết kế website chuyên nghiệp?</h2>
+    <p class="text-lg mb-6 opacity-90">
+      Liên hệ WEBACELA để được tư vấn miễn phí và nhận báo giá tốt nhất!
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a 
+        href="tel:+84932383510" 
+        class="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center"
+      >
+        📞 Gọi ngay: +84 932 383 510
+      </a>
+      <a 
+        href="mailto:congminh1203@gmail.com"
+        class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center"
+      >
+        ✉️ Gửi email
+      </a>
+    </div>
+  </section>
+</BlogLayout>

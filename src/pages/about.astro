@@ -1,0 +1,42 @@
+---
+import { getEntry } from 'astro:content';
+import BlogLayout from '../layouts/BlogLayout.astro';
+
+const aboutPage = await getEntry('pages', 'about');
+
+if (!aboutPage) {
+  throw new Error('About page not found');
+}
+
+const { Content } = await aboutPage.render();
+---
+
+<BlogLayout title={aboutPage.data.title} description="Tìm hiểu về WEBACELA - Đơn vị thiết kế website chuyên nghiệp">
+  <div class="bg-white rounded-lg shadow-lg p-8">
+    <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-strong:text-gray-900 prose-ul:text-gray-700 prose-li:text-gray-700">
+      <Content />
+    </div>
+  </div>
+  
+  <!-- CTA Section -->
+  <section class="mt-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 text-white text-center">
+    <h2 class="text-2xl font-bold mb-4">Sẵn sàng bắt đầu dự án của bạn?</h2>
+    <p class="text-lg mb-6 opacity-90">
+      Liên hệ với chúng tôi ngay hôm nay để được tư vấn miễn phí!
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a 
+        href="tel:+84932383510" 
+        class="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center"
+      >
+        📞 +84 932 383 510
+      </a>
+      <a 
+        href="mailto:congminh1203@gmail.com"
+        class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center"
+      >
+        ✉️ congminh1203@gmail.com
+      </a>
+    </div>
+  </section>
+</BlogLayout>

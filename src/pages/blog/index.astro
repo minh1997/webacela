@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+
+// Get all blog posts and sort by date (newest first)
+const allBlogPosts = await getCollection('blog');
+const sortedPosts = allBlogPosts.sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BlogLayout title="Blog - WEBACELA" description="Chia sẻ kiến thức về thiết kế web, SEO và số hóa doanh nghiệp">
+  <!-- Blog Header -->
+  <div class="text-center mb-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">Blog WEBACELA</h1>
+    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+      Chia sẻ kiến thức về thiết kế web, tối ưu SEO và giải pháp số hóa doanh nghiệp
+    </p>
+  </div>
+
+  <!-- Featured Post -->
+  {sortedPosts.length > 0 && (
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Bài viết nổi bật</h2>
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        {sortedPosts[0].data.featuredImage && (
+          <div class="aspect-video overflow-hidden">
+            <img 
+              src={sortedPosts[0].data.featuredImage} 
+              alt={sortedPosts[0].data.title}
+              class="w-full h-full object-cover"
+            />
+          </div>
+        )}
+        <div class="p-8">
+          <div class="flex flex-wrap gap-2 mb-4">
+            {sortedPosts[0].data.tags.map(tag => (
+              <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
+                #{tag}
+              </span>
+            ))}
+          </div>
+          <h3 class="text-3xl font-bold text-gray-900 mb-4">
+            <a href={`/blog/${sortedPosts[0].slug}`} class="hover:text-blue-600 transition-colors">
+              {sortedPosts[0].data.title}
+            </a>
+          </h3>
+          <p class="text-gray-600 text-lg mb-6">{sortedPosts[0].data.excerpt}</p>
+          <div class="flex items-center justify-between">
+            <time class="text-gray-500" datetime={sortedPosts[0].data.date.toISOString()}>
+              {new Intl.DateTimeFormat('vi-VN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              }).format(sortedPosts[0].data.date)}
+            </time>
+            <a 
+              href={`/blog/${sortedPosts[0].slug}`}
+              class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+            >
+              Đọc bài viết
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- All Posts Grid -->
+  <section>
+    <h2 class="text-2xl font-bold text-gray-900 mb-6">Tất cả bài viết</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sortedPosts.slice(1).map(post => (
+        <BlogCard
+          title={post.data.title}
+          date={post.data.date}
+          excerpt={post.data.excerpt}
+          slug={post.slug}
+          featuredImage={post.data.featuredImage}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+  </section>
+
+  {sortedPosts.length === 0 && (
+    <div class="text-center py-12">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Chưa có bài viết nào</h2>
+      <p class="text-gray-600">Hãy quay lại sau để đọc những bài viết mới nhất!</p>
+    </div>
+  )}
+</BlogLayout>
