@@ -1,0 +1,21 @@
+---
+// This page redirects to the admin interface
+---
+
+<script>
+  // Redirect to the actual admin folder
+  if (typeof window !== 'undefined') {
+    window.location.href = '/admin/index.html';
+  }
+</script>
+
+<html>
+<head>
+  <meta http-equiv="refresh" content="0; url=/admin/index.html">
+  <title>Redirecting to Admin...</title>
+</head>
+<body>
+  <p>Redirecting to admin panel...</p>
+  <p>If you are not redirected, <a href="/admin/index.html">click here</a>.</p>
+</body>
+</html>

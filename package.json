@@ -6,11 +6,18 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "cms:proxy": "npx decap-server",
+    "dev:cms": "npm run cms:proxy & npm run dev",
+    "cms:local": "bash switch-cms-config.sh local && npm run dev:cms",
+    "cms:production": "bash switch-cms-config.sh production"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.10",
     "astro": "^5.9.4",
     "tailwindcss": "^4.1.10"
+  },
+  "devDependencies": {
+    "decap-server": "^3.3.1"
   }
 }
