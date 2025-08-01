@@ -7,27 +7,7 @@
   <title>Content Manager</title>
 </head>
 <body>
-  <div id="dev-check">
-    <p>Checking environment...</p>
-  </div>
-  
-  <script>
-    // Check if we're in development mode
-    const isDevelopment = window.location.hostname === 'localhost' || 
-                         window.location.hostname === '127.0.0.1' || 
-                         window.location.hostname.includes('local');
-    
-    if (!isDevelopment) {
-      document.body.innerHTML = '<h1>404 - Not Found</h1><p>This page is only available in development mode.</p>';
-    } else {
-      // Remove the checking message and load CMS
-      document.getElementById('dev-check').remove();
-      
-      // Load DecapCMS
-      const script = document.createElement('script');
-      script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
-      document.body.appendChild(script);
-    }
-  </script>
+  <!-- Include the script that builds the page and powers Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
