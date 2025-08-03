@@ -41,3 +41,143 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "landing"
+    label: "Landing Pages"
+    folder: "src/content/landing"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text", required: false}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - label: "Page Blocks"
+        name: "blocks"
+        widget: "list"
+        types:
+          - label: "Hero Section"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Subtitle", name: "subtitle", widget: "text", required: false}
+              - {label: "Background Image", name: "backgroundImage", widget: "image", required: false}
+              - {label: "CTA Text", name: "ctaText", widget: "string", required: false}
+              - {label: "CTA Link", name: "ctaLink", widget: "string", required: false}
+              - label: "Text Alignment"
+                name: "textAlign"
+                widget: "select"
+                options: ["left", "center", "right"]
+                default: "center"
+                required: false
+
+          - label: "Content Section"
+            name: "content"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string", required: false}
+              - {label: "Content", name: "content", widget: "markdown"}
+              - label: "Layout"
+                name: "layout"
+                widget: "select"
+                options: ["single", "two-column", "three-column"]
+                default: "single"
+                required: false
+              - {label: "Background Color", name: "backgroundColor", widget: "color", required: false}
+              - {label: "Text Color", name: "textColor", widget: "string", required: false}
+
+          - label: "Features Section"
+            name: "features"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string", required: false}
+              - label: "Columns"
+                name: "columns"
+                widget: "select"
+                options: 
+                  - { label: "1 Column", value: 1 }
+                  - { label: "2 Columns", value: 2 }
+                  - { label: "3 Columns", value: 3 }
+                  - { label: "4 Columns", value: 4 }
+                default: 3
+                required: false
+              - {label: "Background Color", name: "backgroundColor", widget: "color", required: false}
+              - label: "Feature Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Description", name: "description", widget: "text"}
+                  - {label: "Image", name: "image", widget: "image", required: false}
+                  - {label: "Link", name: "link", widget: "string", required: false}
+
+          - label: "Call to Action"
+            name: "cta"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string", required: false}
+              - {label: "Subtitle", name: "subtitle", widget: "text", required: false}
+              - {label: "Button Text", name: "buttonText", widget: "string", required: false}
+              - {label: "Button Link", name: "buttonLink", widget: "string", required: false}
+              - {label: "Background Color", name: "backgroundColor", widget: "color", required: false}
+              - {label: "Text Color", name: "textColor", widget: "string", required: false}
+
+          - label: "Image Gallery"
+            name: "gallery"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string", required: false}
+              - label: "Layout"
+                name: "layout"
+                widget: "select"
+                options: ["grid", "masonry", "carousel"]
+                default: "grid"
+                required: false
+              - label: "Columns"
+                name: "columns"
+                widget: "select"
+                options: 
+                  - { label: "1 Column", value: 1 }
+                  - { label: "2 Columns", value: 2 }
+                  - { label: "3 Columns", value: 3 }
+                  - { label: "4 Columns", value: 4 }
+                default: 3
+                required: false
+              - label: "Images"
+                name: "images"
+                widget: "list"
+                fields:
+                  - {label: "Image", name: "src", widget: "image"}
+                  - {label: "Alt Text", name: "alt", widget: "string"}
+                  - {label: "Caption", name: "caption", widget: "string", required: false}
+
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string", required: false}
+              - label: "Layout"
+                name: "layout"
+                widget: "select"
+                options: ["single", "grid"]
+                default: "grid"
+                required: false
+              - label: "Testimonials"
+                name: "testimonials"
+                widget: "list"
+                fields:
+                  - {label: "Name", name: "name", widget: "string"}
+                  - {label: "Title", name: "title", widget: "string", required: false}
+                  - {label: "Company", name: "company", widget: "string", required: false}
+                  - {label: "Content", name: "content", widget: "text"}
+                  - {label: "Avatar", name: "avatar", widget: "image", required: false}
+                  - label: "Rating"
+                    name: "rating"
+                    widget: "select"
+                    options: 
+                      - { label: "1 Star", value: 1 }
+                      - { label: "2 Stars", value: 2 }
+                      - { label: "3 Stars", value: 3 }
+                      - { label: "4 Stars", value: 4 }
+                      - { label: "5 Stars", value: 5 }
+                    required: false

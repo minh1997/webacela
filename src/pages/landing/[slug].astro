@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PageBuilder from '../../components/pagebuilder/PageBuilder.astro';
+
+export async function getStaticPaths() {
+  const landingPages = await getCollection('landing');
+  return landingPages.map(page => ({
+    params: { slug: page.data.slug || page.slug },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { data } = page;
+---
+
+<Layout title={data.title} description={data.description}>
+  <PageBuilder blocks={data.blocks} />
+</Layout>

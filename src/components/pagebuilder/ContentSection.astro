@@ -1,0 +1,38 @@
+---
+export interface Props {
+  title?: string;
+  content: string;
+  layout?: 'single' | 'two-column' | 'three-column';
+  backgroundColor?: string;
+  textColor?: string;
+}
+
+const { 
+  title, 
+  content, 
+  layout = 'single',
+  backgroundColor = 'transparent',
+  textColor = 'text-gray-800'
+} = Astro.props;
+
+// Split content for multi-column layouts
+const contentParts = layout !== 'single' ? content.split('---') : [content];
+---
+
+<section class="content-section py-12" style={`background-color: ${backgroundColor}`}>
+  <div class="container mx-auto px-4">
+    {title && (
+      <h2 class={`text-3xl font-bold mb-8 text-center ${textColor}`}>{title}</h2>
+    )}
+    
+    <div class={`prose max-w-none ${textColor} ${
+      layout === 'two-column' ? 'grid grid-cols-1 md:grid-cols-2 gap-8' :
+      layout === 'three-column' ? 'grid grid-cols-1 md:grid-cols-3 gap-8' :
+      'max-w-4xl mx-auto'
+    }`}>
+      {contentParts.map((part) => (
+        <div set:html={part.trim()} />
+      ))}
+    </div>
+  </div>
+</section>

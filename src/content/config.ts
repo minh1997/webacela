@@ -18,7 +18,18 @@ const pages = defineCollection({
   }),
 });
 
+const landing = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    slug: z.string().optional(),
+    blocks: z.array(z.any()),
+  }),
+});
+
 export const collections = {
   blog,
   pages,
+  landing,
 };

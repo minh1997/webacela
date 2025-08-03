@@ -1,0 +1,56 @@
+---
+export interface Props {
+  title?: string;
+  images: Array<{
+    src: string;
+    alt: string;
+    caption?: string;
+  }>;
+  layout?: 'grid' | 'masonry' | 'carousel';
+  columns?: number;
+}
+
+const { 
+  title, 
+  images, 
+  layout = 'grid',
+  columns = 3
+} = Astro.props;
+
+const gridCols = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-1 md:grid-cols-2',
+  3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+  4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
+};
+---
+
+<section class="gallery-section py-12">
+  <div class="container mx-auto px-4">
+    {title && (
+      <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">{title}</h2>
+    )}
+    
+    <div class={`grid ${gridCols[columns]} gap-4`}>
+      {images.map((image) => (
+        <div class="gallery-item">
+          <img 
+            src={image.src} 
+            alt={image.alt} 
+            class="w-full h-auto rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer"
+          />
+          {image.caption && (
+            <p class="text-sm text-gray-600 mt-2 text-center">{image.caption}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.gallery-item img {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+</style>

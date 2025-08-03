@@ -1,0 +1,41 @@
+---
+import HeroSection from './HeroSection.astro';
+import ContentSection from './ContentSection.astro';
+import FeaturesSection from './FeaturesSection.astro';
+import CTASection from './CTASection.astro';
+import ImageGallery from './ImageGallery.astro';
+import TestimonialsSection from './TestimonialsSection.astro';
+
+export interface PageBlock {
+  type: 'hero' | 'content' | 'features' | 'cta' | 'gallery' | 'testimonials';
+  [key: string]: any;
+}
+
+export interface Props {
+  blocks: PageBlock[];
+}
+
+const { blocks } = Astro.props;
+---
+
+<div class="page-builder">
+  {blocks.map((block) => {
+    const { type, ...props } = block;
+    
+    if (type === 'hero') {
+      return <HeroSection {...(props as any)} />;
+    } else if (type === 'content') {
+      return <ContentSection {...(props as any)} />;
+    } else if (type === 'features') {
+      return <FeaturesSection {...(props as any)} />;
+    } else if (type === 'cta') {
+      return <CTASection {...(props as any)} />;
+    } else if (type === 'gallery') {
+      return <ImageGallery {...(props as any)} />;
+    } else if (type === 'testimonials') {
+      return <TestimonialsSection {...(props as any)} />;
+    }
+    
+    return null;
+  })}
+</div>

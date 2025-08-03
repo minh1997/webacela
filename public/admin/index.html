@@ -5,9 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Content Manager</title>
+  <style>
+    /* Add some basic styling for the preview */
+    .cms-preview-pane {
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+  </style>
 </head>
 <body>
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <!-- Include our custom preview templates -->
+  <script src="./preview.js"></script>
 </body>
 </html>
