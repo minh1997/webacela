@@ -1,7 +1,6 @@
 backend:
-  name: git-proxy
+  name: git-gateway
   branch: main
-  proxy_url: http://localhost:8081/api/v1
 
 # For local development only
 local_backend: true
@@ -54,10 +53,13 @@ collections:
       - label: "Page Blocks"
         name: "blocks"
         widget: "list"
+        collapsed: true
+        summary: "{{fields.title}} - {{type}}"
         types:
           - label: "Hero Section"
             name: "hero"
             widget: "object"
+            collapsed: true
             fields:
               - {label: "Title", name: "title", widget: "string"}
               - {label: "Subtitle", name: "subtitle", widget: "text", required: false}
@@ -74,6 +76,7 @@ collections:
           - label: "Content Section"
             name: "content"
             widget: "object"
+            collapsed: true
             fields:
               - {label: "Title", name: "title", widget: "string", required: false}
               - {label: "Content", name: "content", widget: "markdown"}
@@ -89,6 +92,7 @@ collections:
           - label: "Features Section"
             name: "features"
             widget: "object"
+            collapsed: true
             fields:
               - {label: "Title", name: "title", widget: "string", required: false}
               - label: "Columns"
@@ -114,6 +118,7 @@ collections:
           - label: "Call to Action"
             name: "cta"
             widget: "object"
+            collapsed: true
             fields:
               - {label: "Title", name: "title", widget: "string", required: false}
               - {label: "Subtitle", name: "subtitle", widget: "text", required: false}
@@ -125,6 +130,7 @@ collections:
           - label: "Image Gallery"
             name: "gallery"
             widget: "object"
+            collapsed: true
             fields:
               - {label: "Title", name: "title", widget: "string", required: false}
               - label: "Layout"
@@ -154,6 +160,7 @@ collections:
           - label: "Testimonials"
             name: "testimonials"
             widget: "object"
+            collapsed: true
             fields:
               - {label: "Title", name: "title", widget: "string", required: false}
               - label: "Layout"
