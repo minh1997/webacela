@@ -32,16 +32,16 @@
     async componentDidMount() {
       try {
         // Load CSS
-        loadStylesheet('https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css');
+        loadStylesheet('https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css');
         
         // Load jQuery if not present
         if (!window.jQuery) {
-          await loadScript('https://code.jquery.com/jquery-3.6.0.min.js');
+          await loadScript('https://code.jquery.com/jquery-3.4.1.slim.min.js');
         }
 
         // Load Summernote
         if (!window.jQuery.fn.summernote) {
-          await loadScript('https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js');
+          await loadScript('https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js');
         }
 
         this.setState({ loaded: true }, () => {
