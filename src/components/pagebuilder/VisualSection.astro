@@ -1,0 +1,86 @@
+---
+export interface Props {
+  title?: string;
+  content: string;
+  backgroundColor?: string;
+}
+
+const { title, content, backgroundColor } = Astro.props;
+---
+
+<section 
+  class="visual-section"
+  style={backgroundColor ? `background-color: ${backgroundColor}` : undefined}
+>
+  <div class="container">
+    {title && (
+      <div class="visual-section__header">
+        <h2 class="visual-section__title">{title}</h2>
+      </div>
+    )}
+    <div class="visual-section__content" set:html={content} />
+  </div>
+</section>
+
+<style>
+  .visual-section {
+    padding: 4rem 0;
+  }
+
+  .visual-section__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .visual-section__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-color, #333);
+  }
+
+  .visual-section__content {
+    /* Reset styles for GrapesJS content */
+    line-height: 1.6;
+  }
+
+  /* Ensure GrapesJS content is responsive */
+  .visual-section__content :global(.container) {
+    max-width: 100%;
+  }
+
+  .visual-section__content :global(img) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .visual-section__content :global(.row) {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+  }
+
+  .visual-section__content :global(.col) {
+    flex: 1;
+    padding: 0 15px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .visual-section {
+      padding: 2rem 0;
+    }
+
+    .visual-section__title {
+      font-size: 2rem;
+    }
+
+    .visual-section__content :global(.row) {
+      flex-direction: column;
+    }
+
+    .visual-section__content :global(.col) {
+      margin-bottom: 1rem;
+    }
+  }
+</style>

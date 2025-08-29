@@ -5,9 +5,10 @@ import FeaturesSection from './FeaturesSection.astro';
 import CTASection from './CTASection.astro';
 import ImageGallery from './ImageGallery.astro';
 import TestimonialsSection from './TestimonialsSection.astro';
+import VisualSection from './VisualSection.astro';
 
 export interface PageBlock {
-  type: 'hero' | 'content' | 'features' | 'cta' | 'gallery' | 'testimonials';
+  type: 'hero' | 'content' | 'features' | 'cta' | 'gallery' | 'testimonials' | 'visual';
   [key: string]: any;
 }
 
@@ -34,6 +35,8 @@ const { blocks } = Astro.props;
       return <ImageGallery {...(props as any)} />;
     } else if (type === 'testimonials') {
       return <TestimonialsSection {...(props as any)} />;
+    } else if (type === 'visual') {
+      return <VisualSection {...(props as any)} />;
     }
     
     return null;

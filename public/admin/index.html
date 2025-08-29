@@ -13,6 +13,91 @@
     .note-frame {
       background-color: #fff;
     }
+    
+    /* GrapesJS specific styles for CMS */
+    .grapesjs-container {
+      border: 1px solid #ddd !important;
+      border-radius: 4px !important;
+    }
+    
+    /* Make sure GrapesJS modal dialogs appear above CMS modals */
+    .gjs-mdl-container {
+      z-index: 999999 !important;
+    }
+    
+    /* Better styling for the loading state */
+    .grapesjs-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      font-size: 16px;
+      color: #666;
+    }
+    
+    /* Custom widget styling */
+    .widget-control {
+      margin-bottom: 1rem;
+    }
+    
+    .widget-control label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    /* GrapesJS Blocks styling */
+    #blocks .gjs-block {
+      width: calc(50% - 5px) !important;
+      margin: 2px !important;
+      padding: 8px !important;
+      background: #fff !important;
+      border: 1px solid #ddd !important;
+      border-radius: 4px !important;
+      cursor: pointer !important;
+      text-align: center !important;
+      font-size: 12px !important;
+      transition: all 0.2s ease !important;
+    }
+    
+    #blocks .gjs-block:hover {
+      border-color: #007bff !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    }
+    
+    #blocks .gjs-block i {
+      display: block !important;
+      font-size: 18px !important;
+      margin-bottom: 4px !important;
+      color: #007bff !important;
+    }
+    
+    /* Make sure blocks are visible */
+    .gjs-blocks-c {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 5px !important;
+    }
+    
+    /* Better preview styling */
+    .grapesjs-preview {
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+    
+    .grapesjs-preview img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    /* Responsive design for the editor */
+    @media (max-width: 768px) {
+      .grapesjs-container {
+        height: 400px !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -22,5 +107,7 @@
   <script src="./preview.js"></script>
   <!-- Include Summernote enhancement -->
   <script src="./summernote-enhancement.js"></script>
+  <!-- Include GrapesJS widget -->
+  <script src="./grapejs-widget.js"></script>
 </body>
 </html>

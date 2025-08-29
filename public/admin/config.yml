@@ -32,14 +32,46 @@ collections:
         fields:
           - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
           - {label: "Title", name: "title", widget: "string"}
-          - {label: "Body", name: "body", widget: "markdown"}
+          - label: "Content Type"
+            name: "contentType"
+            widget: "select"
+            options: ["markdown", "visual-editor"]
+            default: "markdown"
+          - label: "Body (Markdown)"
+            name: "body"
+            widget: "markdown"
+            condition:
+              field: "contentType"
+              value: "markdown"
+          - label: "Body (Visual Editor)"
+            name: "bodyVisual"
+            widget: "grapesjs"
+            condition:
+              field: "contentType"
+              value: "visual-editor"
       - label: "Contact Page"
         name: "contact"
         file: "src/content/pages/contact.md"
         fields:
           - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
           - {label: "Title", name: "title", widget: "string"}
-          - {label: "Body", name: "body", widget: "markdown"}
+          - label: "Content Type"
+            name: "contentType"
+            widget: "select"
+            options: ["markdown", "visual-editor"]
+            default: "markdown"
+          - label: "Body (Markdown)"
+            name: "body"
+            widget: "markdown"
+            condition:
+              field: "contentType"
+              value: "markdown"
+          - label: "Body (Visual Editor)"
+            name: "bodyVisual"
+            widget: "grapesjs"
+            condition:
+              field: "contentType"
+              value: "visual-editor"
 
   - name: "landing"
     label: "Landing Pages"
