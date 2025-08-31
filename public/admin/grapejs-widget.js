@@ -115,16 +115,15 @@
         // Initialize GrapesJS with minimal configuration
         this.editor = window.grapesjs.init({
           container: `#${containerId}`,
-          height: '500px',
+          height: '800px',
           width: 'auto',
           fromElement: false,
           showOffsets: true,
           noticeOnUnload: false,
           storageManager: false,
           
-          // Simple block manager
+          // Block manager with default panels
           blockManager: {
-            appendTo: '#blocks',
             blocks: [
               {
                 id: 'section',
@@ -287,7 +286,7 @@
           border: '1px solid #ddd',
           borderRadius: '4px',
           overflow: 'hidden',
-          minHeight: '500px'
+          minHeight: '800px'
         }
       }, [
         h('div', {

@@ -98,6 +98,65 @@
         height: 400px !important;
       }
     }
+    
+    /* Make Pages collection container wider - FORCE OVERRIDE */
+    .cms-editor-wrapper {
+      max-width: none !important;
+    }
+    
+    /* Target ALL possible DecapCMS container classes with high specificity */
+    .cms-editor-wrapper,
+    .cms-editor-main,
+    .cms-editor-control,
+    .cms-editor-form,
+    .cms-collection-editor,
+    .cms-single-entry-editor,
+    .cms-workflow-editor,
+    div[class*="Editor"],
+    div[class*="editor"],
+    .cms-app > div,
+    .cms-app main,
+    .cms-app article {
+      max-width: none !important;
+      width: 100% !important;
+    }
+    
+    /* Specifically target Pages collection for wider layout with maximum specificity */
+    body .cms-app [data-collection="pages"] .cms-editor-wrapper,
+    body .cms-app [data-collection="pages"] .cms-editor-control,
+    body .cms-app [data-collection="pages"] .cms-editor-main,
+    body .cms-app [data-collection="pages"] .cms-editor-form,
+    body .cms-app [data-collection="pages"] .cms-collection-editor,
+    body .cms-app [data-collection="pages"] div[class*="Editor"],
+    body .cms-app [data-collection="pages"] div[class*="editor"] {
+      max-width: none !important;
+      width: 98vw !important;
+      margin: 0 auto !important;
+      padding: 0 1vw !important;
+    }
+    
+    /* Force override DecapCMS default container styles */
+    html body .cms-app * {
+      max-width: none !important;
+    }
+    
+    /* Make the GrapesJS widget take full available width in Pages */
+    body .cms-app [data-collection="pages"] .grapesjs-container,
+    body .cms-app [data-collection="pages"] .widget-control,
+    body .cms-app [data-collection="pages"] .widget-grapesjs {
+      width: 100% !important;
+      max-width: none !important;
+      box-sizing: border-box !important;
+    }
+
+    .css-c9zyab-ControlPaneContainer {
+      max-width: 1024px !important;
+    }
+    
+    /* Override any remaining width constraints with nuclear option */
+    [data-collection="pages"] * {
+      max-width: 1024px !important;
+    }
   </style>
 </head>
 <body>

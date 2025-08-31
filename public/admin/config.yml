@@ -25,6 +25,10 @@ collections:
 
   - name: "pages"
     label: "Pages"
+    editor:
+      preview: false  # This hides the preview panel for all pages in this collection
+      frame: true     # Enable frame mode for better layout control
+      size: large     # Make the editor container larger
     files:
       - label: "About Page"
         name: "about"
