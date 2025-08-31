@@ -1,5 +1,17 @@
 ---
-title: "Liên hệ"
+title: Liên hệ
+contentType: visual-editor
+bodyVisual: '<body id="il8z"><div class="container"><h1>Welcome!</h1><p>Start
+  building your page by dragging components from the right panel.</p></div><div
+  class="gjs-row" id="ida3"><div class="gjs-cell" id="io11"><div
+  id="ione">Insert your text here</div><div class="gjs-row" id="iis6e"><div
+  class="gjs-cell" id="ibf8z"></div><div class="gjs-cell" id="io0vw"></div><div
+  class="gjs-cell" id="ip1b8"></div></div></div></div><iframe
+  allowfullscreen="allowfullscreen" id="i4e0n"
+  src="https://www.youtube.com/embed/tLlEQxWAfPE?"></iframe></body><style>* {
+  box-sizing: border-box; } body {margin:
+  0;}.gjs-row{display:table;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;width:100%;}.gjs-cell{width:8%;display:table-cell;height:75px;}#ione{padding:10px;}#ibf8z{width:47.26%;}#ip1b8{width:70%;}#io0vw{width:47.26%;}#i4e0n{height:350px;width:615px;}@media
+  (max-width: 768px){.gjs-cell{width:100%;display:block;}}</style>'
 ---
 
 # Liên hệ với WEBACELA

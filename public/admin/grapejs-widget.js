@@ -61,7 +61,6 @@
 
     async componentDidMount() {
       try {
-        console.log('Initializing GrapesJS widget...');
         
         // Load CSS first
         await loadStylesheet('https://unpkg.com/grapesjs@0.20.4/dist/css/grapes.min.css');
@@ -70,6 +69,9 @@
         if (!window.grapesjs) {
           await loadScript('https://unpkg.com/grapesjs@0.20.4/dist/grapes.min.js');
         }
+        
+        // Load blocks-basic plugin from correct CDN
+        await loadScript('https://unpkg.com/grapesjs-blocks-basic');
 
         // Wait for GrapesJS to be available
         let attempts = 0;
@@ -82,13 +84,11 @@
           throw new Error('GrapesJS failed to load');
         }
 
-        console.log('GrapesJS core loaded successfully');
         this.setState({ loaded: true }, () => {
           setTimeout(() => this.initGrapesJS(), 100);
         });
 
       } catch (error) {
-        console.error('Error loading GrapesJS:', error);
         this.setState({ 
           error: 'Failed to load visual editor: ' + error.message,
           loaded: false 
@@ -110,103 +110,124 @@
         const containerId = 'gjs-editor-' + Math.random().toString(36).substr(2, 9);
         this.editorRef.id = containerId;
 
-        console.log('Initializing GrapesJS editor with ID:', containerId);
+        // Try to find the correct plugin name
+        const possibleNames = ['gjs-blocks-basic', 'grapesjs-blocks-basic', 'blocks-basic'];
+        let pluginName = null;
+        
+        for (const name of possibleNames) {
+          if (window.grapesjs.plugins && window.grapesjs.plugins[name]) {
+            pluginName = name;
+            break;
+          }
+        }
 
-        // Initialize GrapesJS with minimal configuration
-        this.editor = window.grapesjs.init({
-          container: `#${containerId}`,
-          height: '800px',
-          width: 'auto',
-          fromElement: false,
-          showOffsets: true,
-          noticeOnUnload: false,
-          storageManager: false,
+        if (!pluginName) {
+          pluginName = 'gjs-blocks-basic'; // Default attempt
+        }
+
+        // Initialize GrapesJS with blocks-basic plugin
+        try {
+          this.editor = window.grapesjs.init({
+            container: `#${containerId}`,
+            height: '800px',
+            width: 'auto',
+            fromElement: false,
+            showOffsets: true,
+            noticeOnUnload: false,
+            storageManager: false,
+            
+            // Try the found plugin name
+            plugins: [pluginName],
+            
+            // Canvas settings
+            canvas: {
+              styles: [
+                'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
+              ]
+            },
+
+            // Device Manager
+            deviceManager: {
+              devices: [{
+                name: 'Desktop',
+                width: '',
+              }, {
+                name: 'Mobile',
+                width: '320px',
+                widthMedia: '480px',
+              }]
+            },
+
+            // Initial content
+            components: value || '<div class="container"><h1>Welcome!</h1><p>Start building your page by dragging components from the right panel.</p></div>',
+          });
           
-          // Block manager with default panels
-          blockManager: {
-            blocks: [
-              {
-                id: 'section',
-                label: 'Section',
-                attributes: { class: 'gjs-block-section' },
-                content: `<section>
-                  <h1>Insert title here</h1>
-                  <p>Insert content here</p>
-                </section>`,
-              }, {
-                id: 'text',
-                label: 'Text',
-                content: '<div data-gjs-type="text">Insert your text here</div>',
-              }, {
-                id: 'image',
-                label: 'Image',
-                select: true,
-                content: { type: 'image' },
-                activate: true,
-              }, {
-                id: 'link',
-                label: 'Link',
-                content: '<a href="#">Link</a>',
-              }, {
-                id: 'button',
-                label: 'Button',
-                content: '<button class="btn btn-primary">Click me</button>',
-              }
-            ]
-          },
-
-          // Canvas settings
-          canvas: {
-            styles: [
-              'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
-            ]
-          },
-
-          // Style manager
-          styleManager: {
-            appendTo: '#styles-container',
-            sectors: [{
-              name: 'Dimension',
-              open: false,
-              buildProps: ['width', 'min-height', 'padding'],
-              properties: [
-                {
-                  property: 'margin',
-                  properties: [
-                    { name: 'Top', property: 'margin-top'},
-                    { name: 'Right', property: 'margin-right'},
-                    { name: 'Bottom', property: 'margin-bottom'},
-                    { name: 'Left', property: 'margin-left'}
-                  ]
-                }
+          console.log('GrapesJS editor with plugin initialized successfully');
+          
+        } catch (pluginError) {
+          console.warn('Plugin failed, initializing without plugin:', pluginError);
+          
+          // Fallback: Initialize without plugin
+          this.editor = window.grapesjs.init({
+            container: `#${containerId}`,
+            height: '800px',
+            width: 'auto',
+            
+            // Canvas settings
+            canvas: {
+              styles: [
+                'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
               ]
-            }, {
-              name: 'Typography',
-              open: false,
-              buildProps: ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'color', 'line-height'],
-              properties: [
-                { name: 'Font', property: 'font-family' },
-                { name: 'Size', property: 'font-size' },
-                { name: 'Color', property: 'color' }
-              ]
-            }]
-          },
+            },
 
-          // Device Manager
-          deviceManager: {
-            devices: [{
-              name: 'Desktop',
-              width: '',
-            }, {
-              name: 'Mobile',
-              width: '320px',
-              widthMedia: '480px',
-            }]
-          },
+            // Style manager
+            styleManager: {
+              appendTo: '#styles-container',
+              sectors: [{
+                name: 'Dimension',
+                open: false,
+                buildProps: ['width', 'min-height', 'padding'],
+                properties: [
+                  {
+                    property: 'margin',
+                    properties: [
+                      { name: 'Top', property: 'margin-top'},
+                      { name: 'Right', property: 'margin-right'},
+                      { name: 'Bottom', property: 'margin-bottom'},
+                      { name: 'Left', property: 'margin-left'}
+                    ]
+                  }
+                ]
+              }, {
+                name: 'Typography',
+                open: false,
+                buildProps: ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'color', 'line-height'],
+                properties: [
+                  { name: 'Font', property: 'font-family' },
+                  { name: 'Size', property: 'font-size' },
+                  { name: 'Color', property: 'color' }
+                ]
+              }]
+            },
 
-          // Initial content
-          components: value || '<div class="container"><h1>Welcome!</h1><p>Start building your page by dragging components from the right panel.</p></div>',
-        });
+            // Device Manager
+            deviceManager: {
+              devices: [{
+                name: 'Desktop',
+                width: '',
+              }, {
+                name: 'Mobile',
+                width: '320px',
+                widthMedia: '480px',
+              }]
+            },
+
+            // Initial content
+            components: value || '<div class="container"><h1>Welcome!</h1><p>Start building your page by dragging components from the right panel.</p></div>',
+          });
+          
+          console.log('GrapesJS editor initialized without plugin (fallback)');
+        }
 
         // Set up change listener
         this.editor.on('component:add component:remove component:update', () => {
