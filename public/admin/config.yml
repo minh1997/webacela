@@ -36,6 +36,7 @@ collections:
         fields:
           - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
           - {label: "Title", name: "title", widget: "string"}
+          - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
           - label: "Content Type"
             name: "contentType"
             widget: "select"
@@ -59,6 +60,7 @@ collections:
         fields:
           - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
           - {label: "Title", name: "title", widget: "string"}
+          - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
           - label: "Content Type"
             name: "contentType"
             widget: "select"
