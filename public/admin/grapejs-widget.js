@@ -72,6 +72,9 @@
         
         // Load blocks-basic plugin from correct CDN
         await loadScript('https://unpkg.com/grapesjs-blocks-basic');
+        
+        // Load TUI Image Editor plugin from CDN
+        await loadScript('https://unpkg.com/grapesjs-tui-image-editor');
 
         // Wait for GrapesJS to be available
         let attempts = 0;
@@ -110,22 +113,36 @@
         const containerId = 'gjs-editor-' + Math.random().toString(36).substr(2, 9);
         this.editorRef.id = containerId;
 
-        // Try to find the correct plugin name
-        const possibleNames = ['gjs-blocks-basic', 'grapesjs-blocks-basic', 'blocks-basic'];
-        let pluginName = null;
+        // Try to find the correct plugin names
+        const possibleBasicNames = ['gjs-blocks-basic', 'grapesjs-blocks-basic', 'blocks-basic'];
+        const possibleTuiNames = ['grapesjs-tui-image-editor', 'tui-image-editor'];
         
-        for (const name of possibleNames) {
+        let basicPluginName = null;
+        let tuiPluginName = null;
+        
+        for (const name of possibleBasicNames) {
           if (window.grapesjs.plugins && window.grapesjs.plugins[name]) {
-            pluginName = name;
+            basicPluginName = name;
+            break;
+          }
+        }
+        
+        for (const name of possibleTuiNames) {
+          if (window.grapesjs.plugins && window.grapesjs.plugins[name]) {
+            tuiPluginName = name;
             break;
           }
         }
 
-        if (!pluginName) {
-          pluginName = 'gjs-blocks-basic'; // Default attempt
+        if (!basicPluginName) {
+          basicPluginName = 'gjs-blocks-basic'; // Default attempt
+        }
+        
+        if (!tuiPluginName) {
+          tuiPluginName = 'grapesjs-tui-image-editor'; // Default attempt
         }
 
-        // Initialize GrapesJS with blocks-basic plugin
+        // Initialize GrapesJS with both plugins
         try {
           this.editor = window.grapesjs.init({
             container: `#${containerId}`,
@@ -136,8 +153,33 @@
             noticeOnUnload: false,
             storageManager: false,
             
-            // Try the found plugin name
-            plugins: [pluginName],
+            // Load both plugins
+            plugins: [basicPluginName, tuiPluginName],
+            
+            // Plugin options
+            pluginOpts: {
+              [basicPluginName]: {
+                blocks: ['column1', 'column2', 'column3', 'column3-7', 'text', 'link', 'image', 'video', 'map'],
+                category: {
+                  id: 'basic',
+                  label: 'Basic',
+                  open: true
+                }
+              },
+              [tuiPluginName]: {
+                config: {
+                  includeUI: {
+                    initMenu: 'filter',
+                    menuBarPosition: 'bottom'
+                  },
+                  cssMaxWidth: 700,
+                  cssMaxHeight: 500
+                },
+                onApply: (imageEditor, imageModel) => {
+                  console.log('Image edited:', imageModel);
+                }
+              }
+            },
             
             // Canvas settings
             canvas: {
