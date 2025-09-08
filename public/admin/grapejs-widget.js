@@ -78,6 +78,9 @@
         
         // Load GrapesJS Forms plugin from CDN
         await loadScript('https://unpkg.com/grapesjs-plugin-forms');
+        
+        // Load GrapesJS Preset Webpage plugin from CDN
+        await loadScript('https://unpkg.com/grapesjs-preset-webpage');
 
         // Wait for GrapesJS to be available
         let attempts = 0;
@@ -120,10 +123,12 @@
         const possibleBasicNames = ['gjs-blocks-basic', 'grapesjs-blocks-basic', 'blocks-basic'];
         const possibleTuiNames = ['grapesjs-tui-image-editor', 'tui-image-editor'];
         const possibleFormsNames = ['grapesjs-plugin-forms', 'plugin-forms', 'forms'];
+        const possiblePresetNames = ['grapesjs-preset-webpage', 'preset-webpage', 'webpage'];
         
         let basicPluginName = null;
         let tuiPluginName = null;
         let formsPluginName = null;
+        let presetPluginName = null;
         
         for (const name of possibleBasicNames) {
           if (window.grapesjs.plugins && window.grapesjs.plugins[name]) {
@@ -145,6 +150,13 @@
             break;
           }
         }
+        
+        for (const name of possiblePresetNames) {
+          if (window.grapesjs.plugins && window.grapesjs.plugins[name]) {
+            presetPluginName = name;
+            break;
+          }
+        }
 
         if (!basicPluginName) {
           basicPluginName = 'gjs-blocks-basic'; // Default attempt
@@ -157,8 +169,12 @@
         if (!formsPluginName) {
           formsPluginName = 'grapesjs-plugin-forms'; // Default attempt
         }
+        
+        if (!presetPluginName) {
+          presetPluginName = 'grapesjs-preset-webpage'; // Default attempt
+        }
 
-        // Initialize GrapesJS with all three plugins
+        // Initialize GrapesJS with all four plugins
         try {
           this.editor = window.grapesjs.init({
             container: `#${containerId}`,
@@ -169,8 +185,8 @@
             noticeOnUnload: false,
             storageManager: false,
             
-            // Load all three plugins
-            plugins: [basicPluginName, tuiPluginName, formsPluginName],
+            // Load all four plugins
+            plugins: [basicPluginName, tuiPluginName, formsPluginName, presetPluginName],
             
             // Plugin options
             pluginOpts: {
@@ -198,6 +214,15 @@
               [formsPluginName]: {
                 blocks: ['form', 'input', 'textarea', 'select', 'button', 'label', 'checkbox', 'radio'],
                 category: 'Forms'
+              },
+              [presetPluginName]: {
+                blocks: ['link-block', 'quote', 'text-basic'],
+                modalImportTitle: 'Import Code',
+                modalImportButton: 'Import',
+                modalImportLabel: 'Paste your HTML/CSS code here',
+                textCleanCanvas: 'Are you sure to clean the canvas?',
+                showStylesOnChange: true,
+                useCustomTheme: true
               }
             },
             
