@@ -75,6 +75,9 @@
         
         // Load TUI Image Editor plugin from CDN
         await loadScript('https://unpkg.com/grapesjs-tui-image-editor');
+        
+        // Load GrapesJS Forms plugin from CDN
+        await loadScript('https://unpkg.com/grapesjs-plugin-forms');
 
         // Wait for GrapesJS to be available
         let attempts = 0;
@@ -116,9 +119,11 @@
         // Try to find the correct plugin names
         const possibleBasicNames = ['gjs-blocks-basic', 'grapesjs-blocks-basic', 'blocks-basic'];
         const possibleTuiNames = ['grapesjs-tui-image-editor', 'tui-image-editor'];
+        const possibleFormsNames = ['grapesjs-plugin-forms', 'plugin-forms', 'forms'];
         
         let basicPluginName = null;
         let tuiPluginName = null;
+        let formsPluginName = null;
         
         for (const name of possibleBasicNames) {
           if (window.grapesjs.plugins && window.grapesjs.plugins[name]) {
@@ -133,6 +138,13 @@
             break;
           }
         }
+        
+        for (const name of possibleFormsNames) {
+          if (window.grapesjs.plugins && window.grapesjs.plugins[name]) {
+            formsPluginName = name;
+            break;
+          }
+        }
 
         if (!basicPluginName) {
           basicPluginName = 'gjs-blocks-basic'; // Default attempt
@@ -141,8 +153,12 @@
         if (!tuiPluginName) {
           tuiPluginName = 'grapesjs-tui-image-editor'; // Default attempt
         }
+        
+        if (!formsPluginName) {
+          formsPluginName = 'grapesjs-plugin-forms'; // Default attempt
+        }
 
-        // Initialize GrapesJS with both plugins
+        // Initialize GrapesJS with all three plugins
         try {
           this.editor = window.grapesjs.init({
             container: `#${containerId}`,
@@ -153,8 +169,8 @@
             noticeOnUnload: false,
             storageManager: false,
             
-            // Load both plugins
-            plugins: [basicPluginName, tuiPluginName],
+            // Load all three plugins
+            plugins: [basicPluginName, tuiPluginName, formsPluginName],
             
             // Plugin options
             pluginOpts: {
@@ -178,6 +194,10 @@
                 onApply: (imageEditor, imageModel) => {
                   console.log('Image edited:', imageModel);
                 }
+              },
+              [formsPluginName]: {
+                blocks: ['form', 'input', 'textarea', 'select', 'button', 'label', 'checkbox', 'radio'],
+                category: 'Forms'
               }
             },
             
