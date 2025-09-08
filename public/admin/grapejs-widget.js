@@ -49,6 +49,27 @@
     });
   }
 
+  // Utility function to load stylesheets
+  function loadStylesheet(href) {
+    return new Promise((resolve) => {
+      // Check if stylesheet already exists
+      const existing = document.querySelector(`link[href="${href}"]`);
+      if (existing) {
+        resolve();
+        return;
+      }
+
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = href;
+      link.onload = () => {
+        console.log('Loaded CSS:', href);
+        resolve();
+      };
+      document.head.appendChild(link);
+    });
+  }
+
   // GrapesJS Control Component
   const GrapesJSControl = createClass({
     getInitialState() {
@@ -238,7 +259,13 @@
               devices: [{
                 name: 'Desktop',
                 width: '',
-              }, {
+              }, 
+              {
+                name: 'Tablet',
+                width: '768px',
+                widthMedia: '992px',
+              },
+              {
                 name: 'Mobile',
                 width: '320px',
                 widthMedia: '480px',
@@ -250,6 +277,9 @@
           });
           
           console.log('GrapesJS editor with plugin initialized successfully');
+          
+          // Fix device commands to work with existing toolbar
+          this.fixDeviceCommands();
           
         } catch (pluginError) {
           console.warn('Plugin failed, initializing without plugin:', pluginError);
@@ -334,6 +364,55 @@
         console.error('Error initializing GrapesJS editor:', error);
         this.setState({ error: 'Failed to initialize editor: ' + error.message });
       }
+    },
+
+    fixDeviceCommands() {
+      if (!this.editor) return;
+
+      // Get device manager and commands
+      const deviceManager = this.editor.DeviceManager;
+      const commands = this.editor.Commands;
+      
+      console.log('Fixing device commands...');
+
+      // Override/fix the existing device commands to work properly
+      commands.add('set-device-desktop', {
+        run: (editor) => {
+          const device = deviceManager.get('desktop') || deviceManager.getAll().find(d => d.get('name') === 'Desktop');
+          if (device) {
+            deviceManager.select(device);
+            console.log('Switched to desktop view');
+          } else {
+            console.warn('Desktop device not found');
+          }
+        }
+      });
+
+      commands.add('set-device-tablet', {
+        run: (editor) => {
+          const device = deviceManager.get('tablet') || deviceManager.getAll().find(d => d.get('name') === 'Tablet');
+          if (device) {
+            deviceManager.select(device);
+            console.log('Switched to tablet view');
+          } else {
+            console.warn('Tablet device not found');
+          }
+        }
+      });
+
+      commands.add('set-device-mobile', {
+        run: (editor) => {
+          const device = deviceManager.get('mobile') || deviceManager.getAll().find(d => d.get('name') === 'Mobile');
+          if (device) {
+            deviceManager.select(device);
+            console.log('Switched to mobile view');
+          } else {
+            console.warn('Mobile device not found');
+          }
+        }
+      });
+
+      console.log('Device commands fixed successfully');
     },
 
     componentWillUnmount() {
