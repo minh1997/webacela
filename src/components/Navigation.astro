@@ -2,8 +2,8 @@
 // Navigation component
 ---
 
-<div class="top-10 w-full">
-  <nav class="bg-gradient-to-r from-blue-600 to-purple-700 p-6 shadow-lg relative">
+<div id="navbar-container" class="top-10 w-full">
+  <nav id="navbar" class="bg-gradient-to-r from-blue-600 to-purple-700 p-6 shadow-lg relative">
     <div class="flex items-center justify-between w-full container mx-auto px-4">
       <div class="flex items-center space-x-2">
         <div class="bg-white p-2 rounded-lg">
@@ -36,7 +36,7 @@
     </div>
   
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-white rounded-2xl shadow-xl overflow-hidden transform opacity-0 scale-95 transition-all duration-200 pointer-events-none">
+    <div id="mobile-menu" class="md:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-white rounded-2xl shadow-xl overflow-hidden transform opacity-0 scale-95 transition-all duration-200 pointer-events-none z-50">
       <div class="py-4">
         <a href="/" class="block px-6 py-3 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 font-medium border-b border-gray-100">Home</a>
         <a href="/blog" class="block px-6 py-3 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 font-medium border-b border-gray-100">Blog</a>
@@ -53,10 +53,15 @@
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburgerIcon = document.getElementById('hamburger-icon');
   const closeIcon = document.getElementById('close-icon');
+  const navbarContainer = document.getElementById('navbar-container');
+  const navbar = document.getElementById('navbar');
   
   let isMenuOpen = false;
+  let lastScrollTop = 0;
   
   function toggleMobileMenu() {
+    if (!mobileMenu || !hamburgerIcon || !closeIcon) return;
+    
     isMenuOpen = !isMenuOpen;
     
     if (isMenuOpen) {
@@ -74,13 +79,45 @@
     }
   }
   
+  // Fixed navigation on scroll functionality
+  function handleScroll() {
+    if (!navbarContainer || !navbar) return;
+    
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > 50) {
+      // Make navbar fixed and compact when scrolling down
+      navbarContainer.classList.add('fixed', 'top-0', 'left-0', 'right-0', 'z-50');
+      navbarContainer.classList.remove('top-10');
+      navbar.classList.add('py-3');
+      navbar.classList.remove('p-6');
+      navbar.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
+    } else {
+      // Return to original state when at top
+      navbarContainer.classList.remove('fixed', 'top-0', 'left-0', 'right-0', 'z-50');
+      navbarContainer.classList.add('top-10');
+      navbar.classList.remove('py-3', 'backdrop-blur-md', 'bg-opacity-95');
+      navbar.classList.add('p-6');
+      navbar.style.boxShadow = '';
+    }
+    
+    lastScrollTop = scrollTop;
+  }
+  
+  // Add scroll event listener
+  window.addEventListener('scroll', handleScroll);
+  
   // Toggle menu when button is clicked
-  mobileMenuButton.addEventListener('click', toggleMobileMenu);
+  if (mobileMenuButton) {
+    mobileMenuButton.addEventListener('click', toggleMobileMenu);
+  }
   
   // Close menu when clicking outside
   document.addEventListener('click', (event) => {
-    if (isMenuOpen && !mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
-      toggleMobileMenu();
+    if (isMenuOpen && mobileMenuButton && mobileMenu && event.target instanceof Node) {
+      if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+        toggleMobileMenu();
+      }
     }
   });
   
@@ -92,12 +129,14 @@
   });
   
   // Close menu when clicking on a menu item
-  const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-  mobileMenuLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (isMenuOpen) {
-        toggleMobileMenu();
-      }
+  if (mobileMenu) {
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (isMenuOpen) {
+          toggleMobileMenu();
+        }
+      });
     });
-  });
+  }
 </script>
