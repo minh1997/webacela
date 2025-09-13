@@ -26,7 +26,8 @@ const landing = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     slug: z.string().optional(),
-    blocks: z.array(z.any()),
+    contentType: z.enum(['markdown', 'visual-editor']).default('markdown'),
+    bodyVisual: z.string().optional(),
   }),
 });
 

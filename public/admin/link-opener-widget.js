@@ -50,7 +50,7 @@
         } else if (collection.get('name') === 'landing') {
           const slug = entry.get('slug') || entry.getIn(['data', 'slug']);
           if (slug) {
-            pageUrl = `${siteDomain}/landing/${slug}`;
+            pageUrl = `${siteDomain}/${slug}`;
           }
         }
 

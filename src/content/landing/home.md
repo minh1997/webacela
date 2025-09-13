@@ -73,6 +73,11 @@ blocks:
     buttonLink: /contact
     backgroundColor: "#1e40af"
     textColor: text-white
+contentType: visual-editor
+bodyVisual: '<body id="ihvw"><div class="container"><h1>Welcome!</h1><p>Start
+  building your page by dragging components from the right
+  panel.</p></div></body><style>* { box-sizing: border-box; } body {margin:
+  0;}</style>'
 ---
 
 <!-- This file demonstrates the page builder functionality -->
