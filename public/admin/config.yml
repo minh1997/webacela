@@ -37,23 +37,14 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
-          - label: "Content Type"
-            name: "contentType"
-            widget: "select"
-            options: ["markdown", "visual-editor"]
-            default: "markdown"
           - label: "Body (Markdown)"
             name: "body"
             widget: "markdown"
-            condition:
-              field: "contentType"
-              value: "markdown"
+            required: false
           - label: "Body (Visual Editor)"
             name: "bodyVisual"
             widget: "grapesjs"
-            condition:
-              field: "contentType"
-              value: "visual-editor"
+            required: false
       - label: "Contact Page"
         name: "contact"
         file: "src/content/pages/contact.md"
@@ -61,23 +52,14 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
-          - label: "Content Type"
-            name: "contentType"
-            widget: "select"
-            options: ["markdown", "visual-editor"]
-            default: "markdown"
           - label: "Body (Markdown)"
             name: "body"
             widget: "markdown"
-            condition:
-              field: "contentType"
-              value: "markdown"
+            required: false
           - label: "Body (Visual Editor)"
             name: "bodyVisual"
             widget: "grapesjs"
-            condition:
-              field: "contentType"
-              value: "visual-editor"
+            required: false
 
   - name: "landing"
     label: "Landing Pages"
@@ -93,20 +75,11 @@ collections:
       - {label: "Description", name: "description", widget: "text", required: false}
       - {label: "Slug", name: "slug", widget: "string"}
       - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
-      - label: "Content Type"
-        name: "contentType"
-        widget: "select"
-        options: ["markdown", "visual-editor"]
-        default: "markdown"
       - label: "Body (Markdown)"
         name: "body"
         widget: "markdown"
-        condition:
-          field: "contentType"
-          value: "markdown"
+        required: false
       - label: "Body (Visual Editor)"
         name: "bodyVisual"
         widget: "grapesjs"
-        condition:
-          field: "contentType"
-          value: "visual-editor"
+        required: false

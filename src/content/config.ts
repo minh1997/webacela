@@ -15,7 +15,6 @@ const pages = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    contentType: z.enum(['markdown', 'visual-editor']).default('markdown'),
     bodyVisual: z.string().optional(),
   }),
 });
@@ -26,7 +25,6 @@ const landing = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     slug: z.string().optional(),
-    contentType: z.enum(['markdown', 'visual-editor']).default('markdown'),
     bodyVisual: z.string().optional(),
   }),
 });

@@ -1,6 +1,5 @@
 ---
 title: Về WEBACELA
-contentType: visual-editor
 bodyVisual: '<body id="iist"><div class="container"><h1>Welcome!</h1><p>Start
   building your page by dragging components from the right panel.</p></div><div
   class="gjs-row" id="iakb"><div class="gjs-cell" id="icu9v"><img id="iz5a"

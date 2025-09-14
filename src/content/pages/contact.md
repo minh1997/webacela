@@ -1,6 +1,5 @@
 ---
 title: Liên hệ
-contentType: visual-editor
 bodyVisual: '<body><div class="container"><h1>Welcome!</h1><p>Start building
   your page by dragging components from the right panel.</p></div><div id="ida3"
   class="gjs-row"><div id="io11" class="gjs-cell"><div id="ione">Insert your
