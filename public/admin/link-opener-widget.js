@@ -10,12 +10,74 @@
       return {
         currentPageUrl: null,
         siteDomain: window.location.origin, // Get current domain
-        isLoading: false
+        isLoading: false,
+        currentSlug: null
       };
     },
 
     componentDidMount() {
       this.detectCurrentPageUrl();
+      // Watch for field changes
+      this.watchForFieldChanges();
+    },
+
+    componentWillUnmount() {
+      // Clean up any event listeners
+      if (this.fieldWatcher) {
+        clearInterval(this.fieldWatcher);
+      }
+    },
+
+    watchForFieldChanges() {
+      // Watch for changes in the slug field specifically
+      this.fieldWatcher = setInterval(() => {
+        try {
+          // Try to get the slug from the actual input field in the DOM
+          const slugInput = document.querySelector('input[type="text"][id*="slug"], input[type="text"][placeholder*="slug"], input[type="text"][name*="slug"]');
+          if (slugInput && slugInput.value) {
+            const newSlug = slugInput.value;
+            if (newSlug !== this.state.currentSlug) {
+              console.log('Slug changed from', this.state.currentSlug, 'to', newSlug);
+              this.setState({ currentSlug: newSlug }, () => {
+                this.updateUrlFromSlug(newSlug);
+              });
+            }
+          }
+        } catch (error) {
+          console.error('Error watching for field changes:', error);
+        }
+      }, 500); // Check every 500ms for better responsiveness
+    },
+
+    updateUrlFromSlug(slug) {
+      try {
+        const { collection } = this.props;
+        const siteDomain = this.state.siteDomain;
+        let pageUrl = null;
+
+        if (!collection || !slug) {
+          return;
+        }
+
+        // Handle different collection types
+        if (collection.get('name') === 'pages') {
+          if (slug === 'about') {
+            pageUrl = `${siteDomain}/about`;
+          } else if (slug === 'contact') {
+            pageUrl = `${siteDomain}/contact`;
+          } else {
+            pageUrl = `${siteDomain}/${slug}`;
+          }
+        } else if (collection.get('name') === 'blog') {
+          pageUrl = `${siteDomain}/blog/${slug}`;
+        } else if (collection.get('name') === 'landing') {
+          pageUrl = `${siteDomain}/${slug}`;
+        }
+
+        this.setState({ currentPageUrl: pageUrl });
+      } catch (error) {
+        console.error('Error updating URL from slug:', error);
+      }
     },
 
     detectCurrentPageUrl() {
@@ -29,11 +91,13 @@
         }
 
         let pageUrl = null;
+        let initialSlug = null;
         const siteDomain = this.state.siteDomain;
 
         // Handle different collection types
         if (collection.get('name') === 'pages') {
           const entryName = entry.get('slug') || entry.get('name');
+          initialSlug = entryName;
           
           if (entryName === 'about') {
             pageUrl = `${siteDomain}/about`;
@@ -44,17 +108,22 @@
           }
         } else if (collection.get('name') === 'blog') {
           const slug = entry.get('slug');
+          initialSlug = slug;
           if (slug) {
             pageUrl = `${siteDomain}/blog/${slug}`;
           }
         } else if (collection.get('name') === 'landing') {
           const slug = entry.get('slug') || entry.getIn(['data', 'slug']);
+          initialSlug = slug;
           if (slug) {
             pageUrl = `${siteDomain}/${slug}`;
           }
         }
-
-        this.setState({ currentPageUrl: pageUrl });
+        
+        this.setState({ 
+          currentPageUrl: pageUrl,
+          currentSlug: initialSlug
+        });
       } catch (error) {
         console.error('Error detecting page URL:', error);
       }
