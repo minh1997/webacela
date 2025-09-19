@@ -1,7 +1,7 @@
 ---
 title: Chào mừng đến với Blog WEBACELA
 date: 2025-01-15T00:00:00.000Z
-featuredImage: /images/components-image.png
+featuredImage: /images/uploads/trung-bình-content-creator-yêu-nước-trên-facebook-v0-s6w3geeqbkmf1.webp
 excerpt: Bài viết đầu tiên giới thiệu về blog của WEBACELA và những gì chúng tôi
   sẽ chia sẻ về thiết kế web và công nghệ.
 tags:
