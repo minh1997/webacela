@@ -36,6 +36,7 @@ collections:
         fields:
           - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
           - {label: "Title", name: "title", widget: "string"}
+          - {label: "SEO Preview", name: "seoPreview", widget: "google-snippet-preview", required: false}
           - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
           - label: "Body (Markdown)"
             name: "body"
@@ -51,6 +52,7 @@ collections:
         fields:
           - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
           - {label: "Title", name: "title", widget: "string"}
+          - {label: "SEO Preview", name: "seoPreview", widget: "google-snippet-preview", required: false}
           - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
           - label: "Body (Markdown)"
             name: "body"
@@ -74,6 +76,7 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text", required: false}
       - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "SEO Preview", name: "seoPreview", widget: "google-snippet-preview", required: false}
       - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
       - label: "Body (Visual Editor)"
         name: "bodyVisual"
