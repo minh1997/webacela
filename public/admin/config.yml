@@ -75,10 +75,6 @@ collections:
       - {label: "Description", name: "description", widget: "text", required: false}
       - {label: "Slug", name: "slug", widget: "string"}
       - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
-      - label: "Body (Markdown)"
-        name: "body"
-        widget: "markdown"
-        required: false
       - label: "Body (Visual Editor)"
         name: "bodyVisual"
         widget: "grapesjs"
