@@ -388,10 +388,13 @@
             },
 
             // Initial content - process scripts if they exist
-            components: this.processInitialContent(value) || '<div class="container"><h1>Welcome!</h1><p>Start building your page by dragging components from the right panel.</p></div>',
+            components: this.processInitialContent(value) || '<div class="container mx-auto px-4 py-16 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen"><div class="max-w-4xl mx-auto text-center"><h1 class="text-5xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Welcome to WebAcela!</h1><p class="text-xl text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto">Start building your amazing page by dragging components from the right panel. Create beautiful, responsive layouts with our visual editor.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-blue-500 text-3xl mb-4">🎨</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Drag & Drop</h3><p class="text-gray-600">Easily add components by dragging them from the blocks panel</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-purple-500 text-3xl mb-4">📱</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Responsive Design</h3><p class="text-gray-600">Your pages will look great on all devices automatically</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-green-500 text-3xl mb-4">⚡</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Fast & Modern</h3><p class="text-gray-600">Built with the latest web technologies for optimal performance</p></div></div><div class="bg-white p-8 rounded-xl shadow-lg"><h2 class="text-2xl font-bold text-gray-800 mb-4">Ready to Get Started?</h2><p class="text-gray-600 mb-6">Choose from our pre-designed blocks or create your own custom components</p><button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-8 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">Start Building</button></div></div></div>',
           });
           
           console.log('GrapesJS editor with plugins initialized successfully');
+          
+          // Override basic plugin blocks with Tailwind classes
+          this.overrideBasicBlocks();
           
           // Debug plugin configuration
           setTimeout(() => {
@@ -735,7 +738,7 @@
             },
 
             // Initial content
-            components: value || '<div class="container"><h1>Welcome!</h1><p>Start building your page by dragging components from the right panel.</p></div>',
+            components: value || '<div class="container mx-auto px-4 py-16 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen"><div class="max-w-4xl mx-auto text-center"><h1 class="text-5xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Welcome to WebAcela!</h1><p class="text-xl text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto">Start building your amazing page by dragging components from the right panel. Create beautiful, responsive layouts with our visual editor.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-blue-500 text-3xl mb-4">🎨</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Drag & Drop</h3><p class="text-gray-600">Easily add components by dragging them from the blocks panel</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-purple-500 text-3xl mb-4">📱</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Responsive Design</h3><p class="text-gray-600">Your pages will look great on all devices automatically</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-green-500 text-3xl mb-4">⚡</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Fast & Modern</h3><p class="text-gray-600">Built with the latest web technologies for optimal performance</p></div></div><div class="bg-white p-8 rounded-xl shadow-lg"><h2 class="text-2xl font-bold text-gray-800 mb-4">Ready to Get Started?</h2><p class="text-gray-600 mb-6">Choose from our pre-designed blocks or create your own custom components</p><button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-8 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">Start Building</button></div></div></div>',
           });
           
         }
@@ -759,7 +762,7 @@
           // If this is a new page with no content, ensure default content is saved
           if (!value || value.trim() === '') {
             console.log('New page detected, setting default content...');
-            const defaultContent = '<div class="container"><h1>Welcome!</h1><p>Start building your page by dragging components from the right panel.</p></div>';
+            const defaultContent = '<div class="container mx-auto px-4 py-16 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen"><div class="max-w-4xl mx-auto text-center"><h1 class="text-5xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Welcome to WebAcela!</h1><p class="text-xl text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto">Start building your amazing page by dragging components from the right panel. Create beautiful, responsive layouts with our visual editor.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-blue-500 text-3xl mb-4">🎨</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Drag & Drop</h3><p class="text-gray-600">Easily add components by dragging them from the blocks panel</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-purple-500 text-3xl mb-4">📱</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Responsive Design</h3><p class="text-gray-600">Your pages will look great on all devices automatically</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-green-500 text-3xl mb-4">⚡</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Fast & Modern</h3><p class="text-gray-600">Built with the latest web technologies for optimal performance</p></div></div><div class="bg-white p-8 rounded-xl shadow-lg"><h2 class="text-2xl font-bold text-gray-800 mb-4">Ready to Get Started?</h2><p class="text-gray-600 mb-6">Choose from our pre-designed blocks or create your own custom components</p><button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-8 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">Start Building</button></div></div></div>';
             
             // Set the content in state and trigger onChange
             this.setState({ value: defaultContent });
@@ -845,6 +848,53 @@
       } catch (error) {
         console.error('Error initializing GrapesJS editor:', error);
         this.setState({ error: 'Failed to initialize editor: ' + error.message });
+      }
+    },
+
+    overrideBasicBlocks() {
+      if (!this.editor) return;
+      
+      try {
+        console.log('Overriding basic blocks with Tailwind classes...');
+        const blockManager = this.editor.BlockManager;
+        
+        // Override text block
+        const textBlock = blockManager.get('text');
+        if (textBlock) {
+          textBlock.set('content', '<p class="text-gray-700 leading-relaxed">Insert your text here</p>');
+          console.log('✅ Text block updated with Tailwind classes');
+        }
+
+        // Override link block
+        const linkBlock = blockManager.get('link');
+        if (linkBlock) {
+          linkBlock.set('content', '<a href="#" class="text-blue-600 hover:text-blue-800 underline transition duration-300">Link text</a>');
+          console.log('✅ Link block updated with Tailwind classes');
+        }
+
+        // Override text-basic block from preset webpage plugin
+        const textBasicBlock = blockManager.get('text-basic');
+        if (textBasicBlock) {
+          textBasicBlock.set('content', '<div class="prose max-w-none p-6 bg-white rounded-lg shadow-sm"><h2 class="text-2xl font-bold text-gray-800 mb-4">Heading</h2><p class="text-gray-600 leading-relaxed mb-4">This is a text-basic block with beautiful Tailwind typography classes. You can edit this content and add more paragraphs.</p><p class="text-gray-600 leading-relaxed">Perfect for creating rich text content with consistent styling.</p></div>');
+          console.log('✅ Text-basic block updated with Tailwind classes');
+        }
+
+        // Override quote block from preset webpage plugin
+        const quoteBlock = blockManager.get('quote');
+        if (quoteBlock) {
+          quoteBlock.set('content', '<blockquote class="border-l-4 border-blue-500 pl-6 py-4 bg-gray-50 rounded-r-lg my-6"><p class="text-lg text-gray-700 italic leading-relaxed mb-2">"This is a beautifully styled quote with Tailwind CSS classes."</p><cite class="text-sm text-gray-500 font-medium">— Author Name</cite></blockquote>');
+          console.log('✅ Quote block updated with Tailwind classes');
+        }
+
+        // Override link-block from preset webpage plugin
+        const linkBlockPreset = blockManager.get('link-block');
+        if (linkBlockPreset) {
+          linkBlockPreset.set('content', '<div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"><h3 class="text-xl font-bold mb-2">Call to Action</h3><p class="mb-4 opacity-90">Click here to learn more about our services</p><a href="#" class="inline-block bg-white text-blue-600 font-semibold py-2 px-6 rounded-full hover:bg-gray-100 transition duration-300">Learn More</a></div>');
+          console.log('✅ Link-block updated with Tailwind classes');
+        }
+        
+      } catch (error) {
+        console.error('Error overriding basic blocks:', error);
       }
     },
 

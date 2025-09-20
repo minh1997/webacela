@@ -25,9 +25,7 @@ const { data } = page;
     <div class="bg-white rounded-lg shadow-lg">
       {/* Visual editor content (GrapesJS) - Show if bodyVisual exists */}
       {data.bodyVisual ? (
-        <div class="mx-auto">
-          <div class="visual-content" set:html={data.bodyVisual} />
-        </div>
+        <div set:html={data.bodyVisual} />
       ) : (
         /* Markdown content - Default fallback */
         <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-strong:text-gray-900 prose-ul:text-gray-700 prose-li:text-gray-700">
