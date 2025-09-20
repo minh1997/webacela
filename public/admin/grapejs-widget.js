@@ -795,11 +795,6 @@
         // Ensure Tailwind CSS is loaded in iframe
         this.ensureTailwindLoaded();
 
-        // Re-initialize countdown components after page load
-        setTimeout(() => {
-          this.reactivateCountdowns();
-        }, 2000);
-
       } catch (error) {
         console.error('Error initializing GrapesJS editor:', error);
         this.setState({ error: 'Failed to initialize editor: ' + error.message });
@@ -835,36 +830,6 @@
           console.error('Error injecting Tailwind CSS script:', error);
         }
       }, 1000);
-    },
-
-    reactivateCountdowns() {
-      if (!this.editor) return;
-
-      try {
-        const iframe = this.editor.Canvas.getFrameEl();
-        if (iframe && iframe.contentDocument) {
-          const doc = iframe.contentDocument;
-          
-          // Find all script tags in the iframe that might be countdown-related
-          const scripts = doc.querySelectorAll('script');
-          scripts.forEach(script => {
-            // Re-execute any script that contains countdown functionality
-            if (script.textContent && script.textContent.includes('countdown')) {
-              try {
-                // Create a new script element and execute it
-                const newScript = doc.createElement('script');
-                newScript.textContent = script.textContent;
-                doc.head.appendChild(newScript);
-                console.log('✅ Countdown script re-executed');
-              } catch (error) {
-                console.log('❌ Error re-executing countdown script:', error);
-              }
-            }
-          });
-        }
-      } catch (error) {
-        console.error('❌ Error reactivating countdowns:', error);
-      }
     },
 
     fixDeviceCommands() {
