@@ -3,18 +3,27 @@ title: Luna party
 description: asdas đâsdasd
 slug: luna-party
 bodyVisual: >-
-  <body><!-- Header --><meta charset="UTF-8"/><meta name="viewport"
-  content="width=device-width, initial-scale=1.0"/><title>Trung Thu
-  2025</title><header class="flex justify-between items-center px-8 py-6
-  bg-yellow-200 shadow-md"><h1 class="text-2xl font-bold text-red-600">🌕 Đêm
-  Hội Trăng Rằm</h1></header><!-- Hero Section --><section class="text-center
-  py-20 px-6 bg-yellow-50"><h2 class="text-5xl font-extrabold text-red-600">Tết
-  Trung Thu 2025</h2><p class="mt-6 max-w-2xl mx-auto text-lg text-gray-700">
-        Hãy cùng gia đình và bạn bè tận hưởng đêm hội lồng đèn, múa lân và thưởng thức bánh trung thu ngọt ngào.
-      </p><button type="button" class="mt-8 px-6 py-3 bg-red-500 text-white rounded-2xl shadow-lg hover:bg-red-400 transition">
-        Tham Gia Ngay
-      </button></section><!-- Features / Activities --><section id="about" class="grid md:grid-cols-3 gap-8 px-8 py-20"><div class="bg-white p-6 rounded-2xl shadow-xl text-center"><h3 class="text-2xl font-bold text-yellow-600">🏮 Thả Đèn Lồng</h3><p class="mt-3 text-gray-600">Cùng nhau thả đèn lồng, gửi gắm điều ước trong đêm trăng rằm.</p></div><div class="bg-white p-6 rounded-2xl shadow-xl text-center"><h3 class="text-2xl font-bold text-yellow-600">🦁 Múa Lân</h3><p class="mt-3 text-gray-600">Thưởng thức màn múa lân sôi động, mang lại may mắn và niềm vui.</p></div><div class="bg-white p-6 rounded-2xl shadow-xl text-center"><h3 class="text-2xl font-bold text-yellow-600">🥮 Bánh Trung Thu</h3><p class="mt-3 text-gray-600">Thưởng thức những chiếc bánh trung thu truyền thống thơm ngon.</p></div></section><!-- Event Schedule --><section id="events" class="px-8 py-20 text-center bg-yellow-100"><h2 class="text-4xl font-bold text-red-600 mb-10">Lịch Trình Chương Trình</h2><ul class="space-y-6 max-w-xl mx-auto text-lg"><li>18:00 - Khai mạc &amp; Đón khách</li><li>18:30 - Múa Lân &amp; Biểu diễn nghệ thuật</li><li>19:30 - Thả đèn lồng</li><li>20:00 - Chia sẻ bánh trung thu &amp; Giao lưu</li><li>21:30 - Kết thúc chương trình</li></ul></section><!-- Contact --><section id="contact" class="bg-red-50 py-16 text-center"><h2 class="text-3xl font-bold text-yellow-600">Liên Hệ</h2><p class="mt-4 text-gray-600">Đăng ký để nhận thông tin mới nhất về chương trình.</p><form method="get" class="mt-6 flex justify-center gap-3"><input type="email" placeholder="Nhập email của bạn" class="px-4 py-2 rounded-xl border border-gray-300 w-64"/><button type="button" class="px-6 py-2 bg-red-500 text-white rounded-xl hover:bg-red-400 transition">Đăng ký</button></form></section><!-- Footer --><footer class="text-center py-6 text-gray-600 text-sm bg-yellow-200">
-      © 2025 Đêm Hội Trăng Rằm. All rights reserved.
-    </footer></body><style>* { box-sizing: border-box; } body {margin: 0;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}</style>
+  <body><!-- Hero --><meta charset="UTF-8"/><meta name="viewport"
+  content="width=device-width, initial-scale=1.0"/><title>Bánh Trung Thu Mona
+  Cake</title><section class="bg-red-900 text-white py-16"><div class="container
+  mx-auto text-center px-4"><h1 class="text-4xl md:text-5xl font-bold mb-4">
+          Bánh Trung Thu Mona Cake
+        </h1><p class="text-lg md:text-xl mb-6">
+          Đồng hành gắn kết triệu triệu gia đình – Tết đoàn viên ấm áp
+        </p><button type="button" class="bg-yellow-400 text-red-900 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition">
+          Xem bộ sưu tập
+        </button></div></section><!-- Giới thiệu --><section class="py-12"><div class="container mx-auto px-4 text-center max-w-2xl"><h2 class="text-3xl font-bold text-red-900 mb-4">Tết Đoàn Viên</h2><p class="text-gray-700 leading-relaxed">
+          Mỗi chiếc bánh trung thu Mona Cake mang hương vị truyền thống, là lời chúc
+          sum vầy và sung túc gửi đến từng gia đình. Hãy cùng nhau thưởng thức
+          những khoảnh khắc ngọt ngào bên trăng rằm.
+        </p></div></section><!-- Bộ sưu tập sản phẩm --><section class="bg-yellow-100 py-12"><div class="container mx-auto px-4"><h2 class="text-3xl font-bold text-center text-red-900 mb-10">
+          Bộ Sưu Tập Bánh Trung Thu
+        </h2><div class="grid gap-8 md:grid-cols-3"><!-- Card sản phẩm --><div class="bg-white rounded-lg shadow hover:shadow-lg transition"><img src="https://via.placeholder.com/400x250" alt="Bánh nướng" class="rounded-t-lg w-full"/><div class="p-6 text-center"><h3 class="text-xl font-semibold mb-2">Bánh Nướng Thập Cẩm</h3><p class="text-gray-600 mb-4">Ngọt ngào vị truyền thống</p><p class="font-bold text-red-900 text-lg mb-4">200.000₫ / hộp</p><button type="button" class="bg-red-900 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                Đặt mua ngay
+              </button></div></div><!-- Card sản phẩm --><div class="bg-white rounded-lg shadow hover:shadow-lg transition"><img src="https://via.placeholder.com/400x250" alt="Bánh dẻo" class="rounded-t-lg w-full"/><div class="p-6 text-center"><h3 class="text-xl font-semibold mb-2">Bánh Dẻo Trà Xanh</h3><p class="text-gray-600 mb-4">Thanh mát vị tự nhiên</p><p class="font-bold text-red-900 text-lg mb-4">180.000₫ / hộp</p><button type="button" class="bg-red-900 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                Đặt mua ngay
+              </button></div></div><!-- Card sản phẩm --><div class="bg-white rounded-lg shadow hover:shadow-lg transition"><img src="https://via.placeholder.com/400x250" alt="Bánh thượng hạng" class="rounded-t-lg w-full"/><div class="p-6 text-center"><h3 class="text-xl font-semibold mb-2">Combo Đoàn Viên</h3><p class="text-gray-600 mb-4">Hộp quà sang trọng</p><p class="font-bold text-red-900 text-lg mb-4">500.000₫ / hộp</p><button type="button" class="bg-red-900 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                Đặt mua ngay
+              </button></div></div></div></div></section><!-- Cam kết --><section class="py-12"><div class="container mx-auto px-4 grid md:grid-cols-4 gap-8 text-center"><div><div class="text-4xl mb-2">🌕</div><p class="font-semibold">Hàng mới mỗi ngày</p></div><div><div class="text-4xl mb-2">🍃</div><p class="font-semibold">Không chất bảo quản</p></div><div><div class="text-4xl mb-2">🏠</div><p class="font-semibold">100% Nhà làm</p></div><div><div class="text-4xl mb-2">📞</div><p class="font-semibold">Hỗ trợ tận tâm</p></div></div></section><!-- Footer --><footer class="bg-red-900 text-white py-6"><div class="container mx-auto text-center"><p class="mb-2">© 2025 Mona Cake. Tất cả các quyền được bảo lưu.</p><p>Hotline: 0123 456 789 | Địa chỉ: 123 Đường Trung Thu, Hà Nội</p></div></footer></body><style>* { box-sizing: border-box; } body {margin: 0;}</style>
 ---
 test markdown
