@@ -246,15 +246,6 @@
           countdownPluginName = 'grapesjs-component-countdown'; // Default attempt
         }
 
-        console.log('Plugin name detection results:');
-        console.log('Basic plugin:', basicPluginName);
-        console.log('TUI plugin:', tuiPluginName);
-        console.log('Forms plugin:', formsPluginName);
-        console.log('Preset plugin:', presetPluginName);
-        console.log('Style BG plugin:', styleBgPluginName);
-        console.log('Custom Code plugin:', customCodePluginName);
-        console.log('Countdown plugin:', countdownPluginName);
-
         // Initialize GrapesJS with all plugins
         try {
           this.editor = window.grapesjs.init({
@@ -396,8 +387,8 @@
               }]
             },
 
-            // Initial content
-            components: value || '<div class="container"><h1>Welcome!</h1><p>Start building your page by dragging components from the right panel.</p></div>',
+            // Initial content - process scripts if they exist
+            components: this.processInitialContent(value) || '<div class="container"><h1>Welcome!</h1><p>Start building your page by dragging components from the right panel.</p></div>',
           });
           
           console.log('GrapesJS editor with plugins initialized successfully');
@@ -761,6 +752,14 @@
           }
         });
 
+        // Set up load listener to validate countdown components
+        this.editor.on('load', () => {
+          console.log('Editor loaded, validating countdown components...');
+          setTimeout(() => {
+            this.validateCountdownComponents();
+          }, 2000);
+        });
+
         // Automatically activate component outlines (View Component button)
         setTimeout(() => {
           try {
@@ -798,6 +797,168 @@
       } catch (error) {
         console.error('Error initializing GrapesJS editor:', error);
         this.setState({ error: 'Failed to initialize editor: ' + error.message });
+      }
+    },
+
+    processInitialContent(content) {
+      if (!content) return content;
+      
+      try {
+        let processedContent = content;
+        
+        // Check if content contains countdown elements that need to be restored
+        if (content.includes('data-js="countdown"') || content.includes('countdown-digit')) {
+          console.log('Found countdown components in content, restoring component attributes...');
+          
+          // Restore countdown component attributes
+          // Look for countdown container elements and add the proper GrapesJS attributes
+          processedContent = processedContent.replace(
+            /<div([^>]*class="[^"]*countdown[^"]*"[^>]*)>/gi,
+            '<div$1 data-gjs-type="countdown">'
+          );
+          
+          // Also check for elements with countdown structure
+          processedContent = processedContent.replace(
+            /<div([^>]*?)>\s*<span[^>]*data-js="countdown"[^>]*>/gi,
+            '<div$1 data-gjs-type="countdown"><span data-js="countdown" class="countdown-cont">'
+          );
+          
+          console.log('✅ Countdown component attributes restored');
+        }
+        
+        // Check if content contains scripts (like countdown scripts)
+        if (content.includes('<script>') && content.includes('__gjsCountdownInterval')) {
+          console.log('Found countdown scripts in initial content, processing...');
+          
+          // Store scripts for later execution in the iframe
+          this.initialScripts = [];
+          
+          // Extract scripts from content
+          const scriptRegex = /<script>([\s\S]*?)<\/script>/gi;
+          let match;
+          
+          while ((match = scriptRegex.exec(content)) !== null) {
+            const scriptContent = match[1];
+            if (scriptContent.includes('__gjsCountdownInterval') || scriptContent.includes('var props =')) {
+              this.initialScripts.push(scriptContent);
+              console.log('Stored countdown script for execution');
+            }
+          }
+          
+          // Schedule script execution after editor loads
+          setTimeout(() => {
+            this.executeInitialScripts();
+            // Validate and fix countdown component types after scripts execute
+            setTimeout(() => {
+              this.validateCountdownComponents();
+            }, 1000);
+          }, 3000);
+        }
+        
+        return processedContent;
+      } catch (error) {
+        console.error('Error processing initial content:', error);
+        return content;
+      }
+    },
+
+    executeInitialScripts() {
+      if (!this.editor || !this.initialScripts || this.initialScripts.length === 0) return;
+      
+      try {
+        const iframe = this.editor.Canvas.getFrameEl();
+        if (iframe && iframe.contentDocument) {
+          const doc = iframe.contentDocument;
+          
+          console.log(`Executing ${this.initialScripts.length} initial countdown scripts`);
+          
+          this.initialScripts.forEach((scriptContent, index) => {
+            try {
+              // Create and execute script in iframe
+              const script = doc.createElement('script');
+              script.textContent = scriptContent;
+              doc.head.appendChild(script);
+              
+              console.log(`✅ Initial countdown script ${index + 1} executed successfully`);
+            } catch (error) {
+              console.log(`❌ Error executing initial script ${index + 1}:`, error);
+            }
+          });
+          
+          // Clear the stored scripts
+          this.initialScripts = null;
+        }
+      } catch (error) {
+        console.error('❌ Error executing initial scripts:', error);
+      }
+    },
+
+    // Check and fix component types after loading
+    validateCountdownComponents() {
+      if (!this.editor) return;
+      
+      try {
+        console.log('Validating countdown components...');
+        
+        // Get all components from the editor
+        const components = this.editor.DomComponents.getComponents();
+        
+        const checkComponent = (component) => {
+          try {
+            // Get component HTML content to check for countdown patterns
+            const componentHtml = component.toHTML();
+            
+            // Check if component HTML contains countdown patterns
+            const hasCountdownData = componentHtml.includes('data-js="countdown"');
+            const hasCountdownClass = componentHtml.includes('class="') && componentHtml.includes('countdown');
+            const hasCountdownDigit = componentHtml.includes('countdown-digit');
+            
+            if (hasCountdownData || hasCountdownClass || hasCountdownDigit) {
+              const currentType = component.get('type');
+              if (currentType !== 'countdown') {
+                console.log('Found countdown element with wrong type, fixing...', currentType);
+                console.log('Component HTML:', componentHtml.substring(0, 200) + '...');
+                
+                // Set the correct component type
+                component.set('type', 'countdown');
+                
+                // Add the countdown trait if missing
+                const traits = component.get('traits') || [];
+                const hasCountdownTrait = traits.some(t => t.name === 'countdown-date');
+                
+                if (!hasCountdownTrait) {
+                  component.set('traits', [
+                    ...traits,
+                    {
+                      type: 'text',
+                      name: 'countdown-date',
+                      label: 'Target Date',
+                      value: '2024-12-31'
+                    }
+                  ]);
+                }
+                
+                console.log('✅ Fixed countdown component type');
+              }
+            }
+            
+            // Check child components recursively
+            const childComponents = component.components();
+            if (childComponents && typeof childComponents.each === 'function') {
+              childComponents.each(child => checkComponent(child));
+            }
+            
+          } catch (componentError) {
+            console.warn('Error checking individual component:', componentError);
+          }
+        };
+        
+        if (components && typeof components.each === 'function') {
+          components.each(component => checkComponent(component));
+        }
+        
+      } catch (error) {
+        console.error('Error validating countdown components:', error);
       }
     },
 
