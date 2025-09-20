@@ -88,6 +88,9 @@
         // Load GrapesJS Custom Code plugin from CDN
         await loadScript('https://unpkg.com/grapesjs-custom-code@1.0.2/dist/index.js');
 
+        // Load GrapesJS Countdown Components plugin from CDN
+        await loadScript('https://unpkg.com/grapesjs-component-countdown@1.0.1/dist/index.js');
+
         // Load CodeMirror separately to ensure it's available
         if (!window.CodeMirror) {
           await loadScript('https://unpkg.com/codemirror@5.65.2/lib/codemirror.js');
@@ -156,6 +159,7 @@
         const possiblePresetNames = ['grapesjs-preset-webpage', 'preset-webpage', 'webpage'];
         const possibleStyleBgNames = ['grapesjs-style-bg', 'style-bg'];
         const possibleCustomCodeNames = ['grapesjs-custom-code', 'custom-code'];
+        const possibleCountdownNames = ['grapesjs-component-countdown', 'component-countdown', 'countdown'];
         
         let basicPluginName = null;
         let tuiPluginName = null;
@@ -163,6 +167,7 @@
         let presetPluginName = null;
         let styleBgPluginName = null;
         let customCodePluginName = null;
+        let countdownPluginName = null;
         
         for (const name of possibleBasicNames) {
           if (window.grapesjs.plugins && window.grapesjs.plugins[name]) {
@@ -205,6 +210,13 @@
             break;
           }
         }
+        
+        for (const name of possibleCountdownNames) {
+          if (window.grapesjs.plugins && window.grapesjs.plugins[name]) {
+            countdownPluginName = name;
+            break;
+          }
+        }
 
         if (!basicPluginName) {
           basicPluginName = 'gjs-blocks-basic'; // Default attempt
@@ -229,6 +241,10 @@
         if (!customCodePluginName) {
           customCodePluginName = 'grapesjs-custom-code'; // Default attempt
         }
+        
+        if (!countdownPluginName) {
+          countdownPluginName = 'grapesjs-component-countdown'; // Default attempt
+        }
 
         console.log('Plugin name detection results:');
         console.log('Basic plugin:', basicPluginName);
@@ -237,6 +253,7 @@
         console.log('Preset plugin:', presetPluginName);
         console.log('Style BG plugin:', styleBgPluginName);
         console.log('Custom Code plugin:', customCodePluginName);
+        console.log('Countdown plugin:', countdownPluginName);
 
         // Initialize GrapesJS with all plugins
         try {
@@ -249,8 +266,8 @@
             noticeOnUnload: false,
             storageManager: false,
             
-            // Load all plugins including Style Background and Custom Code
-            plugins: [basicPluginName, tuiPluginName, formsPluginName, presetPluginName, styleBgPluginName, customCodePluginName],
+            // Load all plugins including Style Background, Custom Code, and Countdown
+            plugins: [basicPluginName, tuiPluginName, formsPluginName, presetPluginName, styleBgPluginName, customCodePluginName, countdownPluginName],
             
             // Plugin options
             pluginOpts: {
@@ -329,6 +346,25 @@
                     Add your custom HTML/CSS/JS code here
                   </div>
                 `
+              }
+            },
+            [countdownPluginName]: {
+              // Countdown component plugin options
+              block: {
+                category: 'Extra',
+                label: 'Countdown',
+                content: `<div data-gjs-type="countdown" class="countdown-component"></div>`,
+                attributes: { class: 'fa fa-clock-o' }
+              },
+              component: {
+                // Default countdown options
+                dateInputType: 'date',
+                defaultDate: '',
+                endText: 'Countdown Ended!',
+                dayText: 'Days',
+                hourText: 'Hours', 
+                minuteText: 'Minutes',
+                secondText: 'Seconds'
               }
             },
             
