@@ -92,16 +92,16 @@
         }
         
         // Load blocks-basic plugin from correct CDN
-        await loadScript('https://unpkg.com/grapesjs-blocks-basic');
+        await loadScript('https://unpkg.com/grapesjs-blocks-basic@1.0.2/dist/index.js');
         
         // Load TUI Image Editor plugin from CDN
-        await loadScript('https://unpkg.com/grapesjs-tui-image-editor');
+        await loadScript('https://unpkg.com/grapesjs-tui-image-editor@1.0.2/dist/index.js');
         
         // Load GrapesJS Forms plugin from CDN
-        await loadScript('https://unpkg.com/grapesjs-plugin-forms');
+        await loadScript('https://unpkg.com/grapesjs-plugin-forms@2.0.6/dist/index.js');
         
         // Load GrapesJS Preset Webpage plugin from CDN
-        await loadScript('https://unpkg.com/grapesjs-preset-webpage');
+        await loadScript('https://unpkg.com/grapesjs-preset-webpage@1.0.3/dist/index.js');
 
         // Wait for GrapesJS to be available
         let attempts = 0;
@@ -250,8 +250,10 @@
             // Canvas settings
             canvas: {
               styles: [
-                'https://cdn.tailwindcss.com',
                 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
+              ],
+              scripts: [
+                'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4'
               ]
             },
 
@@ -294,8 +296,10 @@
             // Canvas settings
             canvas: {
               styles: [
-                'https://cdn.tailwindcss.com',
                 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
+              ],
+              scripts: [
+                'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4'
               ]
             },
 
@@ -360,12 +364,47 @@
           }
         });
 
+        // Ensure Tailwind CSS is loaded in iframe
+        this.ensureTailwindLoaded();
+
         console.log('GrapesJS editor initialized successfully');
 
       } catch (error) {
         console.error('Error initializing GrapesJS editor:', error);
         this.setState({ error: 'Failed to initialize editor: ' + error.message });
       }
+    },
+
+    ensureTailwindLoaded() {
+      if (!this.editor) return;
+
+      // Wait a bit for the iframe to be fully initialized
+      setTimeout(() => {
+        try {
+          const iframe = this.editor.Canvas.getFrameEl();
+          if (iframe && iframe.contentDocument) {
+            const doc = iframe.contentDocument;
+            
+            // Check if Tailwind script is already loaded
+            const existingTailwind = doc.querySelector('script[src*="tailwindcss"]');
+            if (!existingTailwind) {
+              console.log('Injecting Tailwind CSS script into iframe...');
+              
+              // Create script element for Tailwind CSS Play CDN
+              const tailwindScript = doc.createElement('script');
+              tailwindScript.src = 'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4';
+              
+              // Add to iframe head
+              if (doc.head) {
+                doc.head.appendChild(tailwindScript);
+                console.log('Tailwind CSS script injected successfully');
+              }
+            }
+          }
+        } catch (error) {
+          console.error('Error injecting Tailwind CSS script:', error);
+        }
+      }, 1000);
     },
 
     fixDeviceCommands() {
