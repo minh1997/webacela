@@ -752,12 +752,41 @@
           }
         });
 
-        // Set up load listener to validate countdown components
+        // Set up load listener to validate countdown components and handle initial content
         this.editor.on('load', () => {
           console.log('Editor loaded, validating countdown components...');
+          
+          // If this is a new page with no content, ensure default content is saved
+          if (!value || value.trim() === '') {
+            console.log('New page detected, setting default content...');
+            const defaultContent = '<div class="container"><h1>Welcome!</h1><p>Start building your page by dragging components from the right panel.</p></div>';
+            
+            // Set the content in state and trigger onChange
+            this.setState({ value: defaultContent });
+            if (onChange) {
+              onChange(defaultContent);
+            }
+          }
+          
           setTimeout(() => {
             this.validateCountdownComponents();
           }, 2000);
+        });
+
+        // Add canvas:ready listener to ensure content is captured when editor is fully ready
+        this.editor.on('canvas:ready', () => {
+          console.log('Canvas ready, capturing current content...');
+          
+          // Get current content from editor
+          const html = this.editor.getHtml();
+          const css = this.editor.getCss();
+          const fullContent = html + (css ? `<style>${css}</style>` : '');
+          
+          // Update state and trigger onChange to ensure content is saved
+          this.setState({ value: fullContent });
+          if (onChange) {
+            onChange(fullContent);
+          }
         });
 
         // Automatically activate component outlines (View Component button)
@@ -793,6 +822,25 @@
 
         // Ensure Tailwind CSS is loaded in iframe
         this.ensureTailwindLoaded();
+
+        // Ensure default content is properly captured and saved for new pages
+        setTimeout(() => {
+          if (!value || value.trim() === '') {
+            console.log('Ensuring default content is captured for new page...');
+            
+            const html = this.editor.getHtml();
+            const css = this.editor.getCss();
+            const fullContent = html + (css ? `<style>${css}</style>` : '');
+            
+            if (fullContent && fullContent.trim() !== '') {
+              this.setState({ value: fullContent });
+              if (onChange) {
+                onChange(fullContent);
+                console.log('✅ Default content saved for new page');
+              }
+            }
+          }
+        }, 2000);
 
       } catch (error) {
         console.error('Error initializing GrapesJS editor:', error);
