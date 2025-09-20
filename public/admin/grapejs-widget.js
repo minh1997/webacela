@@ -250,6 +250,7 @@
             // Canvas settings
             canvas: {
               styles: [
+                'https://cdn.tailwindcss.com',
                 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
               ]
             },
@@ -293,6 +294,7 @@
             // Canvas settings
             canvas: {
               styles: [
+                'https://cdn.tailwindcss.com',
                 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
               ]
             },

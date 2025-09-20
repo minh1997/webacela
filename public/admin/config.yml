@@ -74,11 +74,11 @@ collections:
       size: large     # Make the editor container larger
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text", required: false}
+      - {label: "Description", name: "description", widget: "text"}
       - {label: "Slug", name: "slug", widget: "string"}
       - {label: "SEO Preview", name: "seoPreview", widget: "google-snippet-preview", required: false}
-      - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
       - label: "Body (Visual Editor)"
         name: "bodyVisual"
         widget: "grapesjs"
         required: false
+      - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
