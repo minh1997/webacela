@@ -1,4 +1,4 @@
-// GrapesJS Widget for Decap CMS - Simplified Version
+// GrapesJS Widget for Decap CMS - Clean Version
 (function() {
   'use strict';
 
@@ -25,27 +25,6 @@
         reject(error);
       };
       document.head.appendChild(script);
-    });
-  }
-
-  // Utility function to load stylesheets
-  function loadStylesheet(href) {
-    return new Promise((resolve) => {
-      // Check if stylesheet already exists
-      const existing = document.querySelector(`link[href="${href}"]`);
-      if (existing) {
-        resolve();
-        return;
-      }
-
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = href;
-      link.onload = () => {
-        console.log('Loaded CSS:', href);
-        resolve();
-      };
-      document.head.appendChild(link);
     });
   }
 
@@ -108,6 +87,30 @@
         
         // Load GrapesJS Custom Code plugin from CDN
         await loadScript('https://unpkg.com/grapesjs-custom-code@1.0.2/dist/index.js');
+
+        // Load CodeMirror separately to ensure it's available
+        if (!window.CodeMirror) {
+          await loadScript('https://unpkg.com/codemirror@5.65.2/lib/codemirror.js');
+          await loadStylesheet('https://unpkg.com/codemirror@5.65.2/lib/codemirror.css');
+          await loadStylesheet('https://unpkg.com/codemirror@5.65.2/theme/hopscotch.css');
+          await loadStylesheet('https://unpkg.com/codemirror@5.65.2/theme/monokai.css');
+          await loadScript('https://unpkg.com/codemirror@5.65.2/mode/xml/xml.js');
+          await loadScript('https://unpkg.com/codemirror@5.65.2/mode/css/css.js');
+          await loadScript('https://unpkg.com/codemirror@5.65.2/mode/javascript/javascript.js');
+          await loadScript('https://unpkg.com/codemirror@5.65.2/mode/htmlmixed/htmlmixed.js');
+          await loadScript('https://unpkg.com/codemirror@5.65.2/addon/edit/closetag.js');
+          await loadScript('https://unpkg.com/codemirror@5.65.2/addon/edit/closebrackets.js');
+          await loadScript('https://unpkg.com/codemirror@5.65.2/addon/edit/matchbrackets.js');
+          await loadScript('https://unpkg.com/codemirror@5.65.2/addon/selection/active-line.js');
+          await loadScript('https://unpkg.com/codemirror@5.65.2/addon/fold/foldcode.js');
+          await loadScript('https://unpkg.com/codemirror@5.65.2/addon/fold/foldgutter.js');
+          await loadScript('https://unpkg.com/codemirror@5.65.2/addon/fold/xml-fold.js');
+          await loadStylesheet('https://unpkg.com/codemirror@5.65.2/addon/fold/foldgutter.css');
+          // Load formatting addon
+          await loadScript('https://unpkg.com/js-beautify@1.14.7/js/lib/beautify.js');
+          await loadScript('https://unpkg.com/js-beautify@1.14.7/js/lib/beautify-css.js');
+          await loadScript('https://unpkg.com/js-beautify@1.14.7/js/lib/beautify-html.js');
+        }
 
         // Wait for GrapesJS to be available
         let attempts = 0;
@@ -227,7 +230,15 @@
           customCodePluginName = 'grapesjs-custom-code'; // Default attempt
         }
 
-        // Initialize GrapesJS with all four plugins
+        console.log('Plugin name detection results:');
+        console.log('Basic plugin:', basicPluginName);
+        console.log('TUI plugin:', tuiPluginName);
+        console.log('Forms plugin:', formsPluginName);
+        console.log('Preset plugin:', presetPluginName);
+        console.log('Style BG plugin:', styleBgPluginName);
+        console.log('Custom Code plugin:', customCodePluginName);
+
+        // Initialize GrapesJS with all plugins
         try {
           this.editor = window.grapesjs.init({
             container: `#${containerId}`,
@@ -353,15 +364,346 @@
             components: value || '<div class="container"><h1>Welcome!</h1><p>Start building your page by dragging components from the right panel.</p></div>',
           });
           
-          console.log('GrapesJS editor with plugin initialized successfully');
+          console.log('GrapesJS editor with plugins initialized successfully');
+          
+          // Debug plugin configuration
+          setTimeout(() => {
+            const importCmd = this.editor.Commands.get('gjs-open-import-webpage');
+            
+            // Test the import command to see what happens
+            if (importCmd) {
+              // Override the existing command with our custom implementation
+              this.editor.Commands.add('gjs-open-import-webpage', {
+                run: (editor) => {
+                  console.log('Custom import command running...');
+                  const modal = editor.Modal;
+                  
+                  // Get current content
+                  const html = editor.getHtml();
+                  const css = editor.getCss();
+                  const currentContent = html + (css ? '\n\n<style>\n' + css + '\n</style>' : '');
+                  
+                  // Create modal content container
+                  const modalContent = document.createElement('div');
+                  modalContent.style.padding = '10px';
+                  
+                  // Add label
+                  const label = document.createElement('label');
+                  label.textContent = 'Paste your HTML/CSS code here';
+                  label.style.display = 'block';
+                  label.style.marginBottom = '10px';
+                  label.style.fontWeight = 'bold';
+                  modalContent.appendChild(label);
+                  
+                  // Add code editor container
+                  const editorContainer = document.createElement('div');
+                  editorContainer.style.border = '1px solid #ddd';
+                  editorContainer.style.borderRadius = '4px';
+                  editorContainer.style.minHeight = '300px';
+                  editorContainer.style.backgroundColor = '#f8f8f8';
+                  modalContent.appendChild(editorContainer);
+                  
+                  // Add import button
+                  const buttonContainer = document.createElement('div');
+                  buttonContainer.style.textAlign = 'right';
+                  buttonContainer.style.marginTop = '10px';
+                  
+                  const importBtn = document.createElement('button');
+                  importBtn.textContent = 'Import';
+                  importBtn.style.padding = '8px 16px';
+                  importBtn.style.backgroundColor = '#007cba';
+                  importBtn.style.color = 'white';
+                  importBtn.style.border = 'none';
+                  importBtn.style.borderRadius = '4px';
+                  importBtn.style.cursor = 'pointer';
+                  
+                  buttonContainer.appendChild(importBtn);
+                  modalContent.appendChild(buttonContainer);
+
+                  // Open modal first
+                  modal.open({
+                    title: 'Import Code',
+                    content: modalContent
+                  });
+                  
+                  // Initialize CodeMirror after modal is open
+                  setTimeout(() => {
+                    try {
+                      console.log('Initializing CodeMirror...');
+                      
+                      // Check if CodeMirror is available globally
+                      if (typeof CodeMirror !== 'undefined') {
+                        console.log('CodeMirror available globally');
+                        
+                        // Create CodeMirror instance directly
+                        const cmInstance = CodeMirror(editorContainer, {
+                          value: '', // Start empty, we'll set formatted content after
+                          mode: 'htmlmixed',
+                          theme: 'monokai',
+                          lineNumbers: true,
+                          autoCloseTags: true,
+                          autoCloseBrackets: true,
+                          lineWrapping: true,
+                          styleActiveLine: true,
+                          matchBrackets: true,
+                          indentUnit: 2,
+                          tabSize: 2,
+                          foldGutter: true,
+                          gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+                          extraKeys: {
+                            'Ctrl-Space': 'autocomplete',
+                            'F11': function(cm) {
+                              cm.setOption('fullScreen', !cm.getOption('fullScreen'));
+                            },
+                            'Esc': function(cm) {
+                              if (cm.getOption('fullScreen')) cm.setOption('fullScreen', false);
+                            },
+                            'Ctrl-F': 'findPersistent',
+                            'Ctrl-Alt-F': function(cm) {
+                              // Format code function
+                              formatCode(cm);
+                            }
+                          }
+                        });
+                        
+                        // Add format code function
+                        function formatCode(cm) {
+                          try {
+                            const code = cm.getValue();
+                            let formatted = code;
+                            
+                            // Check if js-beautify is available
+                            if (typeof html_beautify !== 'undefined') {
+                              formatted = html_beautify(code, {
+                                indent_size: 2,
+                                indent_char: ' ',
+                                max_preserve_newlines: 2,
+                                preserve_newlines: true,
+                                keep_array_indentation: false,
+                                break_chained_methods: false,
+                                indent_scripts: 'keep',
+                                brace_style: 'collapse',
+                                space_before_conditional: true,
+                                unescape_strings: false,
+                                jslint_happy: false,
+                                end_with_newline: false,
+                                wrap_line_length: 0,
+                                indent_inner_html: false,
+                                comma_first: false,
+                                e4x: false,
+                                indent_empty_lines: false
+                              });
+                            }
+                            
+                            cm.setValue(formatted);
+                            console.log('Code formatted successfully');
+                          } catch (error) {
+                            console.error('Code formatting failed:', error);
+                          }
+                        }
+                        
+                        // Set content and auto-format when first loaded
+                        setTimeout(() => {
+                          cmInstance.setValue(currentContent);
+                          
+                          // Auto-format the code on initial load
+                          setTimeout(() => {
+                            formatCode(cmInstance);
+                            console.log('Code auto-formatted on load');
+                          }, 100);
+                        }, 50);
+                        
+                        // Add format button
+                        const formatBtn = document.createElement('button');
+                        formatBtn.textContent = 'Format Code';
+                        formatBtn.style.padding = '4px 8px';
+                        formatBtn.style.marginRight = '10px';
+                        formatBtn.style.backgroundColor = '#28a745';
+                        formatBtn.style.color = 'white';
+                        formatBtn.style.border = 'none';
+                        formatBtn.style.borderRadius = '3px';
+                        formatBtn.style.cursor = 'pointer';
+                        formatBtn.style.fontSize = '12px';
+                        
+                        formatBtn.onclick = () => formatCode(cmInstance);
+                        buttonContainer.insertBefore(formatBtn, importBtn);
+                        
+                        // Style the CodeMirror instance
+                        cmInstance.setSize('100%', '350px');
+                        
+                        // Add custom CSS for better appearance
+                        const styleElement = document.createElement('style');
+                        styleElement.textContent = `
+                          .CodeMirror {
+                            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Source Code Pro', monospace !important;
+                            font-size: 14px !important;
+                            line-height: 1.5 !important;
+                          }
+                          .CodeMirror-selected {
+                            background: rgba(255, 255, 255, 0.1) !important;
+                          }
+                          .CodeMirror-line {
+                            padding-left: 4px !important;
+                          }
+                          .CodeMirror-gutters {
+                            border-right: 1px solid #3e3e3e !important;
+                          }
+                          .cm-tag {
+                            color: #f92672 !important;
+                          }
+                          .cm-attribute {
+                            color: #a6e22e !important;
+                          }
+                          .cm-string {
+                            color: #e6db74 !important;
+                          }
+                          .cm-bracket {
+                            color: #f8f8f2 !important;
+                          }
+                          .cm-comment {
+                            color: #75715e !important;
+                            font-style: italic !important;
+                          }
+                        `;
+                        document.head.appendChild(styleElement);
+                        
+                        // Update import button to use CodeMirror
+                        importBtn.onclick = () => {
+                          const code = cmInstance.getValue();
+                          console.log('Importing code from CodeMirror:', code);
+                          if (code.trim()) {
+                            editor.setComponents(code);
+                            modal.close();
+                          }
+                        };
+                        
+                        // Refresh CodeMirror after a short delay
+                        setTimeout(() => {
+                          cmInstance.refresh();
+                          console.log('CodeMirror refreshed');
+                        }, 100);
+                        
+                        console.log('CodeMirror successfully initialized');
+                      } else {
+                        console.log('CodeMirror not available globally, trying alternative methods...');
+                        
+                        // Method 2: Try to use GrapesJS's internal command to open code editor
+                        try {
+                          const existingCodeCmd = editor.Commands.get('core:code-edit');
+                          if (existingCodeCmd) {
+                            console.log('Using GrapesJS core code edit command');
+                            // Use a simple textarea with better styling
+                            editorContainer.innerHTML = `
+                              <div style="position: relative; background: #1e1e1e; border-radius: 4px;">
+                                <textarea 
+                                  style="
+                                    width: 100%; 
+                                    height: 300px; 
+                                    background: #1e1e1e; 
+                                    color: #e6e6e6; 
+                                    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; 
+                                    font-size: 14px;
+                                    padding: 15px; 
+                                    border: none; 
+                                    resize: none; 
+                                    outline: none;
+                                    line-height: 1.4;
+                                    tab-size: 2;
+                                  " 
+                                  placeholder="Paste your HTML/CSS code here..."
+                                >${currentContent}</textarea>
+                              </div>
+                            `;
+                            const textarea = editorContainer.querySelector('textarea');
+                            
+                            // Add tab support
+                            textarea.addEventListener('keydown', function(e) {
+                              if (e.key === 'Tab') {
+                                e.preventDefault();
+                                const start = this.selectionStart;
+                                const end = this.selectionEnd;
+                                this.value = this.value.substring(0, start) + '  ' + this.value.substring(end);
+                                this.selectionStart = this.selectionEnd = start + 2;
+                              }
+                            });
+                            
+                            importBtn.onclick = () => {
+                              const code = textarea.value;
+                              console.log('Importing code from styled textarea:', code);
+                              if (code.trim()) {
+                                editor.setComponents(code);
+                                modal.close();
+                              }
+                            };
+                            
+                            console.log('Styled textarea editor initialized');
+                          } else {
+                            // Absolute fallback
+                            console.log('Using basic textarea fallback');
+                            editorContainer.innerHTML = `
+                              <textarea style="width:100%; height:300px; font-family:monospace; padding:10px; border:1px solid #ddd; resize:none;">${currentContent}</textarea>
+                            `;
+                            const textarea = editorContainer.querySelector('textarea');
+                            importBtn.onclick = () => {
+                              const code = textarea.value;
+                              if (code.trim()) {
+                                editor.setComponents(code);
+                                modal.close();
+                              }
+                            };
+                          }
+                        } catch (fallbackError) {
+                          console.error('All methods failed:', fallbackError);
+                          // Final fallback
+                          editorContainer.innerHTML = `
+                            <textarea style="width:100%; height:300px; font-family:monospace; padding:10px; border:1px solid #ddd; resize:none;">${currentContent}</textarea>
+                          `;
+                          const textarea = editorContainer.querySelector('textarea');
+                          importBtn.onclick = () => {
+                            const code = textarea.value;
+                            if (code.trim()) {
+                              editor.setComponents(code);
+                              modal.close();
+                            }
+                          };
+                        }
+                      }
+                    } catch (cmError) {
+                      console.error('CodeMirror initialization failed:', cmError);
+                      // Fallback to basic textarea
+                      editorContainer.innerHTML = `
+                        <textarea style="width:100%; height:300px; font-family:monospace; padding:10px; border:1px solid #ddd; resize:none;">${currentContent}</textarea>
+                      `;
+                      const textarea = editorContainer.querySelector('textarea');
+                      importBtn.onclick = () => {
+                        const code = textarea.value;
+                        if (code.trim()) {
+                          editor.setComponents(code);
+                          modal.close();
+                        }
+                      };
+                    }
+                  }, 300);
+                  
+                  console.log('Modal opened, CodeMirror initializing...');
+                }
+              });
+              console.log('Import command overridden with custom implementation');
+            } else {
+              console.warn('Import command not found - preset webpage plugin may not be loaded correctly');
+            }
+            
+            // Check if the plugin registered correctly
+            console.log('Registered plugins:', Object.keys(window.grapesjs.plugins || {}));
+          }, 500);
           
           // Fix device commands to work with existing toolbar
           this.fixDeviceCommands();
           
         } catch (pluginError) {
-          console.warn('Plugin failed, initializing without plugin:', pluginError);
+          console.warn('Plugin failed, initializing without plugins:', pluginError);
           
-          // Fallback: Initialize without plugin
+          // Fallback: Initialize without plugins
           this.editor = window.grapesjs.init({
             container: `#${containerId}`,
             height: '800px',
@@ -377,53 +719,11 @@
               ]
             },
 
-            // Style manager
-            styleManager: {
-              appendTo: '#styles-container',
-              sectors: [{
-                name: 'Dimension',
-                open: false,
-                buildProps: ['width', 'min-height', 'padding'],
-                properties: [
-                  {
-                    property: 'margin',
-                    properties: [
-                      { name: 'Top', property: 'margin-top'},
-                      { name: 'Right', property: 'margin-right'},
-                      { name: 'Bottom', property: 'margin-bottom'},
-                      { name: 'Left', property: 'margin-left'}
-                    ]
-                  }
-                ]
-              }, {
-                name: 'Typography',
-                open: false,
-                buildProps: ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'color', 'line-height'],
-                properties: [
-                  { name: 'Font', property: 'font-family' },
-                  { name: 'Size', property: 'font-size' },
-                  { name: 'Color', property: 'color' }
-                ]
-              }]
-            },
-
-            // Device Manager
-            deviceManager: {
-              devices: [{
-                name: 'Desktop',
-                width: '',
-              }, {
-                name: 'Mobile',
-                width: '320px',
-                widthMedia: '480px',
-              }]
-            },
-
             // Initial content
             components: value || '<div class="container"><h1>Welcome!</h1><p>Start building your page by dragging components from the right panel.</p></div>',
           });
           
-          console.log('GrapesJS editor initialized without plugin (fallback)');
+          console.log('GrapesJS editor initialized without plugins (fallback)');
         }
 
         // Set up change listener
