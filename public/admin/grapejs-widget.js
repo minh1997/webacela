@@ -629,17 +629,14 @@
                             
                             importBtn.onclick = () => {
                               const code = textarea.value;
-                              console.log('Importing code from styled textarea:', code);
                               if (code.trim()) {
                                 editor.setComponents(code);
                                 modal.close();
                               }
                             };
                             
-                            console.log('Styled textarea editor initialized');
                           } else {
                             // Absolute fallback
-                            console.log('Using basic textarea fallback');
                             editorContainer.innerHTML = `
                               <textarea style="width:100%; height:300px; font-family:monospace; padding:10px; border:1px solid #ddd; resize:none;">${currentContent}</textarea>
                             `;
@@ -653,7 +650,6 @@
                             };
                           }
                         } catch (fallbackError) {
-                          console.error('All methods failed:', fallbackError);
                           // Final fallback
                           editorContainer.innerHTML = `
                             <textarea style="width:100%; height:300px; font-family:monospace; padding:10px; border:1px solid #ddd; resize:none;">${currentContent}</textarea>
@@ -669,7 +665,6 @@
                         }
                       }
                     } catch (cmError) {
-                      console.error('CodeMirror initialization failed:', cmError);
                       // Fallback to basic textarea
                       editorContainer.innerHTML = `
                         <textarea style="width:100%; height:300px; font-family:monospace; padding:10px; border:1px solid #ddd; resize:none;">${currentContent}</textarea>
@@ -684,25 +679,18 @@
                       };
                     }
                   }, 300);
-                  
-                  console.log('Modal opened, CodeMirror initializing...');
                 }
               });
-              console.log('Import command overridden with custom implementation');
             } else {
               console.warn('Import command not found - preset webpage plugin may not be loaded correctly');
             }
             
-            // Check if the plugin registered correctly
-            console.log('Registered plugins:', Object.keys(window.grapesjs.plugins || {}));
           }, 500);
           
           // Fix device commands to work with existing toolbar
           this.fixDeviceCommands();
           
         } catch (pluginError) {
-          console.warn('Plugin failed, initializing without plugins:', pluginError);
-          
           // Fallback: Initialize without plugins
           this.editor = window.grapesjs.init({
             container: `#${containerId}`,
@@ -723,7 +711,6 @@
             components: value || '<div class="container"><h1>Welcome!</h1><p>Start building your page by dragging components from the right panel.</p></div>',
           });
           
-          console.log('GrapesJS editor initialized without plugins (fallback)');
         }
 
         // Set up change listener
@@ -738,10 +725,39 @@
           }
         });
 
+        // Automatically activate component outlines (View Component button)
+        setTimeout(() => {
+          try {
+            // Run the command and make sure the button shows as active
+            this.editor.runCommand('sw-visibility');
+            
+            // Force the button to show as active/pressed
+            setTimeout(() => {
+              // Find the sw-visibility button and mark it as active
+              const toolbar = this.editor.Panels.getPanel('options');
+              if (toolbar) {
+                const swVisibilityBtn = toolbar.get('buttons').find(btn => 
+                  btn.get('command') === 'sw-visibility' || 
+                  btn.get('id') === 'sw-visibility'
+                );
+                
+                if (swVisibilityBtn) {
+                  // Set the button as active
+                  swVisibilityBtn.set('active', true);
+                  console.log('✅ Component outlines activated and button set to active state');
+                } else {
+                  console.log('❌ sw-visibility button not found in toolbar');
+                }
+              }
+            }, 100);
+            
+          } catch (error) {
+            console.log('❌ Error activating component outlines:', error);
+          }
+        }, 1000);
+
         // Ensure Tailwind CSS is loaded in iframe
         this.ensureTailwindLoaded();
-
-        console.log('GrapesJS editor initialized successfully');
 
       } catch (error) {
         console.error('Error initializing GrapesJS editor:', error);
@@ -771,7 +787,6 @@
               // Add to iframe head
               if (doc.head) {
                 doc.head.appendChild(tailwindScript);
-                console.log('Tailwind CSS script injected successfully');
               }
             }
           }
@@ -788,8 +803,6 @@
       const deviceManager = this.editor.DeviceManager;
       const commands = this.editor.Commands;
       
-      console.log('Fixing device commands...');
-
       // Override/fix the existing device commands to work properly
       commands.add('set-device-desktop', {
         run: (editor) => {
@@ -826,8 +839,6 @@
           }
         }
       });
-
-      console.log('Device commands fixed successfully');
     },
 
     componentWillUnmount() {
