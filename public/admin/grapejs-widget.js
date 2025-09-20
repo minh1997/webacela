@@ -102,6 +102,9 @@
         
         // Load GrapesJS Preset Webpage plugin from CDN
         await loadScript('https://unpkg.com/grapesjs-preset-webpage@1.0.3/dist/index.js');
+        
+        // Load GrapesJS Style Background plugin from CDN
+        await loadScript('https://unpkg.com/grapesjs-style-bg@2.0.2/dist/index.js');
 
         // Wait for GrapesJS to be available
         let attempts = 0;
@@ -145,11 +148,13 @@
         const possibleTuiNames = ['grapesjs-tui-image-editor', 'tui-image-editor'];
         const possibleFormsNames = ['grapesjs-plugin-forms', 'plugin-forms', 'forms'];
         const possiblePresetNames = ['grapesjs-preset-webpage', 'preset-webpage', 'webpage'];
+        const possibleStyleBgNames = ['grapesjs-style-bg', 'style-bg'];
         
         let basicPluginName = null;
         let tuiPluginName = null;
         let formsPluginName = null;
         let presetPluginName = null;
+        let styleBgPluginName = null;
         
         for (const name of possibleBasicNames) {
           if (window.grapesjs.plugins && window.grapesjs.plugins[name]) {
@@ -178,6 +183,13 @@
             break;
           }
         }
+        
+        for (const name of possibleStyleBgNames) {
+          if (window.grapesjs.plugins && window.grapesjs.plugins[name]) {
+            styleBgPluginName = name;
+            break;
+          }
+        }
 
         if (!basicPluginName) {
           basicPluginName = 'gjs-blocks-basic'; // Default attempt
@@ -194,6 +206,10 @@
         if (!presetPluginName) {
           presetPluginName = 'grapesjs-preset-webpage'; // Default attempt
         }
+        
+        if (!styleBgPluginName) {
+          styleBgPluginName = 'grapesjs-style-bg'; // Default attempt
+        }
 
         // Initialize GrapesJS with all four plugins
         try {
@@ -206,8 +222,8 @@
             noticeOnUnload: false,
             storageManager: false,
             
-            // Load all four plugins
-            plugins: [basicPluginName, tuiPluginName, formsPluginName, presetPluginName],
+            // Load all plugins including Style Background
+            plugins: [basicPluginName, tuiPluginName, formsPluginName, presetPluginName, styleBgPluginName],
             
             // Plugin options
             pluginOpts: {
@@ -244,6 +260,11 @@
                 textCleanCanvas: 'Are you sure to clean the canvas?',
                 showStylesOnChange: true,
                 useCustomTheme: true
+              },
+              [styleBgPluginName]: {
+                colorPicker: true,
+                imagePicker: true,
+                gradients: true,
               }
             },
             
