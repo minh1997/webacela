@@ -105,6 +105,9 @@
         
         // Load GrapesJS Style Background plugin from CDN
         await loadScript('https://unpkg.com/grapesjs-style-bg@2.0.2/dist/index.js');
+        
+        // Load GrapesJS Custom Code plugin from CDN
+        await loadScript('https://unpkg.com/grapesjs-custom-code@1.0.2/dist/index.js');
 
         // Wait for GrapesJS to be available
         let attempts = 0;
@@ -149,12 +152,14 @@
         const possibleFormsNames = ['grapesjs-plugin-forms', 'plugin-forms', 'forms'];
         const possiblePresetNames = ['grapesjs-preset-webpage', 'preset-webpage', 'webpage'];
         const possibleStyleBgNames = ['grapesjs-style-bg', 'style-bg'];
+        const possibleCustomCodeNames = ['grapesjs-custom-code', 'custom-code'];
         
         let basicPluginName = null;
         let tuiPluginName = null;
         let formsPluginName = null;
         let presetPluginName = null;
         let styleBgPluginName = null;
+        let customCodePluginName = null;
         
         for (const name of possibleBasicNames) {
           if (window.grapesjs.plugins && window.grapesjs.plugins[name]) {
@@ -190,6 +195,13 @@
             break;
           }
         }
+        
+        for (const name of possibleCustomCodeNames) {
+          if (window.grapesjs.plugins && window.grapesjs.plugins[name]) {
+            customCodePluginName = name;
+            break;
+          }
+        }
 
         if (!basicPluginName) {
           basicPluginName = 'gjs-blocks-basic'; // Default attempt
@@ -210,6 +222,10 @@
         if (!styleBgPluginName) {
           styleBgPluginName = 'grapesjs-style-bg'; // Default attempt
         }
+        
+        if (!customCodePluginName) {
+          customCodePluginName = 'grapesjs-custom-code'; // Default attempt
+        }
 
         // Initialize GrapesJS with all four plugins
         try {
@@ -222,8 +238,8 @@
             noticeOnUnload: false,
             storageManager: false,
             
-            // Load all plugins including Style Background
-            plugins: [basicPluginName, tuiPluginName, formsPluginName, presetPluginName, styleBgPluginName],
+            // Load all plugins including Style Background and Custom Code
+            plugins: [basicPluginName, tuiPluginName, formsPluginName, presetPluginName, styleBgPluginName, customCodePluginName],
             
             // Plugin options
             pluginOpts: {
@@ -265,6 +281,43 @@
                 colorPicker: true,
                 imagePicker: true,
                 gradients: true,
+              },
+              [customCodePluginName]: {
+                // Custom Code plugin options
+                blockCustomCode: {
+                  category: 'Extra',
+                  label: 'Custom Code',
+                  content: `
+                    <div data-gjs-type="custom-code" data-gjs-editable="false" data-gjs-removable="true" data-gjs-copyable="true" data-gjs-highlightable="true" data-gjs-selectable="true">
+                      <div style="padding: 10px; background: #f4f4f4; border: 1px dashed #ccc; text-align: center; color: #666;">
+                        Custom Code Block<br>
+                        <small>Double-click to edit</small>
+                      </div>
+                    </div>
+                  `,
+                  attributes: { class: 'fa fa-code' }
+                },
+                modalTitle: 'Edit Custom Code',
+                codeViewOptions: {
+                  theme: 'hopscotch',
+                  readOnly: false,
+                  autoCloseTags: true,
+                  autoCloseBrackets: true,
+                  lineWrapping: true,
+                  styleActiveLine: true,
+                  smartIndent: true,
+                  indentWithTabs: true
+                },
+                buttonLabel: 'Save',
+                commandCustomCode: {
+                  id: 'custom-code-edit'
+                },
+                // Placeholder for empty custom code blocks
+                placeholderContent: `
+                  <div style="padding: 20px; text-align: center; color: #999; font-style: italic;">
+                    Add your custom HTML/CSS/JS code here
+                  </div>
+                `
               }
             },
             
