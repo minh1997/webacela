@@ -361,9 +361,6 @@
             
             // Canvas settings
             canvas: {
-              styles: [
-                'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
-              ],
               scripts: [
                 'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4'
               ]
