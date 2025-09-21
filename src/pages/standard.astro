@@ -1,0 +1,305 @@
+---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Layout from '../layouts/Layout.astro';
+import ProductSlide from '../components/slides/productSlide.astro';
+---
+
+<Layout>
+	<Navigation />
+	
+	<!-- Hero Section -->
+	<section class="min-h-screen bg-cover bg-center bg-no-repeat" style="background: #F0F7FE url('/images/hero-bg.png') no-repeat bottom -20px left; background-size: 100%;">
+		<div class="container mx-auto px-4 grid lg:grid-cols-[1fr_1fr] min-h-screen items-center pt-20">
+			<div class="mb-20 lg:text-left text-center mt-20 lg:mt-0">
+				<h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800 mb-8 leading-tight">
+					Website Tiêu Chuẩn
+					<span class="text-purple-600"> hiệu quả cho doanh nghiệp</span>
+				</h1>
+				<p class="text-lg text-gray-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-8">
+					Chúng tôi xử lý nghiên cứu, chiến lược, thiết kế và phát triển. 
+					Bạn chỉ cần tập trung vào việc phát triển kinh doanh với tỷ lệ chuyển đổi cao hơn.
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+					<button class="bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white font-semibold text-lg py-4 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">
+						Đặt lịch tư vấn
+					</button>
+					<button class="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-semibold text-lg py-4 px-8 rounded-full transition-all duration-300">
+						Tìm hiểu thêm
+					</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Stats Section -->
+	<section class="py-20 bg-gray-50">
+		<div class="container mx-auto px-4">
+			<h2 class="text-4xl lg:text-5xl font-bold text-gray-800 text-center mb-16">
+				Như bạn có thể thấy, <span class="text-purple-600">chúng tôi đạt kết quả</span>
+			</h2>
+			
+			<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+				<div class="text-center">
+					<div class="text-5xl font-bold text-purple-600 mb-4">98%</div>
+					<p class="text-gray-600">Tỷ lệ hoàn thành dự án đúng thời hạn</p>
+				</div>
+				<div class="text-center">
+					<div class="text-5xl font-bold text-blue-600 mb-4">150+</div>
+					<p class="text-gray-600">Website đã hoàn thành thành công</p>
+				</div>
+				<div class="text-center">
+					<div class="text-5xl font-bold text-green-600 mb-4">24/7</div>
+					<p class="text-gray-600">Hỗ trợ kỹ thuật liên tục</p>
+				</div>
+				<div class="text-center">
+					<div class="text-5xl font-bold text-orange-600 mb-4">100%</div>
+					<p class="text-gray-600">Khách hàng hài lòng với dịch vụ</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Pricing Section -->
+	<section class="py-20 bg-white">
+		<div class="container mx-auto px-4">
+			<div class="text-center mb-16">
+				<h2 class="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
+					Giải pháp website <span class="text-purple-600">của chúng tôi</span>
+				</h2>
+				<p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+					Chúng tôi xây dựng trải nghiệm kỹ thuật số cho thương hiệu thông qua các website tùy chỉnh. 
+					Điều này giúp bạn thu hút khách hàng hiệu quả hơn với tỷ lệ chuyển đổi cao hơn, CPA thấp hơn và ROAS được cải thiện.
+				</p>
+				
+				<!-- Key Benefits Highlight -->
+				<div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+					<div class="bg-green-50 border border-green-200 rounded-2xl p-6">
+						<div class="text-3xl mb-3">🎉</div>
+						<h3 class="text-xl font-bold text-green-800 mb-2">Forever Free</h3>
+						<p class="text-green-600">Không phí hàng tháng, sở hữu vĩnh viễn</p>
+					</div>
+					<div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+						<div class="text-3xl mb-3">🚀</div>
+						<h3 class="text-xl font-bold text-blue-800 mb-2">Unlimited Pages</h3>
+						<p class="text-blue-600">Tạo không giới hạn landing pages</p>
+					</div>
+					<div class="bg-purple-50 border border-purple-200 rounded-2xl p-6">
+						<div class="text-3xl mb-3">⚡</div>
+						<h3 class="text-xl font-bold text-purple-800 mb-2">High Performance</h3>
+						<p class="text-purple-600">Tốc độ nhanh, hiệu suất cao</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Process Section -->
+	<section class="py-20 bg-gray-50">
+		<div class="container mx-auto px-4">
+			<h2 class="text-4xl lg:text-5xl font-bold text-gray-800 text-center mb-16">
+				Điều gì xảy ra khi bạn <span class="text-purple-600">đặt mua Website</span>
+			</h2>
+			
+			<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+				<div class="text-center">
+					<div class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+						<span class="text-2xl font-bold text-purple-600">1</span>
+					</div>
+					<h3 class="text-xl font-bold text-gray-800 mb-4">Điền form onboarding chi tiết</h3>
+					<p class="text-gray-600">Form này mất 7 phút để hoàn thành và cho phép chúng tôi thu thập mọi thứ cần thiết để xây dựng trang của bạn.</p>
+				</div>
+				
+				<div class="text-center">
+					<div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+						<span class="text-2xl font-bold text-blue-600">2</span>
+					</div>
+					<h3 class="text-xl font-bold text-gray-800 mb-4">Chiến lược, Wireframing & Copywriting</h3>
+					<p class="text-gray-600">Team WEBACELA dành 8-10 giờ để nghiên cứu thương hiệu, wireframing và copywriting cho trang của bạn.</p>
+				</div>
+				
+				<div class="text-center">
+					<div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+						<span class="text-2xl font-bold text-green-600">3</span>
+					</div>
+					<h3 class="text-xl font-bold text-gray-800 mb-4">Thiết kế Mobile & Desktop</h3>
+					<p class="text-gray-600">Sử dụng brand book và hướng dẫn của bạn, chúng tôi làm cho website của bạn trở nên sống động. Tất cả đều được thiết kế responsive.</p>
+				</div>
+				
+				<div class="text-center">
+					<div class="bg-orange-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+						<span class="text-2xl font-bold text-orange-600">4</span>
+					</div>
+					<h3 class="text-xl font-bold text-gray-800 mb-4">Website của bạn HOẠT ĐỘNG!</h3>
+					<p class="text-gray-600">Chúng tôi phát triển website của bạn, và khi hoàn thành, chúng tôi chuyển giao website đã phát triển đầy đủ cho bạn.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Testimonials Section -->
+	<section class="py-20 bg-white">
+		<div class="container mx-auto px-4">
+			<h2 class="text-4xl lg:text-5xl font-bold text-gray-800 text-center mb-16">
+				Những gì khách hàng <span class="text-purple-600">nói về WEBACELA</span>
+			</h2>
+			
+			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+				<div class="bg-gray-50 p-8 rounded-2xl">
+					<p class="text-gray-700 mb-6 italic">
+						"WEBACELA đã giúp chúng tôi xây dựng website chuyên nghiệp với tỷ lệ chuyển đổi cao. Team rất chuyên nghiệp và thời gian hoàn thành dự án rất nhanh."
+					</p>
+					<div class="flex items-center">
+						<div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
+							NT
+						</div>
+						<div>
+							<div class="font-semibold text-gray-800">Nguyễn Thanh</div>
+							<div class="text-gray-600 text-sm">CEO tại TechStart</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="bg-gray-50 p-8 rounded-2xl">
+					<p class="text-gray-700 mb-6 italic">
+						"Website mới của chúng tôi đã tăng tỷ lệ chuyển đổi lên 40% chỉ trong tháng đầu tiên. Đội ngũ WEBACELA thực sự hiểu về business."
+					</p>
+					<div class="flex items-center">
+						<div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
+							LM
+						</div>
+						<div>
+							<div class="font-semibold text-gray-800">Lê Mai</div>
+							<div class="text-gray-600 text-sm">Founder tại EcoShop</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="bg-gray-50 p-8 rounded-2xl">
+					<p class="text-gray-700 mb-6 italic">
+						"Chất lượng dịch vụ tuyệt vời, hỗ trợ 24/7 rất tận tình. Website được bàn giao đúng thời hạn và vượt quá mong đợi của chúng tôi."
+					</p>
+					<div class="flex items-center">
+						<div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
+							TH
+						</div>
+						<div>
+							<div class="font-semibold text-gray-800">Trần Hưng</div>
+							<div class="text-gray-600 text-sm">Director tại FoodPlus</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section class="py-20 bg-gradient-to-br from-purple-600 to-blue-700">
+		<div class="container mx-auto px-4 text-center">
+			<h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">
+				Sẵn sàng làm cho quảng cáo của bạn <span class="text-yellow-400">hiệu quả hơn?</span>
+			</h2>
+			<p class="text-xl text-purple-100 mb-8 max-w-3xl mx-auto">
+				Xem tại sao các công ty như Vingroup, FPT, Viettel, Techcombank và nhiều hơn nữa, 
+				xây dựng website với WEBACELA.
+			</p>
+			<button class="bg-white text-purple-700 font-bold py-4 px-12 rounded-full text-lg hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105 mr-4">
+				Xây dựng website của tôi
+			</button>
+		</div>
+	</section>
+
+	<!-- Final CTA -->
+	<section class="py-16 bg-gray-800">
+		<div class="container mx-auto px-4 text-center">
+			<h3 class="text-3xl font-bold text-white mb-4">
+				Chưa sẵn sàng mua? <span class="text-purple-400">Đặt lịch gọi</span> với chúng tôi 🤙
+			</h3>
+			<p class="text-gray-300 mb-8">
+				Lên lịch thời gian để thảo luận về cách WEBACELA có thể tăng cường nhu cầu marketing của bạn.
+			</p>
+			<button class="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300">
+				Hãy trò chuyện
+			</button>
+		</div>
+	</section>
+
+	<Footer />
+</Layout>
+
+<!-- Custom Styles for Carousel -->
+<style>
+	.b-hero__slider {
+		--gap: 2rem;
+		display: flex;
+		gap: var(--gap);
+		overflow: hidden;
+		position: relative;
+		user-select: none;
+		max-width: 600px;
+		margin: 0 auto;
+	}
+	
+	.b-hero__slider:hover .b-hero__slider-wrapper {
+		animation-play-state: paused;
+	}
+	
+	.b-hero__slider-wrapper {
+		animation: scroll 20s linear infinite;
+		display: flex;
+		flex-shrink: 0;
+		gap: var(--gap);
+	}
+	
+	.b-hero__slide {
+		height: 24rem;
+		width: 11rem;
+		flex-shrink: 0;
+	}
+	
+	@media (min-width: 768px) {
+		.b-hero__slide {
+			height: 28rem;
+			width: 13rem;
+		}
+	}
+	
+	.b-hero__slide img {
+		border-radius: 1rem;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+		box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+	}
+	
+	.b-hero__slide:hover img {
+		transform: scale(1.05);
+	}
+	
+	.b-hero__shadow {
+		background: linear-gradient(180deg, rgba(240, 247, 254, 0), #F0F7FE);
+		bottom: 0;
+		height: 8rem;
+		position: absolute;
+		width: 100%;
+		z-index: 9;
+		pointer-events: none;
+	}
+	
+	@keyframes scroll {
+		0% {
+			transform: translateZ(0);
+			visibility: visible;
+		}
+		100% {
+			transform: translate3d(calc(-100% - var(--gap)), 0, 0);
+		}
+	}
+	
+	.c-image {
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+</style>
