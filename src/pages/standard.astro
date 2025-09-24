@@ -32,62 +32,68 @@ import ProductSlide from '../components/slides/productSlide.astro';
 		</div>
 	</section>
 
-	<!-- Stats Section -->
-	<section class="py-20 bg-gray-50">
+	<!-- 4 Reasons Section -->
+	<section class="py-20 bg-gray-900">
 		<div class="container mx-auto px-4">
-			<h2 class="text-4xl lg:text-5xl font-bold text-gray-800 text-center mb-16">
-				Như bạn có thể thấy, <span class="text-purple-600">chúng tôi đạt kết quả</span>
-			</h2>
-			
-			<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-				<div class="text-center">
-					<div class="text-5xl font-bold text-purple-600 mb-4">98%</div>
-					<p class="text-gray-600">Tỷ lệ hoàn thành dự án đúng thời hạn</p>
-				</div>
-				<div class="text-center">
-					<div class="text-5xl font-bold text-blue-600 mb-4">150+</div>
-					<p class="text-gray-600">Website đã hoàn thành thành công</p>
-				</div>
-				<div class="text-center">
-					<div class="text-5xl font-bold text-green-600 mb-4">24/7</div>
-					<p class="text-gray-600">Hỗ trợ kỹ thuật liên tục</p>
-				</div>
-				<div class="text-center">
-					<div class="text-5xl font-bold text-orange-600 mb-4">100%</div>
-					<p class="text-gray-600">Khách hàng hài lòng với dịch vụ</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Pricing Section -->
-	<section class="py-20 bg-white">
-		<div class="container mx-auto px-4">
+			<!-- Section Header -->
 			<div class="text-center mb-16">
-				<h2 class="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
-					Giải pháp website <span class="text-purple-600">của chúng tôi</span>
+				<h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">
+					4 Lý Do Tại Sao Bạn Nên Chọn
+					<br><span class="text-purple-400">WEBACELA để Xây Dựng Website Tiêu Chuẩn</span>
 				</h2>
-				<p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-					Chúng tôi xây dựng trải nghiệm kỹ thuật số cho thương hiệu thông qua các website tùy chỉnh. 
-					Điều này giúp bạn thu hút khách hàng hiệu quả hơn với tỷ lệ chuyển đổi cao hơn, CPA thấp hơn và ROAS được cải thiện.
-				</p>
-				
-				<!-- Key Benefits Highlight -->
-				<div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
-					<div class="bg-green-50 border border-green-200 rounded-2xl p-6">
-						<div class="text-3xl mb-3">🎉</div>
-						<h3 class="text-xl font-bold text-green-800 mb-2">Forever Free</h3>
-						<p class="text-green-600">Không phí hàng tháng, sở hữu vĩnh viễn</p>
+			</div>
+
+			<!-- Reasons Grid -->
+			<div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+				<!-- Reason 1 -->
+				<div class="bg-gray-800 rounded-2xl p-8 relative overflow-hidden group hover:bg-gray-750 transition-all duration-300">
+					<div class="absolute top-6 left-6 text-8xl font-bold text-gray-700 opacity-30 leading-none">1</div>
+					<div class="relative z-10 pt-12">
+						<h3 class="text-2xl font-bold text-white mb-4">
+							Trả tiền một lần – Sở hữu trọn đời
+						</h3>
+						<p class="text-gray-300 leading-relaxed">
+							Không phí duy trì hằng tháng, không lo cắt dịch vụ. Website thuộc toàn quyền sở hữu của bạn, toàn quyền chỉnh sửa mã nguồn.
+						</p>
 					</div>
-					<div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
-						<div class="text-3xl mb-3">🚀</div>
-						<h3 class="text-xl font-bold text-blue-800 mb-2">Unlimited Pages</h3>
-						<p class="text-blue-600">Tạo không giới hạn landing pages</p>
+				</div>
+
+				<!-- Reason 2 -->
+				<div class="bg-gray-800 rounded-2xl p-8 relative overflow-hidden group hover:bg-gray-750 transition-all duration-300">
+					<div class="absolute top-6 left-6 text-8xl font-bold text-gray-700 opacity-30 leading-none">2</div>
+					<div class="relative z-10 pt-12">
+						<h3 class="text-2xl font-bold text-white mb-4">
+							Hạ tầng toàn cầu – Miễn phí vĩnh viễn
+						</h3>
+						<p class="text-gray-300 leading-relaxed">
+							Lưu trữ trên CDN toàn cầu, tốc độ tải nhanh ở cả Việt Nam và quốc tế. Đảm bảo website luôn online ổn định, không mất thêm chi phí hosting.
+						</p>
 					</div>
-					<div class="bg-purple-50 border border-purple-200 rounded-2xl p-6">
-						<div class="text-3xl mb-3">⚡</div>
-						<h3 class="text-xl font-bold text-purple-800 mb-2">High Performance</h3>
-						<p class="text-purple-600">Tốc độ nhanh, hiệu suất cao</p>
+				</div>
+
+				<!-- Reason 3 -->
+				<div class="bg-gray-800 rounded-2xl p-8 relative overflow-hidden group hover:bg-gray-750 transition-all duration-300">
+					<div class="absolute top-6 left-6 text-8xl font-bold text-gray-700 opacity-30 leading-none">3</div>
+					<div class="relative z-10 pt-12">
+						<h3 class="text-2xl font-bold text-white mb-4">
+							Ngay cả ông bà của bạn cũng có thể sử dụng landing pages của chúng tôi
+						</h3>
+						<p class="text-gray-300 leading-relaxed">
+							Landing pages của chúng tôi vượt qua bài kiểm tra "ông bà cổ điển". Chúng không chỉ dễ theo dõi và điều hướng, mà còn tải cực kỳ nhanh. Nếu khách truy cập có dịch vụ di động kém, landing pages WEBACELA vẫn tải ngay lập tức.
+						</p>
+					</div>
+				</div>
+
+				<!-- Reason 4 -->
+				<div class="bg-gray-800 rounded-2xl p-8 relative overflow-hidden group hover:bg-gray-750 transition-all duration-300">
+					<div class="absolute top-6 left-6 text-8xl font-bold text-gray-700 opacity-30 leading-none">4</div>
+					<div class="relative z-10 pt-12">
+						<h3 class="text-2xl font-bold text-white mb-4">
+							Thiết kế tối ưu – Dễ quản lý nội dung
+						</h3>
+						<p class="text-gray-300 leading-relaxed">
+							Website chuẩn SEO, responsive trên mọi thiết bị. Dễ dàng đăng bài, chỉnh sửa nội dung mà không cần biết code. Không lo bị chèn quảng cáo hay giới hạn chức năng như các nền tảng miễn phí khác
+						</p>
 					</div>
 				</div>
 			</div>
@@ -190,22 +196,6 @@ import ProductSlide from '../components/slides/productSlide.astro';
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-
-	<!-- CTA Section -->
-	<section class="py-20 bg-gradient-to-br from-purple-600 to-blue-700">
-		<div class="container mx-auto px-4 text-center">
-			<h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">
-				Sẵn sàng làm cho quảng cáo của bạn <span class="text-yellow-400">hiệu quả hơn?</span>
-			</h2>
-			<p class="text-xl text-purple-100 mb-8 max-w-3xl mx-auto">
-				Xem tại sao các công ty như Vingroup, FPT, Viettel, Techcombank và nhiều hơn nữa, 
-				xây dựng website với WEBACELA.
-			</p>
-			<button class="bg-white text-purple-700 font-bold py-4 px-12 rounded-full text-lg hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105 mr-4">
-				Xây dựng website của tôi
-			</button>
 		</div>
 	</section>
 
