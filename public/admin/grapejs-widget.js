@@ -823,6 +823,12 @@
         // Ensure Tailwind CSS is loaded in iframe
         this.ensureTailwindLoaded();
 
+        // Add fullscreen functionality with hover overlay
+        this.addFullscreenOverlay();
+        
+        // Setup GrapesJS fullscreen command integration
+        this.setupFullscreenCommand();
+
         // Ensure default content is properly captured and saved for new pages
         setTimeout(() => {
           if (!value || value.trim() === '') {
@@ -1131,6 +1137,306 @@
           }
         }
       });
+    },
+
+    addFullscreenOverlay() {
+      if (!this.editor || !this.editorRef) return;
+      
+      const editorContainer = this.editorRef;
+      
+      // Remove any existing overlay first
+      const existingOverlay = editorContainer.querySelector('.grapejs-fullscreen-overlay');
+      if (existingOverlay) {
+        existingOverlay.remove();
+      }
+      
+      // Create fullscreen overlay
+      const overlay = document.createElement('div');
+      overlay.className = 'grapejs-fullscreen-overlay';
+      overlay.innerHTML = `
+        <div class="fullscreen-content">
+          <div class="fullscreen-icon">⛶</div>
+          <div class="fullscreen-text">Click here to fullscreen edit page</div>
+        </div>
+      `;
+      
+      // Style the overlay
+      overlay.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        color: white;
+        font-family: system-ui, -apple-system, sans-serif;
+      `;
+      
+      // Style the content inside
+      const content = overlay.querySelector('.fullscreen-content');
+      content.style.cssText = `
+        text-align: center;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+      `;
+      
+      // Style the icon
+      const icon = overlay.querySelector('.fullscreen-icon');
+      icon.style.cssText = `
+        font-size: 48px;
+        margin-bottom: 12px;
+        animation: pulse 2s infinite;
+      `;
+      
+      // Style the text
+      const text = overlay.querySelector('.fullscreen-text');
+      text.style.cssText = `
+        font-size: 16px;
+        font-weight: 500;
+        opacity: 0.9;
+      `;
+      
+      // Add pulse animation
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        .grapejs-fullscreen-overlay:hover .fullscreen-content {
+          transform: scale(1) !important;
+        }
+        .grapejs-fullscreen-overlay.show {
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+      `;
+      document.head.appendChild(style);
+      
+      // Position the editor container relatively if not already
+      if (getComputedStyle(editorContainer).position === 'static') {
+        editorContainer.style.position = 'relative';
+      }
+      
+      // Add overlay to editor container
+      editorContainer.appendChild(overlay);
+      
+      // Add hover event listeners
+      editorContainer.addEventListener('mouseenter', () => {
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+          overlay.classList.add('show');
+        }
+      });
+      
+      editorContainer.addEventListener('mouseleave', () => {
+        overlay.classList.remove('show');
+      });
+      
+      // Add click event to enter fullscreen
+      overlay.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+          // Use GrapesJS fullscreen command to ensure proper button state
+          if (this.editor && this.editor.Commands) {
+            this.editor.runCommand('fullscreen');
+          } else {
+            // Fallback to direct browser API
+            if (editorContainer.requestFullscreen) {
+              editorContainer.requestFullscreen().catch(err => {
+                console.error('Error entering fullscreen:', err);
+              });
+            } else if (editorContainer.webkitRequestFullscreen) {
+              editorContainer.webkitRequestFullscreen();
+            } else if (editorContainer.msRequestFullscreen) {
+              editorContainer.msRequestFullscreen();
+            }
+          }
+        }
+      });
+      
+      // Handle fullscreen change events
+      const handleFullscreenChange = () => {
+        const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
+        
+        if (isFullscreen) {
+          // Hide overlay and adjust container styles for fullscreen
+          overlay.classList.remove('show');
+          overlay.style.visibility = 'hidden';
+          overlay.style.pointerEvents = 'none';
+          
+          // Apply fullscreen styles
+          editorContainer.style.width = '100vw';
+          editorContainer.style.height = '100vh';
+          editorContainer.style.position = 'fixed';
+          editorContainer.style.top = '0';
+          editorContainer.style.left = '0';
+          editorContainer.style.zIndex = '9999';
+          editorContainer.style.background = 'white';
+        } else {
+          // Reset container styles and re-enable overlay
+          editorContainer.style.width = '';
+          editorContainer.style.height = '800px';
+          editorContainer.style.position = 'relative';
+          editorContainer.style.top = '';
+          editorContainer.style.left = '';
+          editorContainer.style.zIndex = '';
+          editorContainer.style.background = '';
+          
+          // Re-enable overlay
+          overlay.style.visibility = 'visible';
+          overlay.style.pointerEvents = 'auto';
+          overlay.style.opacity = '0';
+          overlay.classList.remove('show');
+        }
+      };
+      
+      // Listen for fullscreen changes
+      document.addEventListener('fullscreenchange', handleFullscreenChange);
+      document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+      document.addEventListener('msfullscreenchange', handleFullscreenChange);
+      
+      console.log('✅ Fullscreen overlay with tooltip added successfully');
+    },
+
+    setupFullscreenCommand() {
+      if (!this.editor) return;
+      
+      const editor = this.editor;
+      const commands = editor.Commands;
+      
+      // Override or create the fullscreen command
+      commands.add('fullscreen', {
+        run: (editor, sender) => {
+          const container = editor.getContainer();
+          
+          // Set the button as active
+          if (sender && typeof sender.set === 'function') {
+            sender.set('active', true);
+          }
+          
+          // Enter fullscreen mode
+          if (container.requestFullscreen) {
+            container.requestFullscreen().catch(err => {
+              console.error('Error entering fullscreen:', err);
+            });
+          } else if (container.webkitRequestFullscreen) {
+            container.webkitRequestFullscreen();
+          } else if (container.msRequestFullscreen) {
+            container.msRequestFullscreen();
+          }
+          
+          // Apply fullscreen styles
+          container.style.width = '100vw';
+          container.style.height = '100vh';
+          container.style.position = 'fixed';
+          container.style.top = '0';
+          container.style.left = '0';
+          container.style.zIndex = '9999';
+          container.style.background = 'white';
+          
+          // Hide our custom overlay
+          const overlay = container.querySelector('.grapejs-fullscreen-overlay');
+          if (overlay) {
+            overlay.style.display = 'none';
+          }
+          
+          console.log('✅ Entered fullscreen via GrapesJS command');
+        },
+        
+        stop: (editor, sender) => {
+          const container = editor.getContainer();
+          
+          // Set the button as inactive
+          if (sender && typeof sender.set === 'function') {
+            sender.set('active', false);
+          }
+          
+          // Exit fullscreen mode
+          if (document.exitFullscreen) {
+            document.exitFullscreen().catch(err => {
+              console.error('Error exiting fullscreen:', err);
+            });
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+          
+          // Reset container styles
+          container.style.width = '';
+          container.style.height = '800px';
+          container.style.position = 'relative';
+          container.style.top = '';
+          container.style.left = '';
+          container.style.zIndex = '';
+          container.style.background = '';
+          
+          // Show our custom overlay again
+          const overlay = container.querySelector('.grapejs-fullscreen-overlay');
+          if (overlay) {
+            overlay.style.display = 'flex';
+          }
+          
+          console.log('✅ Exited fullscreen via GrapesJS command');
+        }
+      });
+      
+      // Also handle fullscreen changes from browser events to sync the button state
+      const handleFullscreenChange = () => {
+        const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
+        
+        // Find the fullscreen button and sync its state
+        const panels = editor.Panels;
+        const optionsPanel = panels.getPanel('options');
+        if (optionsPanel) {
+          const buttons = optionsPanel.get('buttons');
+          const fullscreenBtn = buttons.find(btn => 
+            btn.get('command') === 'fullscreen' || 
+            btn.get('id') === 'fullscreen' ||
+            btn.get('className')?.includes('fa-expand')
+          );
+          
+          if (fullscreenBtn) {
+            fullscreenBtn.set('active', isFullscreen);
+            console.log(`✅ Fullscreen button state synced: ${isFullscreen ? 'active' : 'inactive'}`);
+          }
+        }
+        
+        // Also handle our overlay visibility
+        const container = editor.getContainer();
+        const overlay = container.querySelector('.grapejs-fullscreen-overlay');
+        if (overlay) {
+          if (isFullscreen) {
+            overlay.style.display = 'none';
+          } else {
+            overlay.style.display = 'flex';
+            overlay.classList.remove('show'); // Reset hover state
+          }
+        }
+      };
+      
+      // Listen for fullscreen changes to sync button state
+      document.addEventListener('fullscreenchange', handleFullscreenChange);
+      document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+      document.addEventListener('msfullscreenchange', handleFullscreenChange);
+      
+      console.log('✅ GrapesJS fullscreen command integration setup complete');
     },
 
     componentWillUnmount() {
