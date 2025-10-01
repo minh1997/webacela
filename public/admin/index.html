@@ -155,6 +155,25 @@
 <body>
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <!-- Load Vietnamese translation -->
+  <script>
+    // Load Vietnamese locale
+    fetch('./vi.yml')
+      .then(response => response.text())
+      .then(data => {
+        // Parse YAML and register the locale
+        const yamlData = jsyaml.load(data);
+        if (window.CMS && yamlData.vi) {
+          CMS.registerLocale('vi', yamlData.vi);
+        }
+      })
+      .catch(error => console.log('Vietnamese locale loading failed:', error));
+  </script>
+  
+  <!-- Load js-yaml library for YAML parsing -->
+  <script src="https://unpkg.com/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+  
   <!-- Include our custom preview templates -->
   <script src="./preview.js"></script>
   <!-- Include Summernote enhancement -->

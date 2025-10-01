@@ -5,6 +5,9 @@ backend:
 # For local development only
 local_backend: true
 
+# Vietnamese localization
+locale: 'vi'
+
 media_folder: public/images/uploads # Media files will be stored in the repo under public/images/uploads
 public_folder: /images/uploads # The src attribute for uploaded media will begin with /images/uploads
 
@@ -16,55 +19,55 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
       - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Featured Image", name: "featuredImage", widget: "image", required: false}
-      - {label: "Excerpt", name: "excerpt", widget: "text"}
-      - {label: "Body", name: "body", widget: "summernote"}
-      - {label: "Tags", name: "tags", widget: "list", default: ["blog"]}
+      - {label: "Tiêu đề", name: "title", widget: "string"}
+      - {label: "Ngày xuất bản", name: "date", widget: "datetime"}
+      - {label: "Hình ảnh nổi bật", name: "featuredImage", widget: "image", required: false}
+      - {label: "Tóm tắt", name: "excerpt", widget: "text"}
+      - {label: "Nội dung", name: "body", widget: "summernote"}
+      - {label: "Thẻ", name: "tags", widget: "list", default: ["blog"]}
 
   - name: "pages"
-    label: "Pages"
+    label: "Trang"
     editor:
       preview: false  # This hides the preview panel for all pages in this collection
       frame: true     # Enable frame mode for better layout control
       size: large     # Make the editor container larger
     files:
-      - label: "About Page"
+      - label: "Trang Giới Thiệu"
         name: "about"
         file: "src/content/pages/about.md"
         fields:
           - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "SEO Preview", name: "seoPreview", widget: "google-snippet-preview", required: false}
-          - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
-          - label: "Body (Markdown)"
+          - {label: "Tiêu đề", name: "title", widget: "string"}
+          - {label: "Xem trước SEO", name: "seoPreview", widget: "google-snippet-preview", required: false}
+          - {label: "Hành động trang trực tiếp", name: "livePageActions", widget: "live-page-opener", required: false}
+          - label: "Nội dung (Markdown)"
             name: "body"
             widget: "markdown"
             required: false
-          - label: "Body (Visual Editor)"
+          - label: "Nội dung (Trình soạn thảo trực quan)"
             name: "bodyVisual"
             widget: "grapesjs"
             required: false
-      - label: "Contact Page"
+      - label: "Trang Liên Hệ"
         name: "contact"
         file: "src/content/pages/contact.md"
         fields:
           - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "SEO Preview", name: "seoPreview", widget: "google-snippet-preview", required: false}
-          - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
-          - label: "Body (Markdown)"
+          - {label: "Tiêu đề", name: "title", widget: "string"}
+          - {label: "Xem trước SEO", name: "seoPreview", widget: "google-snippet-preview", required: false}
+          - {label: "Hành động trang trực tiếp", name: "livePageActions", widget: "live-page-opener", required: false}
+          - label: "Nội dung (Markdown)"
             name: "body"
             widget: "markdown"
             required: false
-          - label: "Body (Visual Editor)"
+          - label: "Nội dung (Trình soạn thảo trực quan)"
             name: "bodyVisual"
             widget: "grapesjs"
             required: false
 
   - name: "landing"
-    label: "Landing Pages"
+    label: "Trang Đích"
     folder: "src/content/landing"
     create: true
     slug: "{{slug}}"
@@ -73,12 +76,12 @@ collections:
       frame: true     # Enable frame mode for better layout control
       size: large     # Make the editor container larger
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Slug", name: "slug", widget: "string"}
-      - {label: "SEO Preview", name: "seoPreview", widget: "google-snippet-preview", required: false}
-      - label: "Body (Visual Editor)"
+      - {label: "Tiêu đề", name: "title", widget: "string"}
+      - {label: "Mô tả", name: "description", widget: "text"}
+      - {label: "Đường dẫn", name: "slug", widget: "string"}
+      - {label: "Xem trước SEO", name: "seoPreview", widget: "google-snippet-preview", required: false}
+      - label: "Nội dung (Trình soạn thảo trực quan)"
         name: "bodyVisual"
         widget: "grapesjs"
         required: false
-      - {label: "Live Page Actions", name: "livePageActions", widget: "live-page-opener", required: false}
+      - {label: "Hành động trang trực tiếp", name: "livePageActions", widget: "live-page-opener", required: false}
