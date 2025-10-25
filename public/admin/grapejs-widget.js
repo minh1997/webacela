@@ -132,7 +132,7 @@
 
       } catch (error) {
         this.setState({ 
-          error: 'Failed to load visual editor: ' + error.message,
+          error: 'Không thể tải trình chỉnh sửa trực quan: ' + error.message,
           loaded: false 
         });
       }
@@ -266,7 +266,7 @@
                 blocks: ['column1', 'column2', 'column3', 'column3-7', 'text', 'link', 'image', 'video', 'map'],
                 category: {
                   id: 'basic',
-                  label: 'Basic',
+                  label: 'Cơ bản',
                   open: true
                 }
               },
@@ -285,14 +285,14 @@
               },
               [formsPluginName]: {
                 blocks: ['form', 'input', 'textarea', 'select', 'button', 'label', 'checkbox', 'radio'],
-                category: 'Forms'
+                category: 'Biểu mẫu'
               },
               [presetPluginName]: {
                 blocks: ['link-block', 'quote', 'text-basic'],
-                modalImportTitle: 'Import Code',
-                modalImportButton: 'Import',
-                modalImportLabel: 'Paste your HTML/CSS code here',
-                textCleanCanvas: 'Are you sure to clean the canvas?',
+                modalImportTitle: 'Nhập Mã',
+                modalImportButton: 'Nhập',
+                modalImportLabel: 'Dán mã HTML/CSS của bạn vào đây',
+                textCleanCanvas: 'Bạn có chắc chắn muốn xóa toàn bộ trang?',
                 showStylesOnChange: true,
                 useCustomTheme: true
               },
@@ -304,19 +304,19 @@
               [customCodePluginName]: {
                 // Custom Code plugin options
                 blockCustomCode: {
-                  category: 'Extra',
-                  label: 'Custom Code',
+                  category: 'Thêm',
+                  label: 'Mã Tùy Chỉnh',
                   content: `
                     <div data-gjs-type="custom-code" data-gjs-editable="false" data-gjs-removable="true" data-gjs-copyable="true" data-gjs-highlightable="true" data-gjs-selectable="true">
                       <div style="padding: 10px; background: #f4f4f4; border: 1px dashed #ccc; text-align: center; color: #666;">
-                        Custom Code Block<br>
-                        <small>Double-click to edit</small>
+                        Khối Mã Tùy Chỉnh<br>
+                        <small>Nhấp đúp để chỉnh sửa</small>
                       </div>
                     </div>
                   `,
                   attributes: { class: 'fa fa-code' }
                 },
-                modalTitle: 'Edit Custom Code',
+                modalTitle: 'Chỉnh Sửa Mã Tùy Chỉnh',
                 codeViewOptions: {
                   theme: 'hopscotch',
                   readOnly: false,
@@ -327,14 +327,14 @@
                   smartIndent: true,
                   indentWithTabs: true
                 },
-                buttonLabel: 'Save',
+                buttonLabel: 'Lưu',
                 commandCustomCode: {
                   id: 'custom-code-edit'
                 },
                 // Placeholder for empty custom code blocks
                 placeholderContent: `
                   <div style="padding: 20px; text-align: center; color: #999; font-style: italic;">
-                    Add your custom HTML/CSS/JS code here
+                    Thêm mã HTML/CSS/JS tùy chỉnh của bạn vào đây
                   </div>
                 `
               }
@@ -342,8 +342,8 @@
             [countdownPluginName]: {
               // Countdown component plugin options
               block: {
-                category: 'Extra',
-                label: 'Countdown',
+                category: 'Thêm',
+                label: 'Đếm Ngược',
                 content: `<div data-gjs-type="countdown" class="countdown-component"></div>`,
                 attributes: { class: 'fa fa-clock-o' }
               },
@@ -351,11 +351,11 @@
                 // Default countdown options
                 dateInputType: 'date',
                 defaultDate: '',
-                endText: 'Countdown Ended!',
-                dayText: 'Days',
-                hourText: 'Hours', 
-                minuteText: 'Minutes',
-                secondText: 'Seconds'
+                endText: 'Đã Kết Thúc!',
+                dayText: 'Ngày',
+                hourText: 'Giờ', 
+                minuteText: 'Phút',
+                secondText: 'Giây'
               }
             },
             
@@ -369,23 +369,23 @@
             // Device Manager
             deviceManager: {
               devices: [{
-                name: 'Desktop',
+                name: 'Máy tính',
                 width: '',
               }, 
               {
-                name: 'Tablet',
+                name: 'Máy tính bảng',
                 width: '768px',
                 widthMedia: '992px',
               },
               {
-                name: 'Mobile',
+                name: 'Điện thoại',
                 width: '320px',
                 widthMedia: '480px',
               }]
             },
 
             // Initial content - process scripts if they exist
-            components: this.processInitialContent(value) || '<div class="container mx-auto px-4 py-16 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen"><div class="max-w-4xl mx-auto text-center"><h1 class="text-5xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Welcome to WebAcela!</h1><p class="text-xl text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto">Start building your amazing page by dragging components from the right panel. Create beautiful, responsive layouts with our visual editor.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-blue-500 text-3xl mb-4">🎨</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Drag & Drop</h3><p class="text-gray-600">Easily add components by dragging them from the blocks panel</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-purple-500 text-3xl mb-4">📱</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Responsive Design</h3><p class="text-gray-600">Your pages will look great on all devices automatically</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-green-500 text-3xl mb-4">⚡</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Fast & Modern</h3><p class="text-gray-600">Built with the latest web technologies for optimal performance</p></div></div><div class="bg-white p-8 rounded-xl shadow-lg"><h2 class="text-2xl font-bold text-gray-800 mb-4">Ready to Get Started?</h2><p class="text-gray-600 mb-6">Choose from our pre-designed blocks or create your own custom components</p><button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-8 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">Start Building</button></div></div></div>',
+            components: this.processInitialContent(value) || '<div class="container mx-auto px-4 py-16 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen"><div class="max-w-4xl mx-auto text-center"><h1 class="text-5xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Chào mừng đến với WebAcela!</h1><p class="text-xl text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto">Bắt đầu xây dựng trang tuyệt vời của bạn bằng cách kéo thả các thành phần từ bảng bên phải. Tạo các bố cục đẹp mắt, đáp ứng với trình chỉnh sửa trực quan của chúng tôi.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-blue-500 text-3xl mb-4">🎨</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Kéo & Thả</h3><p class="text-gray-600">Dễ dàng thêm các thành phần bằng cách kéo chúng từ bảng khối</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-purple-500 text-3xl mb-4">📱</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Thiết Kế Đáp Ứng</h3><p class="text-gray-600">Trang của bạn sẽ trông tuyệt vời trên mọi thiết bị</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-green-500 text-3xl mb-4">⚡</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Nhanh & Hiện Đại</h3><p class="text-gray-600">Được xây dựng với công nghệ web mới nhất để có hiệu suất tối ưu</p></div></div><div class="bg-white p-8 rounded-xl shadow-lg"><h2 class="text-2xl font-bold text-gray-800 mb-4">Sẵn Sàng Bắt Đầu?</h2><p class="text-gray-600 mb-6">Chọn từ các khối được thiết kế sẵn hoặc tạo các thành phần tùy chỉnh của riêng bạn</p><button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-8 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">Bắt Đầu Xây Dựng</button></div></div></div>',
           });
           
           console.log('GrapesJS editor with plugins initialized successfully');
@@ -416,7 +416,7 @@
                   
                   // Add label
                   const label = document.createElement('label');
-                  label.textContent = 'Paste your HTML/CSS code here';
+                  label.textContent = 'Dán mã HTML/CSS của bạn vào đây';
                   label.style.display = 'block';
                   label.style.marginBottom = '10px';
                   label.style.fontWeight = 'bold';
@@ -436,7 +436,7 @@
                   buttonContainer.style.marginTop = '10px';
                   
                   const importBtn = document.createElement('button');
-                  importBtn.textContent = 'Import';
+                  importBtn.textContent = 'Nhập';
                   importBtn.style.padding = '8px 16px';
                   importBtn.style.backgroundColor = '#007cba';
                   importBtn.style.color = 'white';
@@ -449,7 +449,7 @@
 
                   // Open modal first
                   modal.open({
-                    title: 'Import Code',
+                    title: 'Nhập Mã',
                     content: modalContent
                   });
                   
@@ -542,7 +542,7 @@
                         
                         // Add format button
                         const formatBtn = document.createElement('button');
-                        formatBtn.textContent = 'Format Code';
+                        formatBtn.textContent = 'Định Dạng Mã';
                         formatBtn.style.padding = '4px 8px';
                         formatBtn.style.marginRight = '10px';
                         formatBtn.style.backgroundColor = '#28a745';
@@ -637,7 +637,7 @@
                                     line-height: 1.4;
                                     tab-size: 2;
                                   " 
-                                  placeholder="Paste your HTML/CSS code here..."
+                                  placeholder="Dán mã HTML/CSS của bạn vào đây..."
                                 >${currentContent}</textarea>
                               </div>
                             `;
@@ -735,7 +735,7 @@
             },
 
             // Initial content
-            components: value || '<div class="container mx-auto px-4 py-16 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen"><div class="max-w-4xl mx-auto text-center"><h1 class="text-5xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Welcome to WebAcela!</h1><p class="text-xl text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto">Start building your amazing page by dragging components from the right panel. Create beautiful, responsive layouts with our visual editor.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-blue-500 text-3xl mb-4">🎨</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Drag & Drop</h3><p class="text-gray-600">Easily add components by dragging them from the blocks panel</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-purple-500 text-3xl mb-4">📱</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Responsive Design</h3><p class="text-gray-600">Your pages will look great on all devices automatically</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-green-500 text-3xl mb-4">⚡</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Fast & Modern</h3><p class="text-gray-600">Built with the latest web technologies for optimal performance</p></div></div><div class="bg-white p-8 rounded-xl shadow-lg"><h2 class="text-2xl font-bold text-gray-800 mb-4">Ready to Get Started?</h2><p class="text-gray-600 mb-6">Choose from our pre-designed blocks or create your own custom components</p><button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-8 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">Start Building</button></div></div></div>',
+            components: value || '<div class="container mx-auto px-4 py-16 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen"><div class="max-w-4xl mx-auto text-center"><h1 class="text-5xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Chào mừng đến với WebAcela!</h1><p class="text-xl text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto">Bắt đầu xây dựng trang tuyệt vời của bạn bằng cách kéo thả các thành phần từ bảng bên phải. Tạo các bố cục đẹp mắt, đáp ứng với trình chỉnh sửa trực quan của chúng tôi.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-blue-500 text-3xl mb-4">🎨</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Kéo & Thả</h3><p class="text-gray-600">Dễ dàng thêm các thành phần bằng cách kéo chúng từ bảng khối</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-purple-500 text-3xl mb-4">📱</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Thiết Kế Đáp Ứng</h3><p class="text-gray-600">Trang của bạn sẽ trông tuyệt vời trên mọi thiết bị</p></div><div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="text-green-500 text-3xl mb-4">⚡</div><h3 class="text-lg font-semibold text-gray-800 mb-2">Nhanh & Hiện Đại</h3><p class="text-gray-600">Được xây dựng với công nghệ web mới nhất để có hiệu suất tối ưu</p></div></div><div class="bg-white p-8 rounded-xl shadow-lg"><h2 class="text-2xl font-bold text-gray-800 mb-4">Sẵn Sàng Bắt Đầu?</h2><p class="text-gray-600 mb-6">Chọn từ các khối được thiết kế sẵn hoặc tạo các thành phần tùy chỉnh của riêng bạn</p><button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-8 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">Bắt Đầu Xây Dựng</button></div></div></div>',
           });
           
         }
@@ -864,35 +864,35 @@
         // Override text block
         const textBlock = blockManager.get('text');
         if (textBlock) {
-          textBlock.set('content', '<p class="text-gray-700 leading-relaxed">Insert your text here</p>');
+          textBlock.set('content', '<p class="text-gray-700 leading-relaxed">Chèn văn bản của bạn vào đây</p>');
           console.log('✅ Text block updated with Tailwind classes');
         }
 
         // Override link block
         const linkBlock = blockManager.get('link');
         if (linkBlock) {
-          linkBlock.set('content', '<a href="#" class="text-blue-600 hover:text-blue-800 underline transition duration-300">Link text</a>');
+          linkBlock.set('content', '<a href="#" class="text-blue-600 hover:text-blue-800 underline transition duration-300">Văn bản liên kết</a>');
           console.log('✅ Link block updated with Tailwind classes');
         }
 
         // Override text-basic block from preset webpage plugin
         const textBasicBlock = blockManager.get('text-basic');
         if (textBasicBlock) {
-          textBasicBlock.set('content', '<div class="prose max-w-none p-6 bg-white rounded-lg shadow-sm"><h2 class="text-2xl font-bold text-gray-800 mb-4">Heading</h2><p class="text-gray-600 leading-relaxed mb-4">This is a text-basic block with beautiful Tailwind typography classes. You can edit this content and add more paragraphs.</p><p class="text-gray-600 leading-relaxed">Perfect for creating rich text content with consistent styling.</p></div>');
+          textBasicBlock.set('content', '<div class="prose max-w-none p-6 bg-white rounded-lg shadow-sm"><h2 class="text-2xl font-bold text-gray-800 mb-4">Tiêu đề</h2><p class="text-gray-600 leading-relaxed mb-4">Đây là khối văn bản cơ bản với các lớp typography đẹp mắt của Tailwind. Bạn có thể chỉnh sửa nội dung này và thêm nhiều đoạn văn hơn.</p><p class="text-gray-600 leading-relaxed">Hoàn hảo để tạo nội dung văn bản phong phú với kiểu dáng nhất quán.</p></div>');
           console.log('✅ Text-basic block updated with Tailwind classes');
         }
 
         // Override quote block from preset webpage plugin
         const quoteBlock = blockManager.get('quote');
         if (quoteBlock) {
-          quoteBlock.set('content', '<blockquote class="border-l-4 border-blue-500 pl-6 py-4 bg-gray-50 rounded-r-lg my-6"><p class="text-lg text-gray-700 italic leading-relaxed mb-2">"This is a beautifully styled quote with Tailwind CSS classes."</p><cite class="text-sm text-gray-500 font-medium">— Author Name</cite></blockquote>');
+          quoteBlock.set('content', '<blockquote class="border-l-4 border-blue-500 pl-6 py-4 bg-gray-50 rounded-r-lg my-6"><p class="text-lg text-gray-700 italic leading-relaxed mb-2">"Đây là một trích dẫn được tạo kiểu đẹp mắt với các lớp Tailwind CSS."</p><cite class="text-sm text-gray-500 font-medium">— Tên Tác Giả</cite></blockquote>');
           console.log('✅ Quote block updated with Tailwind classes');
         }
 
         // Override link-block from preset webpage plugin
         const linkBlockPreset = blockManager.get('link-block');
         if (linkBlockPreset) {
-          linkBlockPreset.set('content', '<div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"><h3 class="text-xl font-bold mb-2">Call to Action</h3><p class="mb-4 opacity-90">Click here to learn more about our services</p><a href="#" class="inline-block bg-white text-blue-600 font-semibold py-2 px-6 rounded-full hover:bg-gray-100 transition duration-300">Learn More</a></div>');
+          linkBlockPreset.set('content', '<div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"><h3 class="text-xl font-bold mb-2">Kêu Gọi Hành Động</h3><p class="mb-4 opacity-90">Nhấp vào đây để tìm hiểu thêm về dịch vụ của chúng tôi</p><a href="#" class="inline-block bg-white text-blue-600 font-semibold py-2 px-6 rounded-full hover:bg-gray-100 transition duration-300">Tìm Hiểu Thêm</a></div>');
           console.log('✅ Link-block updated with Tailwind classes');
         }
         
@@ -1156,7 +1156,7 @@
       overlay.innerHTML = `
         <div class="fullscreen-content">
           <div class="fullscreen-icon">⛶</div>
-          <div class="fullscreen-text">Click here to fullscreen edit page</div>
+          <div class="fullscreen-text">Nhấp vào đây để chỉnh sửa trang toàn màn hình</div>
         </div>
       `;
       
@@ -1462,7 +1462,7 @@
             color: '#d63031'
           }
         }, [
-          h('strong', {}, 'Error: '),
+          h('strong', {}, 'Lỗi: '),
           error,
           h('br'),
           h('button', {
@@ -1476,7 +1476,7 @@
               borderRadius: '3px',
               cursor: 'pointer'
             }
-          }, 'Reload Page')
+          }, 'Tải Lại Trang')
         ]);
       }
 
@@ -1489,7 +1489,7 @@
             borderRadius: '4px',
             backgroundColor: '#f9f9f9'
           }
-        }, 'Loading visual editor...');
+        }, 'Đang tải trình chỉnh sửa trực quan...');
       }
 
       return h('div', {
@@ -1528,7 +1528,7 @@
           color: '#666',
           fontStyle: 'italic'
         }
-      }, 'No content to preview');
+      }, 'Không có nội dung để xem trước');
     }
 
     return h('div', {
