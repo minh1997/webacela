@@ -257,6 +257,220 @@
             noticeOnUnload: false,
             storageManager: false,
             
+            // i18n configuration for Vietnamese
+            i18n: {
+              locale: 'vi',
+              detectLocale: false,
+              messages: {
+                vi: {
+                  styleManager: {
+                    properties: {
+                      'text-align': 'Căn chỉnh văn bản',
+                      'color': 'Màu chữ',
+                      'background-color': 'Màu nền',
+                      'font-family': 'Font chữ',
+                      'font-size': 'Kích thước chữ',
+                      'font-weight': 'Độ đậm chữ',
+                      'letter-spacing': 'Khoảng cách chữ',
+                      'line-height': 'Độ cao dòng',
+                      'text-decoration': 'Trang trí văn bản',
+                      'text-shadow': 'Bóng chữ',
+                      'border': 'Viền',
+                      'border-radius': 'Bo góc',
+                      'border-width': 'Độ dày viền',
+                      'border-style': 'Kiểu viền',
+                      'border-color': 'Màu viền',
+                      'box-shadow': 'Bóng đổ',
+                      'background': 'Nền',
+                      'background-image': 'Ảnh nền',
+                      'background-repeat': 'Lặp lại nền',
+                      'background-position': 'Vị trí nền',
+                      'background-size': 'Kích thước nền',
+                      'width': 'Chiều rộng',
+                      'height': 'Chiều cao',
+                      'max-width': 'Chiều rộng tối đa',
+                      'max-height': 'Chiều cao tối đa',
+                      'min-width': 'Chiều rộng tối thiểu',
+                      'min-height': 'Chiều cao tối thiểu',
+                      'margin': 'Lề ngoài',
+                      'margin-top': 'Lề trên',
+                      'margin-right': 'Lề phải',
+                      'margin-bottom': 'Lề dưới',
+                      'margin-left': 'Lề trái',
+                      'padding': 'Lề trong',
+                      'padding-top': 'Lề trong trên',
+                      'padding-right': 'Lề trong phải',
+                      'padding-bottom': 'Lề trong dưới',
+                      'padding-left': 'Lề trong trái',
+                      'display': 'Hiển thị',
+                      'position': 'Vị trí',
+                      'top': 'Trên',
+                      'right': 'Phải',
+                      'bottom': 'Dưới',
+                      'left': 'Trái',
+                      'float': 'Nổi',
+                      'opacity': 'Độ mờ',
+                      'cursor': 'Con trỏ',
+                      'overflow': 'Tràn',
+                      'z-index': 'Thứ tự Z',
+                      'flex-direction': 'Hướng flex',
+                      'justify-content': 'Căn nội dung',
+                      'align-items': 'Căn mục',
+                      'flex-wrap': 'Ngắt dòng flex',
+                      'transition': 'Chuyển động',
+                      'transform': 'Biến đổi',
+                    },
+                    sectors: {
+                      general: 'Chung',
+                      layout: 'Bố cục',
+                      typography: 'Kiểu chữ',
+                      decorations: 'Trang trí',
+                      extra: 'Thêm',
+                      flex: 'Flex',
+                      dimension: 'Kích thước',
+                    }
+                  },
+                  traitManager: {
+                    empty: 'Chọn một phần tử trước khi sử dụng Trình quản lý Trait',
+                    label: 'Cài đặt thành phần',
+                    traits: {
+                      labels: {
+                        id: 'Id',
+                        title: 'Tiêu đề',
+                        alt: 'Văn bản thay thế',
+                        href: 'Liên kết',
+                        target: 'Đích',
+                        name: 'Tên',
+                        placeholder: 'Chữ mờ',
+                        value: 'Giá trị',
+                        type: 'Loại',
+                        required: 'Bắt buộc',
+                        checked: 'Đã chọn',
+                      },
+                      options: {
+                        target: {
+                          false: 'Trang này',
+                          _blank: 'Cửa sổ mới',
+                        },
+                      },
+                    },
+                  },
+                  domComponents: {
+                    names: {
+                      '': 'Hộp',
+                      wrapper: 'Body',
+                      text: 'Văn bản',
+                      comment: 'Bình luận',
+                      image: 'Hình ảnh',
+                      video: 'Video',
+                      label: 'Nhãn',
+                      link: 'Liên kết',
+                      map: 'Bản đồ',
+                      tfoot: 'Chân bảng',
+                      tbody: 'Thân bảng',
+                      thead: 'Đầu bảng',
+                      table: 'Bảng',
+                      row: 'Hàng bảng',
+                      cell: 'Ô bảng',
+                    },
+                  },
+                  deviceManager: {
+                    device: 'Thiết bị',
+                    devices: {
+                      desktop: 'Máy tính',
+                      tablet: 'Máy tính bảng',
+                      mobileLandscape: 'Di động ngang',
+                      mobilePortrait: 'Di động dọc',
+                    },
+                  },
+                  panels: {
+                    buttons: {
+                      titles: {
+                        preview: 'Xem trước',
+                        fullscreen: 'Toàn màn hình',
+                        'sw-visibility': 'Xem các thành phần',
+                        'export-template': 'Xem mã',
+                        'open-sm': 'Mở Trình quản lý Kiểu',
+                        'open-tm': 'Cài đặt',
+                        'open-layers': 'Mở Trình quản lý Lớp',
+                        'open-blocks': 'Mở Khối',
+                      },
+                    },
+                  },
+                  selectorManager: {
+                    label: 'Lớp',
+                    selected: 'Đã chọn',
+                    emptyState: '- Trạng thái -',
+                    states: {
+                      hover: 'Di chuột',
+                      active: 'Nhấp',
+                      'nth-of-type(2n)': 'Chẵn/Lẻ',
+                    },
+                  },
+                  blockManager: {
+                    labels: {
+                      // Blocks from basic plugin
+                      'column1': '1 Cột',
+                      'column2': '2 Cột',
+                      'column3': '3 Cột',
+                      'column3-7': '2 Cột 3/7',
+                      'text': 'Văn bản',
+                      'link': 'Liên kết',
+                      'image': 'Hình ảnh',
+                      'video': 'Video',
+                      'map': 'Bản đồ',
+                      
+                      // Blocks from forms plugin
+                      'form': 'Biểu mẫu',
+                      'input': 'Nhập liệu',
+                      'textarea': 'Văn bản lớn',
+                      'select': 'Chọn',
+                      'button': 'Nút',
+                      'label': 'Nhãn',
+                      'checkbox': 'Hộp kiểm',
+                      'radio': 'Nút radio',
+                      
+                      // Blocks from preset webpage
+                      'link-block': 'Khối liên kết',
+                      'quote': 'Trích dẫn',
+                      'text-basic': 'Đoạn văn bản',
+                    },
+                    categories: {
+                      'Basic': 'Cơ bản',
+                      'Forms': 'Biểu mẫu',
+                      'Extra': 'Thêm',
+                    },
+                  },
+                  assetManager: {
+                    addButton: 'Thêm hình ảnh',
+                    inputPlh: 'http://đường/dẫn/đến/hình/ảnh.jpg',
+                    modalTitle: 'Chọn hình ảnh',
+                    uploadTitle: 'Thả file vào đây hoặc nhấp để tải lên',
+                  },
+                  layerManager: {
+                    category: 'Lớp',
+                    layer: 'Lớp',
+                    layers: 'Lớp',
+                    back: 'Quay lại',
+                    selectParent: 'Chọn cha',
+                  },
+                  commands: {
+                    'fullscreen': 'Toàn màn hình',
+                    'preview': 'Xem trước',
+                    'sw-visibility': 'Hiển thị đường viền',
+                  },
+                  rte: {
+                    bold: 'Đậm',
+                    italic: 'Nghiêng',
+                    underline: 'Gạch dưới',
+                    strikethrough: 'Gạch ngang',
+                    link: 'Liên kết',
+                    wrap: 'Ngắt dòng',
+                  },
+                },
+              },
+            },
+            
             // Load all plugins including Style Background, Custom Code, and Countdown
             plugins: [basicPluginName, tuiPluginName, formsPluginName, presetPluginName, styleBgPluginName, customCodePluginName, countdownPluginName],
             
@@ -1104,7 +1318,7 @@
       // Override/fix the existing device commands to work properly
       commands.add('set-device-desktop', {
         run: (editor) => {
-          const device = deviceManager.get('desktop') || deviceManager.getAll().find(d => d.get('name') === 'Desktop');
+          const device = deviceManager.get('desktop') || deviceManager.getAll().find(d => d.get('name') === 'Máy tính' || d.get('name') === 'Desktop');
           if (device) {
             deviceManager.select(device);
             console.log('Switched to desktop view');
@@ -1116,7 +1330,7 @@
 
       commands.add('set-device-tablet', {
         run: (editor) => {
-          const device = deviceManager.get('tablet') || deviceManager.getAll().find(d => d.get('name') === 'Tablet');
+          const device = deviceManager.get('tablet') || deviceManager.getAll().find(d => d.get('name') === 'Máy tính bảng' || d.get('name') === 'Tablet');
           if (device) {
             deviceManager.select(device);
             console.log('Switched to tablet view');
@@ -1128,7 +1342,7 @@
 
       commands.add('set-device-mobile', {
         run: (editor) => {
-          const device = deviceManager.get('mobile') || deviceManager.getAll().find(d => d.get('name') === 'Mobile');
+          const device = deviceManager.get('mobile') || deviceManager.getAll().find(d => d.get('name') === 'Điện thoại' || d.get('name') === 'Mobile');
           if (device) {
             deviceManager.select(device);
             console.log('Switched to mobile view');
