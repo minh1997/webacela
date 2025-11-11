@@ -1,26 +1,15 @@
 ---
 import '../styles/global.css';
-
-interface Props {
-	title?: string;
-	description?: string;
-}
-
-const { 
-	title = 'Webacela Inc. - Thiết Kế Website Chuyên Nghiệp', 
-	description = 'WEBACELA cung cấp dịch vụ thiết kế website chuyên nghiệp, landing page tối ưu chuyển đổi. Trả phí một lần - Sở hữu trọn đời. Không phí duy trì hàng tháng. Tốc độ tải nhanh với CDN toàn cầu.' 
-} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="vi">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<title>Webacela Inc.</title>
 	</head>
 	<body class="min-h-screen bg-gray-50">
 		<slot />
