@@ -85,3 +85,22 @@ collections:
         widget: "grapesjs"
         required: false
       - {label: "Hành động trang trực tiếp", name: "livePageActions", widget: "live-page-opener", required: false}
+
+  - name: "settings"
+    label: "Cài Đặt"
+    files:
+      - label: "Cài Đặt Chung"
+        name: "general"
+        file: "src/content/settings/general.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Trang chủ"
+            name: "homepage"
+            widget: "relation"
+            collection: "landing"
+            search_fields: ["title", "slug"]
+            value_field: "slug"
+            display_fields: ["title"]
+            required: false
+            hint: "Chọn landing page sẽ được hiển thị làm trang chủ"
