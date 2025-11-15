@@ -3,6 +3,7 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Layout from '../layouts/Layout.astro';
 import ProductSlide from '../components/slides/productSlide.astro';
+import QuoteForm from '../components/QuoteForm.astro';
 ---
 
 <Layout 
@@ -361,20 +362,7 @@ import ProductSlide from '../components/slides/productSlide.astro';
 		</div>
 	</section>
 
-	<!-- Final CTA -->
-	<section class="py-16 bg-gray-800">
-		<div class="container mx-auto px-4 text-center">
-			<h3 class="text-3xl font-bold text-white mb-4">
-				Chưa sẵn sàng mua? <span class="text-purple-400">Liên hệ</span> với chúng tôi 🤙
-			</h3>
-			<p class="text-gray-300 mb-8">
-				Lên lịch thời gian để thảo luận về cách WEBACELA có thể tăng cường nhu cầu marketing của bạn.
-			</p>
-			<button class="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300">
-				Hãy trò chuyện
-			</button>
-		</div>
-	</section>
+	<QuoteForm />
 
 	<Footer />
 </Layout>
