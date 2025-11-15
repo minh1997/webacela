@@ -2,6 +2,7 @@
 <a href="https://zalo.me/0932383510" target="_blank" aria-label="Liên hệ Zalo" data-cta="zalo-float" style="position: fixed; bottom: 75px; right: 18px; z-index: 9999;">
 	<img class="" style="width: 56px; height: auto" src="/images/zalo.svg" alt="Zalo contact" loading="lazy" decoding="async">
 </a>
+
 <footer class="bg-gray-900 text-white py-12">
   <div class="container mx-auto px-4">
     
@@ -133,3 +134,52 @@
     
   </div>
 </footer>
+
+<!-- Back to top button -->
+<button
+  id="back-to-top"
+  aria-label="Quay về đầu trang"
+  title="Quay về đầu trang"
+  style="display: none; position: fixed; bottom: 1.25rem; right: 18px; z-index: 10000;"
+  class="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-full shadow-lg transition-opacity duration-200 cursor-pointer"
+>
+  <!-- simple up arrow -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+    <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+  </svg>
+</button>
+
+<script>
+  (function () {
+    try {
+      const btn = document.getElementById('back-to-top');
+      if (!btn) return;
+
+      const showAfter = 300; // pixels
+
+      function onScroll() {
+        if (window.scrollY > showAfter) {
+          btn.style.display = 'block';
+          btn.style.opacity = '1';
+        } else {
+          btn.style.opacity = '0';
+          btn.style.display = 'none';
+        }
+      }
+
+      // Show/hide on scroll
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // Click to scroll to top smoothly
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Initial check
+      onScroll();
+    } catch (err) {
+      console.warn('Back to top script failed', err);
+    }
+  })();
+</script>
