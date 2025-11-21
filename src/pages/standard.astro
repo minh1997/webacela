@@ -342,7 +342,10 @@ import QuoteForm from '../components/QuoteForm.astro';
 						</p>
 					</div>
 
-					<button class="w-full bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white font-semibold py-4 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 mb-8">
+					<button 
+						class="w-full bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white font-semibold py-4 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 mb-8"
+						onclick="scrollToQuoteForm('landing')"
+					>
 						Chọn Gói Landing Page
 					</button>
 
@@ -354,6 +357,13 @@ import QuoteForm from '../components/QuoteForm.astro';
 								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
 							</svg>
 							<span class="text-gray-700"><strong>2 trang landing page</strong> được thiết kế theo yêu cầu</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">1 Tên miền .com</span>
 						</div>
 
 						<div class="flex items-start space-x-3">
@@ -434,7 +444,10 @@ import QuoteForm from '../components/QuoteForm.astro';
 						</p>
 					</div>
 
-					<button class="w-full bg-gradient-to-r from-purple-600 to-indigo-700 hover:from-purple-700 hover:to-indigo-800 text-white font-semibold py-4 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 mb-8">
+					<button 
+						class="w-full bg-gradient-to-r from-purple-600 to-indigo-700 hover:from-purple-700 hover:to-indigo-800 text-white font-semibold py-4 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 mb-8"
+						onclick="scrollToQuoteForm('basic')"
+					>
 						Chọn Gói Tiêu Chuẩn
 					</button>
 
@@ -446,6 +459,13 @@ import QuoteForm from '../components/QuoteForm.astro';
 								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
 							</svg>
 							<span class="text-gray-700"><strong>Website 5 trang</strong> theo yêu cầu</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">1 Tên miền .com</span>
 						</div>
 
 						<div class="flex items-start space-x-3">
@@ -667,3 +687,26 @@ import QuoteForm from '../components/QuoteForm.astro';
 		z-index: 3;
 	}
 </style>
+
+<script is:inline>
+	function scrollToQuoteForm(budgetValue) {
+		// Scroll to the quote form section
+		const quoteForm = document.getElementById('quote-form');
+		if (quoteForm) {
+			quoteForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			
+			// Wait for scroll to complete, then set the budget value
+			setTimeout(() => {
+				const budgetSelect = document.getElementById('budget');
+				if (budgetSelect) {
+					budgetSelect.value = budgetValue;
+					// Add a visual highlight to show it was selected
+					budgetSelect.classList.add('ring-2', 'ring-indigo-500');
+					setTimeout(() => {
+						budgetSelect.classList.remove('ring-2', 'ring-indigo-500');
+					}, 1500);
+				}
+			}, 800);
+		}
+	}
+</script>
