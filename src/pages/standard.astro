@@ -306,58 +306,252 @@ import QuoteForm from '../components/QuoteForm.astro';
 		</div>
 	</section>
 
-	<!-- Testimonials Section -->
-	<section class="py-20 bg-white">
+	<!-- Pricing Section -->
+	<section id="pricing" class="py-20 bg-white">
 		<div class="container mx-auto px-4">
-			<h2 class="text-4xl lg:text-5xl font-bold text-gray-800 text-center mb-16">
-				Những gì khách hàng <span class="text-purple-600">nói về WEBACELA</span>
-			</h2>
 			
-			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-				<div class="bg-gray-50 p-8 rounded-2xl">
-					<p class="text-gray-700 mb-6 italic">
-						"WEBACELA đã giúp chúng tôi xây dựng website chuyên nghiệp với tỷ lệ chuyển đổi cao. Team rất chuyên nghiệp và thời gian hoàn thành dự án rất nhanh."
-					</p>
-					<div class="flex items-center">
-						<div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
-							NT
-						</div>
-						<div>
-							<div class="font-semibold text-gray-800">Nguyễn Thanh</div>
-							<div class="text-gray-600 text-sm">CEO tại TechStart</div>
-						</div>
-					</div>
-				</div>
+			<!-- Section Header -->
+			<div class="text-center mb-16">
+				<h2 class="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
+					Bảng Giá <span class="text-purple-600">Website Tiêu Chuẩn</span>
+				</h2>
+				<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+					Chọn gói phù hợp với nhu cầu của bạn - Trả một lần, sở hữu trọn đời
+				</p>
+			</div>
+
+			<!-- Pricing Cards -->
+			<div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
 				
-				<div class="bg-gray-50 p-8 rounded-2xl">
-					<p class="text-gray-700 mb-6 italic">
-						"Website mới của chúng tôi đã tăng tỷ lệ chuyển đổi lên 40% chỉ trong tháng đầu tiên. Đội ngũ WEBACELA thực sự hiểu về business."
-					</p>
-					<div class="flex items-center">
-						<div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
-							LM
+				<!-- Landing Page Plan -->
+				<div class="bg-white rounded-3xl p-8 shadow-lg border-2 border-blue-200 relative hover:shadow-2xl transition-all duration-300">
+					<div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+						<span class="bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-semibold">
+							Phổ biến nhất
+						</span>
+					</div>
+					
+					<div class="text-center mb-8 mt-4">
+						<h3 class="text-2xl font-bold text-gray-800 mb-4">Gói Landing Page</h3>
+						<div class="mb-4">
+							<span class="text-5xl font-bold text-blue-600">3.500.000₫</span>
+							<span class="text-gray-600 ml-2">/ một lần</span>
 						</div>
-						<div>
-							<div class="font-semibold text-gray-800">Lê Mai</div>
-							<div class="text-gray-600 text-sm">Founder tại EcoShop</div>
+						<p class="text-gray-600">
+							Dành cho chiến dịch marketing, sản phẩm đơn lẻ hoặc dịch vụ cụ thể
+						</p>
+					</div>
+
+					<button class="w-full bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white font-semibold py-4 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 mb-8">
+						Chọn Gói Landing Page
+					</button>
+
+					<div class="space-y-4">
+						<h4 class="font-semibold text-gray-800 mb-4">Gói Landing Page bao gồm:</h4>
+						
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700"><strong>2 trang landing page</strong> được thiết kế theo yêu cầu</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Thiết kế UI/UX tối ưu chuyển đổi</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Responsive 100% mọi thiết bị</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Tối ưu SEO cơ bản</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Hosting 10GB miễn phí vĩnh viễn</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">SSL miễn phí (HTTPS)</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">CDN toàn cầu - tốc độ cao</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700"><strong>Không phí duy trì hàng tháng</strong></span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Tùy chỉnh nội dung, layout qua CMS</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Bàn giao trong 1-2 ngày</span>
 						</div>
 					</div>
 				</div>
-				
-				<div class="bg-gray-50 p-8 rounded-2xl">
-					<p class="text-gray-700 mb-6 italic">
-						"Chất lượng dịch vụ tuyệt vời, hỗ trợ 24/7 rất tận tình. Website được bàn giao đúng thời hạn và vượt quá mong đợi của chúng tôi."
-					</p>
-					<div class="flex items-center">
-						<div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
-							TH
+
+				<!-- Standard Website Plan -->
+				<div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 relative hover:shadow-2xl transition-all duration-300">
+					<div class="text-center mb-8">
+						<h3 class="text-2xl font-bold text-gray-800 mb-4">Gói Tiêu Chuẩn</h3>
+						<div class="mb-4">
+							<span class="text-5xl font-bold text-purple-600">7.000.000₫</span>
+							<span class="text-gray-600 ml-2">/ một lần</span>
 						</div>
-						<div>
-							<div class="font-semibold text-gray-800">Trần Hưng</div>
-							<div class="text-gray-600 text-sm">Director tại FoodPlus</div>
+						<p class="text-gray-600">
+							Giải pháp đầy đủ cho doanh nghiệp nhỏ, giải pháp bán hàng và cá nhân cần website hoàn chỉnh
+						</p>
+					</div>
+
+					<button class="w-full bg-gradient-to-r from-purple-600 to-indigo-700 hover:from-purple-700 hover:to-indigo-800 text-white font-semibold py-4 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 mb-8">
+						Chọn Gói Tiêu Chuẩn
+					</button>
+
+					<div class="space-y-4">
+						<h4 class="font-semibold text-gray-800 mb-4">Gói Tiêu Chuẩn bao gồm:</h4>
+						
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700"><strong>Website 5 trang</strong> theo yêu cầu</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Tốc độ tải cho hiệu xuất cao</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Thiết kế theo Figma (nếu có)</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Hỗ trợ kỹ thuật cho SEO</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Hosting 10GB vĩnh viễn</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">SSL miễn phí (HTTPS)</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700"><strong>Không phí duy trì hàng tháng</strong></span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">CMS quản lý nội dung dễ dàng</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Đăng bài viết, Blog</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700"><strong>Không giới hạn tạo landing page</strong></span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Thanh toán online (Liên hệ tích hợp)</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Hướng dẫn sử dụng chi tiết</span>
+						</div>
+
+						<div class="flex items-start space-x-3">
+							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+							</svg>
+							<span class="text-gray-700">Bàn giao trong 3-4 ngày</span>
 						</div>
 					</div>
 				</div>
+
+			</div>
+
+			<!-- Additional Info -->
+			<div class="text-center mt-12">
+				<p class="text-gray-600 mb-4">
+					Tất cả các gói đều bao gồm thiết kế responsive, tối ưu tốc độ và hỗ trợ kỹ thuật
+				</p>
+				<div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6 max-w-4xl mx-auto">
+					<h4 class="text-lg font-semibold text-blue-800 mb-3">💡 Cam kết của chúng tôi:</h4>
+					<div class="text-sm text-blue-700 space-y-2">
+						<div>• <strong>Thanh toán 1 lần:</strong> Không có phí ẩn, không phí duy trì hàng tháng</div>
+						<div>• <strong>Sở hữu trọn đời:</strong> Website thuộc 100% quyền sở hữu của bạn</div>
+						<div>• <strong>Hỗ trợ kỹ thuật:</strong> Hỗ trợ khắc phục sự cố miễn phí 24/7</div>
+					</div>
+				</div>
+				<p class="text-sm text-gray-500">
+					Có câu hỏi? <a href="#quote-form" class="text-purple-600 hover:text-purple-700 font-semibold">Liên hệ với chúng tôi</a> để được tư vấn miễn phí
+				</p>
 			</div>
 		</div>
 	</section>
