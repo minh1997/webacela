@@ -39,12 +39,9 @@ collections:
         fields:
           - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
           - {label: "Tiêu đề", name: "title", widget: "string"}
+          - {label: "Mô tả", name: "description", widget: "text", required: false}
           - {label: "Xem trước SEO", name: "seoPreview", widget: "google-snippet-preview", required: false}
           - {label: "Hành động trang trực tiếp", name: "livePageActions", widget: "live-page-opener", required: false}
-          - label: "Nội dung (Markdown)"
-            name: "body"
-            widget: "markdown"
-            required: false
           - label: "Nội dung (Trình soạn thảo trực quan)"
             name: "bodyVisual"
             widget: "grapesjs"
@@ -55,12 +52,9 @@ collections:
         fields:
           - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
           - {label: "Tiêu đề", name: "title", widget: "string"}
+          - {label: "Mô tả", name: "description", widget: "text", required: false}
           - {label: "Xem trước SEO", name: "seoPreview", widget: "google-snippet-preview", required: false}
           - {label: "Hành động trang trực tiếp", name: "livePageActions", widget: "live-page-opener", required: false}
-          - label: "Nội dung (Markdown)"
-            name: "body"
-            widget: "markdown"
-            required: false
           - label: "Nội dung (Trình soạn thảo trực quan)"
             name: "bodyVisual"
             widget: "grapesjs"
