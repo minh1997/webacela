@@ -1,6 +1,6 @@
 ---
 import { getEntry } from 'astro:content';
-import BlogLayout from '../layouts/BlogLayout.astro';
+import Layout from '../layouts/Layout.astro';
 
 const aboutPage = await getEntry('pages', 'about');
 
@@ -11,7 +11,7 @@ if (!aboutPage) {
 const { Content } = await aboutPage.render();
 ---
 
-<BlogLayout title={aboutPage.data.title} description="Tìm hiểu về WEBACELA - Đơn vị thiết kế website chuyên nghiệp">
+<Layout title={aboutPage.data.title} description="Tìm hiểu về WEBACELA - Đơn vị thiết kế website chuyên nghiệp">
   <div class="bg-white rounded-lg shadow-lg p-8">
     {/* Visual editor content (GrapesJS) - Show if bodyVisual exists */}
     {aboutPage.data.bodyVisual ? (
@@ -45,7 +45,7 @@ const { Content } = await aboutPage.render();
       </a>
     </div>
   </section>
-</BlogLayout>
+</Layout>
 
 <style>
   /* Styles for visual editor content */

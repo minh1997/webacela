@@ -576,7 +576,7 @@
             // Canvas settings
             canvas: {
               scripts: [
-                'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4'
+                'https://cdn.tailwindcss.com'
               ]
             },
 
