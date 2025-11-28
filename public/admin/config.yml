@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: demo
 
 # For local development only
 local_backend: true
