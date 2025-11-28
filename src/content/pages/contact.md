@@ -1,7 +1,7 @@
 ---
 title: Liên hệ
 description: ádasdas
-bodyVisual: "<body id=\"i1e7\"><!-- Navigation --><meta charset=\"UTF-8\"/><meta
+bodyVisual: "<body><!-- Navigation --><meta charset=\"UTF-8\"/><meta
   name=\"viewport\" content=\"width=device-width,
   initial-scale=1.0\"/><title>Contact Us - Luxe Beauty</title><nav
   class=\"bg-white shadow-sm sticky top-0 z-50\"><div class=\"max-w-7xl mx-auto
