@@ -185,6 +185,18 @@ import Footer from '../components/Footer.astro';
       
       const currentText = typingTexts[currentTextIndex];
       
+      // Clear all typed lines when reaching the Coffee.exe line
+      if (currentText === "// Coffee.exe has stopped working" && typedLines) {
+        gsap.to(typedLines.children, {
+          opacity: 0,
+          stagger: 0.02,
+          duration: 0.2,
+          onComplete: () => {
+            typedLines.innerHTML = '';
+          }
+        });
+      }
+      
       // Set the full text immediately with HTML for syntax highlighting
       typingContent.innerHTML = formatCode(currentText);
       
