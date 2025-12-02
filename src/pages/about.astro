@@ -49,8 +49,11 @@ import Footer from '../components/Footer.astro';
               <div class="w-3 h-3 bg-green-500 rounded-full"></div>
               <span class="ml-2 text-slate-400 text-xs">terminal</span>
             </div>
-            <div class="text-green-400 typing-text">
-              <span class="text-purple-400">$</span> return <span class="text-yellow-300">'Laravel + React'</span>;
+            <div class="text-green-400 space-y-1">
+              <div id="typed-lines" class="space-y-1"></div>
+              <div class="typing-text">
+                <span class="typing-content"></span><span class="cursor">|</span>
+              </div>
             </div>
           </div>
 
@@ -113,7 +116,7 @@ import Footer from '../components/Footer.astro';
         <div class="relative fade-in-up delay-1">
           <div class="floating-container">
             <!-- Decorative rotating elements -->
-            <div class="deco-element deco-element-1 absolute -top-4 -left-4 w-20 h-20 bg-green-400/30 rounded-lg rotate-element"></div>
+            <div class="deco-element deco-element-1 absolute -bottom-4 -left-4 w-20 h-20 bg-green-400/30 rounded-lg rotate-element"></div>
             <div class="deco-element deco-element-2 absolute -bottom-4 -right-4 w-16 h-16 bg-blue-400/30 rounded-full rotate-reverse"></div>
             <div class="deco-element deco-element-3 absolute top-10 -right-6 w-12 h-12 bg-purple-400/30 rounded-lg float-up-down"></div>
 
@@ -130,10 +133,10 @@ import Footer from '../components/Footer.astro';
             </div>
 
             <!-- Floating icons -->
-            <div class="floating-icon floating-icon-1 absolute top-20 -left-8 bg-slate-900/80 backdrop-blur-sm p-3 rounded-lg border border-slate-700">
-              <span class="text-2xl">☕</span>
+            <div class="floating-icon floating-icon-1 absolute top-20 -left-8 bg-slate-900/80 backdrop-blur-sm p-3 rounded-full border border-slate-700">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-coffee h-4 w-4"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><line x1="6" x2="6" y1="2" y2="4"></line><line x1="10" x2="10" y1="2" y2="4"></line><line x1="14" x2="14" y1="2" y2="4"></line></svg>
             </div>
-            <div class="floating-icon floating-icon-2 absolute bottom-32 -right-8 bg-slate-900/80 backdrop-blur-sm p-3 rounded-lg border border-slate-700">
+            <div class="floating-icon floating-icon-2 absolute bottom-32 -right-8 bg-slate-900/80 backdrop-blur-sm p-3 rounded-full border border-slate-700">
               <span class="text-2xl">⚙️</span>
             </div>
           </div>
@@ -162,6 +165,92 @@ import Footer from '../components/Footer.astro';
 
   // Wait for DOM to be ready
   document.addEventListener('DOMContentLoaded', () => {
+    // Typing animation texts
+    const typingTexts = [
+      "const developer = 'Nguyen Cong Minh';",
+      "function buildAmazingApps() {",
+      "  return 'Laravel + React';",
+      "}",
+      "// Coffee.exe has stopped working",
+      "git commit -m 'Another day, another bug fixed'",
+      "console.log('Hello, World! 👋');"
+    ];
+
+    let currentTextIndex = 0;
+    const typingContent = document.querySelector('.typing-content');
+    const typedLines = document.getElementById('typed-lines');
+    
+    function typeText() {
+      if (!typingContent) return;
+      
+      const currentText = typingTexts[currentTextIndex];
+      
+      // Set the full text immediately with HTML for syntax highlighting
+      typingContent.innerHTML = formatCode(currentText);
+      
+      // Animate width to create typing effect
+      gsap.fromTo(typingContent, 
+        { width: 0 },
+        { 
+          width: 'auto',
+          duration: currentText.length * 0.05,
+          ease: 'none',
+          onComplete: () => {
+            // Add the completed line to typed-lines
+            if (typedLines) {
+              const completedLine = document.createElement('div');
+              completedLine.innerHTML = formatCode(currentText);
+              completedLine.style.opacity = '0';
+              typedLines.appendChild(completedLine);
+              
+              // Fade in the completed line
+              gsap.to(completedLine, {
+                opacity: 0.7,
+                duration: 0.3
+              });
+            }
+            
+            // Clear the current typing content
+            typingContent.innerHTML = '';
+            
+            // Move to next text
+            currentTextIndex = (currentTextIndex + 1) % typingTexts.length;
+            
+            // If we've completed all texts, clear and restart after a delay
+            if (currentTextIndex === 0 && typedLines) {
+              gsap.delayedCall(2, () => {
+                gsap.to(typedLines.children, {
+                  opacity: 0,
+                  stagger: 0.05,
+                  duration: 0.3,
+                  onComplete: () => {
+                    typedLines.innerHTML = '';
+                    gsap.delayedCall(0.5, typeText);
+                  }
+                });
+              });
+            } else {
+              // Wait a bit before typing next text
+              gsap.delayedCall(0.3, typeText);
+            }
+          }
+        }
+      );
+    }
+
+    // Helper function to add syntax highlighting
+    function formatCode(text: string) {
+      // Simple syntax highlighting
+      return text
+        .replace(/(const|function|return|git|console)/g, '<span class="text-purple-400">$1</span>')
+        .replace(/('.*?')/g, '<span class="text-yellow-300">$1</span>')
+        .replace(/(\/\/.*$)/g, '<span class="text-gray-500">$1</span>')
+        .replace(/(\{|\}|\(|\))/g, '<span class="text-blue-400">$1</span>');
+    }
+
+    // Start typing animation after initial delay
+    gsap.delayedCall(1, typeText);
+
     // Hero section fade in animations
     gsap.from('.fade-in-up', {
       opacity: 0,
@@ -179,17 +268,6 @@ import Footer from '../components/Footer.astro';
       delay: 0.3,
       ease: 'back.out(1.7)'
     });
-
-    // Terminal typing effect
-    const terminalText = document.querySelector('.typing-text');
-    if (terminalText) {
-      gsap.from(terminalText, {
-        width: 0,
-        duration: 2,
-        delay: 0.5,
-        ease: 'steps(30)'
-      });
-    }
 
     // Pulsing dot
     gsap.to('.pulse-dot', {
@@ -365,22 +443,32 @@ import Footer from '../components/Footer.astro';
   }
 
   .typing-text {
+    display: flex;
+    align-items: center;
+  }
+
+  .typing-content {
     overflow: hidden;
-    border-right: 2px solid #a855f7;
     white-space: nowrap;
+    display: inline-block;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 1px;
+    height: 1.2em;
+    background-color: transparent;
+    margin-left: 2px;
+    animation: blink 0.75s step-end infinite;
   }
 
   @keyframes blink {
     from, to {
-      border-color: transparent;
+      opacity: 1;
     }
     50% {
-      border-color: #a855f7;
+      opacity: 0;
     }
-  }
-
-  .typing-text {
-    animation: blink 0.75s step-end infinite;
   }
 
   /* Responsive adjustments */
