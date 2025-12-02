@@ -1,51 +1,400 @@
 ---
-import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-
-const aboutPage = await getEntry('pages', 'about');
-
-if (!aboutPage) {
-  throw new Error('About page not found');
-}
-
-const { Content } = await aboutPage.render();
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout title={aboutPage.data.title} description="Tìm hiểu về WEBACELA - Đơn vị thiết kế website chuyên nghiệp">
-  <div class="bg-white rounded-lg shadow-lg p-8">
-    {/* Visual editor content (GrapesJS) - Show if bodyVisual exists */}
-    {aboutPage.data.bodyVisual ? (
-      <div class="visual-content" set:html={aboutPage.data.bodyVisual} />
-    ) : (
-      /* Markdown content - Default fallback */
-      <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-strong:text-gray-900 prose-ul:text-gray-700 prose-li:text-gray-700">
-        <Content />
-      </div>
-    )}
-  </div>
+<Layout 
+  title="About Me - Portfolio" 
+  description="Full-stack Developer với nhiều năm kinh nghiệm trong web development"
+>
+  <Navigation />
   
-  <!-- CTA Section -->
-  <section class="mt-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 text-white text-center">
-    <h2 class="text-2xl font-bold mb-4">Sẵn sàng bắt đầu dự án của bạn?</h2>
-    <p class="text-lg mb-6 opacity-90">
-      Liên hệ với chúng tôi ngay hôm nay để được tư vấn miễn phí!
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a 
-        href="tel:+84932383510" 
-        class="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center"
-      >
-        📞 +84 932 383 510
-      </a>
-      <a 
-        href="mailto:congminh1203@gmail.com"
-        class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center"
-      >
-        ✉️ congminh1203@gmail.com
-      </a>
+  <!-- Hero Section -->
+  <section class="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white py-20 px-4 relative overflow-hidden">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="bg-element bg-element-1"></div>
+      <div class="bg-element bg-element-2"></div>
+      <div class="bg-element bg-element-3"></div>
+    </div>
+
+    <div class="container mx-auto max-w-7xl relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Left Content -->
+        <div class="space-y-6 fade-in-up">
+          <!-- Optimizing Badge -->
+          <div class="inline-flex items-center gap-2 bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 rounded-full px-4 py-2">
+            <div class="pulse-dot w-2 h-2 bg-purple-400 rounded-full"></div>
+            <span class="text-sm flex items-center gap-2">
+              ⚡ Optimizing...
+            </span>
+          </div>
+
+          <!-- Main Heading -->
+          <div>
+            <h1 class="text-5xl lg:text-7xl font-bold leading-tight mb-2">
+              Hi, I'm Công Minh
+            </h1>
+            <h2 class="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Full-stack Developer
+            </h2>
+          </div>
+
+          <!-- Terminal Mock -->
+          <div class="terminal-window bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-lg p-4 font-mono text-sm">
+            <div class="flex gap-2 mb-3">
+              <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+              <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+              <span class="ml-2 text-slate-400 text-xs">terminal</span>
+            </div>
+            <div class="text-green-400 typing-text">
+              <span class="text-purple-400">$</span> return <span class="text-yellow-300">'Laravel + React'</span>;
+            </div>
+          </div>
+
+          <!-- Description -->
+          <p class="text-lg text-slate-300 leading-relaxed">
+            Frontend Developer với 5+ năm kinh nghiệm trong React Native, Expo, React, Tailwind CSS, và Laravel
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="mailto:congminh1203@gmail.com"
+              class="cta-button bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-full font-medium inline-flex items-center gap-2 transition-all shadow-lg shadow-purple-500/50"
+            >
+              Get in Touch
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+
+            <a
+              href="/resume.pdf"
+              download
+              class="cta-button bg-transparent border-2 border-slate-600 hover:border-purple-500 text-white px-6 py-3 rounded-full font-medium inline-flex items-center gap-2 transition-all"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Download Resume
+            </a>
+          </div>
+
+          <!-- Social Links -->
+          <div class="flex items-center gap-4 pt-4">
+            <span class="text-slate-400">Follow me on:</span>
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-icon text-slate-400 hover:text-white transition-colors"
+            >
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-icon text-slate-400 hover:text-white transition-colors"
+            >
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Side - Profile Image -->
+        <div class="relative fade-in-up delay-1">
+          <div class="floating-container">
+            <!-- Decorative rotating elements -->
+            <div class="deco-element deco-element-1 absolute -top-4 -left-4 w-20 h-20 bg-green-400/30 rounded-lg rotate-element"></div>
+            <div class="deco-element deco-element-2 absolute -bottom-4 -right-4 w-16 h-16 bg-blue-400/30 rounded-full rotate-reverse"></div>
+            <div class="deco-element deco-element-3 absolute top-10 -right-6 w-12 h-12 bg-purple-400/30 rounded-lg float-up-down"></div>
+
+            <!-- Profile Image -->
+            <div class="relative w-full max-w-md mx-auto profile-image">
+              <div class="aspect-square rounded-full overflow-hidden border-4 border-purple-500/50 shadow-2xl shadow-purple-500/50">
+                <img
+                  src="/images/profile.jpg"
+                  alt="Profile"
+                  class="w-full h-full object-cover"
+                  onerror="this.src='https://via.placeholder.com/500?text=Profile'"
+                />
+              </div>
+            </div>
+
+            <!-- Floating icons -->
+            <div class="floating-icon floating-icon-1 absolute top-20 -left-8 bg-slate-900/80 backdrop-blur-sm p-3 rounded-lg border border-slate-700">
+              <span class="text-2xl">☕</span>
+            </div>
+            <div class="floating-icon floating-icon-2 absolute bottom-32 -right-8 bg-slate-900/80 backdrop-blur-sm p-3 rounded-lg border border-slate-700">
+              <span class="text-2xl">⚙️</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Code Button -->
+    <div class="fixed bottom-8 right-8 z-50 scale-in">
+      <button class="code-button bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 rounded-full shadow-lg shadow-purple-500/50 hover:scale-110 transition-transform">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+        </svg>
+      </button>
     </div>
   </section>
+
+  <Footer />
 </Layout>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', () => {
+    // Hero section fade in animations
+    gsap.from('.fade-in-up', {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: 'power3.out'
+    });
+
+    // Profile image scale in
+    gsap.from('.profile-image', {
+      opacity: 0,
+      scale: 0.8,
+      duration: 1,
+      delay: 0.3,
+      ease: 'back.out(1.7)'
+    });
+
+    // Terminal typing effect
+    const terminalText = document.querySelector('.typing-text');
+    if (terminalText) {
+      gsap.from(terminalText, {
+        width: 0,
+        duration: 2,
+        delay: 0.5,
+        ease: 'steps(30)'
+      });
+    }
+
+    // Pulsing dot
+    gsap.to('.pulse-dot', {
+      scale: 1.3,
+      opacity: 0.5,
+      duration: 1.5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power2.inOut'
+    });
+
+    // Floating animation for profile container
+    gsap.to('.floating-container', {
+      y: -10,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power1.inOut'
+    });
+
+    // Floating icons
+    gsap.to('.floating-icon-1', {
+      y: -10,
+      duration: 3,
+      delay: 0.5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power1.inOut'
+    });
+
+    gsap.to('.floating-icon-2', {
+      y: -10,
+      duration: 3,
+      delay: 1,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power1.inOut'
+    });
+
+    // Rotating decorative elements
+    gsap.to('.rotate-element', {
+      rotation: 360,
+      duration: 20,
+      repeat: -1,
+      ease: 'none'
+    });
+
+    gsap.to('.rotate-reverse', {
+      rotation: -360,
+      duration: 15,
+      repeat: -1,
+      ease: 'none'
+    });
+
+    gsap.to('.float-up-down', {
+      y: -20,
+      duration: 4,
+      delay: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power1.inOut'
+    });
+
+    // Background elements pulsing
+    gsap.to('.bg-element-1', {
+      scale: 1.2,
+      opacity: 0.6,
+      duration: 4,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power2.inOut'
+    });
+
+    gsap.to('.bg-element-2', {
+      scale: 1.3,
+      opacity: 0.5,
+      duration: 5,
+      delay: 1,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power2.inOut'
+    });
+
+    gsap.to('.bg-element-3', {
+      scale: 1.4,
+      opacity: 0.7,
+      duration: 6,
+      delay: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power2.inOut'
+    });
+
+    // Code button scale in
+    gsap.from('.code-button', {
+      scale: 0,
+      duration: 0.5,
+      delay: 1,
+      ease: 'back.out(1.7)'
+    });
+
+    // Hover animations for CTA buttons
+    const ctaButtons = document.querySelectorAll('.cta-button');
+    ctaButtons.forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        gsap.to(button, { scale: 1.05, duration: 0.3 });
+      });
+      button.addEventListener('mouseleave', () => {
+        gsap.to(button, { scale: 1, duration: 0.3 });
+      });
+      button.addEventListener('mousedown', () => {
+        gsap.to(button, { scale: 0.95, duration: 0.1 });
+      });
+      button.addEventListener('mouseup', () => {
+        gsap.to(button, { scale: 1.05, duration: 0.1 });
+      });
+    });
+
+    // Social icons hover
+    const socialIcons = document.querySelectorAll('.social-icon');
+    socialIcons.forEach(icon => {
+      icon.addEventListener('mouseenter', () => {
+        gsap.to(icon, { scale: 1.2, rotation: 5, duration: 0.3 });
+      });
+      icon.addEventListener('mouseleave', () => {
+        gsap.to(icon, { scale: 1, rotation: 0, duration: 0.3 });
+      });
+    });
+
+    // Code button hover
+    const codeButton = document.querySelector('.code-button');
+    if (codeButton) {
+      codeButton.addEventListener('mouseenter', () => {
+        gsap.to(codeButton, { scale: 1.1, rotation: 90, duration: 0.3 });
+      });
+      codeButton.addEventListener('mouseleave', () => {
+        gsap.to(codeButton, { scale: 1, rotation: 0, duration: 0.3 });
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Base styles only - GSAP handles animations */
+  .bg-element {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+  }
+
+  .bg-element-1 {
+    top: 5rem;
+    left: 2.5rem;
+    width: 5rem;
+    height: 5rem;
+    background: rgba(168, 85, 247, 0.2);
+  }
+
+  .bg-element-2 {
+    top: 10rem;
+    right: 5rem;
+    width: 8rem;
+    height: 8rem;
+    background: rgba(59, 130, 246, 0.2);
+  }
+
+  .bg-element-3 {
+    bottom: 5rem;
+    left: 25%;
+    width: 6rem;
+    height: 6rem;
+    background: rgba(34, 197, 94, 0.2);
+  }
+
+  .typing-text {
+    overflow: hidden;
+    border-right: 2px solid #a855f7;
+    white-space: nowrap;
+  }
+
+  @keyframes blink {
+    from, to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: #a855f7;
+    }
+  }
+
+  .typing-text {
+    animation: blink 0.75s step-end infinite;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .floating-icon {
+      display: none;
+    }
+
+    .deco-element {
+      width: 3rem !important;
+      height: 3rem !important;
+    }
+  }
+</style>
 
 <style>
   /* Styles for visual editor content */
