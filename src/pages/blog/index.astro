@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import BlogLayout from '../../layouts/BlogLayout.astro';
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
 import BlogCard from '../../components/BlogCard.astro';
 
 // Get all blog posts and sort by date (newest first)
@@ -8,86 +10,174 @@ const allBlogPosts = await getCollection('blog');
 const sortedPosts = allBlogPosts.sort((a, b) => 
   new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
+
+// Get featured post (first/newest post)
+const featuredPost = sortedPosts[0];
+const recentPosts = sortedPosts.slice(1);
 ---
 
-<BlogLayout title="Blog - WEBACELA" description="Chia sẻ kiến thức về thiết kế web, SEO và số hóa doanh nghiệp">
-  <!-- Blog Header -->
-  <div class="text-center mb-12">
-    <h1 class="text-4xl font-bold text-gray-900 mb-4">Blog WEBACELA</h1>
-    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-      Chia sẻ kiến thức về thiết kế web, tối ưu SEO và giải pháp số hóa doanh nghiệp
-    </p>
-  </div>
-
-  <!-- Featured Post -->
-  {sortedPosts.length > 0 && (
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold text-gray-900 mb-6">Bài viết nổi bật</h2>
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-        {sortedPosts[0].data.featuredImage && (
-          <div class="aspect-video overflow-hidden">
-            <img 
-              src={sortedPosts[0].data.featuredImage} 
-              alt={sortedPosts[0].data.title}
-              class="w-full h-full object-cover"
-            />
-          </div>
-        )}
-        <div class="p-8">
-          <div class="flex flex-wrap gap-2 mb-4">
-            {sortedPosts[0].data.tags.map(tag => (
-              <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
-                #{tag}
-              </span>
-            ))}
-          </div>
-          <h3 class="text-3xl font-bold text-gray-900 mb-4">
-            <a href={`/blog/${sortedPosts[0].slug}`} class="hover:text-blue-600 transition-colors">
-              {sortedPosts[0].data.title}
-            </a>
-          </h3>
-          <p class="text-gray-600 text-lg mb-6">{sortedPosts[0].data.excerpt}</p>
-          <div class="flex items-center justify-between">
-            <time class="text-gray-500" datetime={sortedPosts[0].data.date.toISOString()}>
-              {new Intl.DateTimeFormat('vi-VN', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              }).format(sortedPosts[0].data.date)}
-            </time>
-            <a 
-              href={`/blog/${sortedPosts[0].slug}`}
-              class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
-            >
-              Đọc bài viết
-            </a>
-          </div>
-        </div>
+<Layout title="Blog - WEBACELA" description="Chia sẻ kiến thức về thiết kế web, SEO và số hóa doanh nghiệp">
+  <Navigation />
+  
+  <main class="min-h-screen bg-gray-50">
+    <!-- Blog Header -->
+    <section class="bg-white py-16 border-b">
+      <div class="container mx-auto px-4 max-w-6xl text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">The Journey</h1>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Follow our adventures through Europe's hidden landscapes, where every
+          photograph tells a story and every encounter becomes an opportunity for
+          kindness.
+        </p>
       </div>
     </section>
-  )}
 
-  <!-- All Posts Grid -->
-  <section>
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">Tất cả bài viết</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {sortedPosts.slice(1).map(post => (
-        <BlogCard
-          title={post.data.title}
-          date={post.data.date}
-          excerpt={post.data.excerpt}
-          slug={post.slug}
-          featuredImage={post.data.featuredImage}
-          tags={post.data.tags}
-        />
-      ))}
-    </div>
-  </section>
+    <div class="container mx-auto px-4 max-w-6xl py-12">
+      <!-- Featured Story -->
+      {featuredPost && (
+        <section class="mb-16">
+          <div class="inline-block bg-green-50 text-green-700 text-sm font-semibold px-4 py-2 rounded-full mb-6">
+            Featured Story
+          </div>
+          
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="grid md:grid-cols-2 gap-0">
+              <!-- Featured Image -->
+              <div class="relative aspect-[4/3] md:aspect-auto">
+                {featuredPost.data.featuredImage ? (
+                  <img 
+                    src={featuredPost.data.featuredImage} 
+                    alt={featuredPost.data.title}
+                    class="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div class="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500"></div>
+                )}
+              </div>
+              
+              <!-- Featured Content -->
+              <div class="p-8 md:p-12 flex flex-col justify-center">
+                <div class="flex items-center gap-3 text-sm text-gray-500 mb-4">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span>Swiss Alps, Switzerland</span>
+                  </div>
+                  <span>•</span>
+                  <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <time datetime={featuredPost.data.date.toISOString()}>
+                      {new Intl.DateTimeFormat('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      }).format(featuredPost.data.date)}
+                    </time>
+                  </div>
+                </div>
+                
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  {featuredPost.data.title}
+                </h2>
+                
+                <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                  {featuredPost.data.excerpt}
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mb-6">
+                  {featuredPost.data.tags.map(tag => (
+                    <span class="bg-gray-100 text-gray-700 text-sm px-3 py-1 rounded-full">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                <a 
+                  href={`/blog/${featuredPost.slug}`}
+                  class="inline-flex items-center text-green-600 hover:text-green-700 font-semibold transition-colors group"
+                >
+                  Read Full Story
+                  <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
-  {sortedPosts.length === 0 && (
-    <div class="text-center py-12">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">Chưa có bài viết nào</h2>
-      <p class="text-gray-600">Hãy quay lại sau để đọc những bài viết mới nhất!</p>
+      <!-- Recent Adventures -->
+      {recentPosts.length > 0 && (
+        <section>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">Recent Adventures</h2>
+          
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {recentPosts.map(post => (
+              <a 
+                href={`/blog/${post.slug}`}
+                class="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              >
+                <div class="relative aspect-[4/3] overflow-hidden">
+                  {post.data.featuredImage ? (
+                    <img 
+                      src={post.data.featuredImage} 
+                      alt={post.data.title}
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div class="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500"></div>
+                  )}
+                </div>
+                
+                <div class="p-6">
+                  <div class="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span>Location</span>
+                  </div>
+                  
+                  <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
+                    {post.data.title}
+                  </h3>
+                  
+                  <p class="text-gray-600 line-clamp-2 mb-4">
+                    {post.data.excerpt}
+                  </p>
+                  
+                  <div class="flex items-center gap-2 text-sm text-gray-500">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <time datetime={post.data.date.toISOString()}>
+                      {new Intl.DateTimeFormat('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      }).format(post.data.date)}
+                    </time>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {sortedPosts.length === 0 && (
+        <div class="text-center py-16">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Chưa có bài viết nào</h2>
+          <p class="text-gray-600">Hãy quay lại sau để đọc những bài viết mới nhất!</p>
+        </div>
+      )}
     </div>
-  )}
-</BlogLayout>
+  </main>
+  
+  <Footer />
+</Layout>
