@@ -117,6 +117,9 @@
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition"
                   required
                 />
+                <p id="emailError" class="hidden text-red-600 text-sm mt-1">
+                  Vui lòng nhập địa chỉ email hợp lệ
+                </p>
               </div>
               <div>
                 <label for="phone" class="block text-gray-900 font-medium mb-2">
@@ -130,6 +133,9 @@
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition"
                   required
                 />
+                <p id="phoneError" class="hidden text-red-600 text-sm mt-1">
+                  Vui lòng nhập số điện thoại hợp lệ
+                </p>
               </div>
             </div>
 
@@ -196,8 +202,74 @@
   const btnLoading = document.getElementById('btnLoading') as HTMLSpanElement;
   const successMessage = document.getElementById('successMessage') as HTMLDivElement;
   const errorMessage = document.getElementById('errorMessage') as HTMLDivElement;
+  
+  // Form inputs
+  const emailInput = document.getElementById('email') as HTMLInputElement;
+  const phoneInput = document.getElementById('phone') as HTMLInputElement;
+  const emailError = document.getElementById('emailError') as HTMLParagraphElement;
+  const phoneError = document.getElementById('phoneError') as HTMLParagraphElement;
 
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUt3pU_qOs71e8S0tSaMTkV-PnGIGfua2qpbSc8dNodxHsczDYj9Z3OYR3lsmqYjLM/exec';
+
+  // Email validation function
+  function validateEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  // Phone validation function (Vietnamese phone numbers)
+  function validatePhone(phone: string): boolean {
+    // Remove spaces and dashes
+    const cleanPhone = phone.replace(/[\s-]/g, '');
+    // Vietnamese phone format: 10 digits starting with 0, or with +84
+    const phoneRegex = /^(0|\+84)[0-9]{9}$/;
+    return phoneRegex.test(cleanPhone);
+  }
+
+  // Real-time email validation
+  emailInput.addEventListener('blur', () => {
+    const email = emailInput.value.trim();
+    if (email && !validateEmail(email)) {
+      emailInput.classList.add('border-red-500', 'focus:ring-red-500');
+      emailInput.classList.remove('border-gray-300', 'focus:ring-indigo-500');
+      emailError.classList.remove('hidden');
+    } else {
+      emailInput.classList.remove('border-red-500', 'focus:ring-red-500');
+      emailInput.classList.add('border-gray-300', 'focus:ring-indigo-500');
+      emailError.classList.add('hidden');
+    }
+  });
+
+  // Real-time phone validation
+  phoneInput.addEventListener('blur', () => {
+    const phone = phoneInput.value.trim();
+    if (phone && !validatePhone(phone)) {
+      phoneInput.classList.add('border-red-500', 'focus:ring-red-500');
+      phoneInput.classList.remove('border-gray-300', 'focus:ring-indigo-500');
+      phoneError.classList.remove('hidden');
+    } else {
+      phoneInput.classList.remove('border-red-500', 'focus:ring-red-500');
+      phoneInput.classList.add('border-gray-300', 'focus:ring-indigo-500');
+      phoneError.classList.add('hidden');
+    }
+  });
+
+  // Clear error on input
+  emailInput.addEventListener('input', () => {
+    if (emailInput.classList.contains('border-red-500')) {
+      emailInput.classList.remove('border-red-500', 'focus:ring-red-500');
+      emailInput.classList.add('border-gray-300', 'focus:ring-indigo-500');
+      emailError.classList.add('hidden');
+    }
+  });
+
+  phoneInput.addEventListener('input', () => {
+    if (phoneInput.classList.contains('border-red-500')) {
+      phoneInput.classList.remove('border-red-500', 'focus:ring-red-500');
+      phoneInput.classList.add('border-gray-300', 'focus:ring-indigo-500');
+      phoneError.classList.add('hidden');
+    }
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -205,6 +277,26 @@
     // Hide previous messages
     successMessage.classList.add('hidden');
     errorMessage.classList.add('hidden');
+
+    // Validate email
+    const email = emailInput.value.trim();
+    if (!validateEmail(email)) {
+      emailInput.classList.add('border-red-500', 'focus:ring-red-500');
+      emailInput.classList.remove('border-gray-300', 'focus:ring-indigo-500');
+      emailError.classList.remove('hidden');
+      emailInput.focus();
+      return;
+    }
+
+    // Validate phone
+    const phone = phoneInput.value.trim();
+    if (!validatePhone(phone)) {
+      phoneInput.classList.add('border-red-500', 'focus:ring-red-500');
+      phoneInput.classList.remove('border-gray-300', 'focus:ring-indigo-500');
+      phoneError.classList.remove('hidden');
+      phoneInput.focus();
+      return;
+    }
 
     // Show loading state
     submitBtn.disabled = true;
@@ -230,6 +322,12 @@
       // Show success message
       successMessage.classList.remove('hidden');
       form.reset();
+
+      // Reset field styles
+      emailInput.classList.remove('border-red-500', 'focus:ring-red-500');
+      emailInput.classList.add('border-gray-300', 'focus:ring-indigo-500');
+      phoneInput.classList.remove('border-red-500', 'focus:ring-red-500');
+      phoneInput.classList.add('border-gray-300', 'focus:ring-indigo-500');
 
       // Scroll to success message
       successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
