@@ -25,10 +25,16 @@ import QuoteForm from '../components/QuoteForm.astro';
 					Chúng tôi xử lý mọi thứ từ A-Z, bạn chỉ cần tập trung kinh doanh và thu về kết quả.
 				</p>
 				<div class="flex flex-col sm:flex-row gap-4 justify-center">
-					<button class="bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white font-semibold text-lg py-4 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">
+					<button 
+						onclick="document.getElementById('quote-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })"
+						class="bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white font-semibold text-lg py-4 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+					>
 						Đặt lịch tư vấn
 					</button>
-					<button class="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-semibold text-lg py-4 px-8 rounded-full transition-all duration-300">
+					<button 
+						onclick="document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' })"
+						class="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-semibold text-lg py-4 px-8 rounded-full transition-all duration-300"
+					>
 						Tìm hiểu thêm
 					</button>
 				</div>
