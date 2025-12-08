@@ -12,29 +12,14 @@ excerpt: Mô hình website JAMstack hiện đại, cho phép người dùng sở
 tags:
   - blog
 ---
-<h2 class=""><span style="font-size: 36px;">﻿</span><span style="font-size: 18px;">🚀 Giải Pháp Website JAMstack - Mua Một Lần, Dùng Trọn Đời</span></h2><h2><span style="font-size: 36px;">🌐 Tổng Quan</span></h2><h2>
-
-<p>Bạn đang tìm kiếm một giải pháp website:</p>
-<ul>
-<li>
-<p>Tốc độ cao</p>
-</li>
-<li>
-<p>Bảo mật</p>
-</li>
-<li>
-<p>Tự do sở hữu nội dung</p>
-</li>
-<li>
-<p>Không tốn phí duy trì hằng tháng?</p>
-</li>
-</ul>
+<h2 class=""><span style="font-size: 36px;">﻿</span><span style="font-size: 36px;">🚀 Giải Pháp Website JAMstack - Mua Một Lần, Dùng Trọn Đời</span></h2><h2><span style="font-size: 36px;">🌐 Tổng Quan</span></h2><h2>Bạn đang tìm kiếm một giải pháp website:</h2>
+<ul><li>Tốc độ cao</li><li>Bảo mật</li><li>Tự do sở hữu nội dung</li><li>Không tốn phí duy trì hằng tháng?</li></ul>
 <p><strong>JAMstack</strong> là câu trả lời!</p>
 <blockquote>
 <p>JAMstack = <strong>JavaScript + APIs + Markup</strong> – là mô hình xây dựng website tĩnh hiện đại: nhanh, an toàn, dễ mở rộng và thân thiện SEO.</p>
 </blockquote>
 <hr>
-</h2><h2>✅ Vì Sao Nên Chọn JAMstack?</h2><h3>💰 Sở Hữu Website Vĩnh Viễn</h3><h2>
+<h2>✅ Vì Sao Nên Chọn JAMstack?</h2><h3>💰 Sở Hữu Website Vĩnh Viễn</h3><h2>
 
 <ul>
 <li>
