@@ -52,7 +52,7 @@ tags:
 <h2><span style="font-size: 18px;"><b>🎯 Phù Hợp Với Ai?</b></span></h2>
 <ul>
   <li>Freelancer, Influencer, Coach</li>
-  <li>Doanh nghiệp nhỏ, đơn vị đào tạo</li><li>Shop Online cá nhân tối&nbsp;</li>
+  <li>Doanh nghiệp nhỏ, đơn vị đào tạo</li><li>Shop Online cá nhân</li>
   <li>Blogger, cá nhân viết nội dung</li>
 </ul>
 
