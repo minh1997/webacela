@@ -11,6 +11,8 @@ excerpt: Mô hình website JAMstack hiện đại, cho phép người dùng sở
   tổ chức cần landing page hoặc blog chuyên nghiệp, lâu dài.
 tags:
   - blog
+  - website
+  - jamstack
 ---
 <h2 class=""><span style="font-size: 18px;">﻿</span><span style="font-size: 24px;">🚀 Giải Pháp Website JAMstack - Mua Một Lần, Dùng Trọn Đời</span></h2>
 
