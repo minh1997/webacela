@@ -12,11 +12,9 @@ excerpt: Mô hình website JAMstack hiện đại, cho phép người dùng sở
 tags:
   - blog
 ---
-<h2>🚀 Giải Pháp Website JAMstack - Mua Một Lần, Dùng Trọn Đời</h2>
+<h2 class=""><span style="font-size: 18px;">﻿</span><span style="font-size: 24px;">🚀 Giải Pháp Website JAMstack - Mua Một Lần, Dùng Trọn Đời</span></h2>
 
-<p><img src="https://jamstack.org/jamstack-diagram.svg" alt="Giải pháp JAMstack" style="max-width:100%;"></p>
-
-<h2>🌐 Giới Thiệu</h2>
+<h2><span style="font-size: 18px;">🌐 Giới Thiệu</span></h2>
 <p>Bạn đang tìm kiếm một giải pháp website hiện đại, nhanh, bảo mật và không phải trả phí hằng tháng? JAMstack chính là câu trả lời.</p>
 <blockquote>
   JAMstack là mô hình phát triển web dựa trên <strong>JavaScript</strong>, <strong>API</strong>, và <strong>Markup</strong>, giúp tạo ra các website tĩnh với hiệu suất cao và bảo mật vượt trội.
@@ -24,10 +22,10 @@ tags:
 
 <hr>
 
-<h2>✅ Vì Sao Nên Chọn Website JAMstack?</h2>
+<h2><span style="font-size: 18px;">✅ Vì Sao Nên Chọn Website JAMstack?</span></h2>
 <h3>💸 Trả Một Lần, Dùng Trọn Đời</h3>
 <ul>
-  <li>Hosting miễn phí với <strong>Netlify</strong>, <strong>Vercel</strong> hoặc <strong>Cloudflare Pages</strong>.</li>
+  <li>Hosting miễn phí với <b>GitHub Page&nbsp;</b>hoặc <strong>Cloudflare Pages</strong>.</li>
   <li>Không cần gia hạn hoặc trả tiền duy trì hàng tháng.</li>
 </ul>
 
@@ -51,12 +49,11 @@ tags:
 
 <hr>
 
-<h2>🛠 Mô Hình Công Nghệ</h2>
-<p><img src="https://raw.githubusercontent.com/gsap/website/main/images/showcases/lottie-showcase.png" alt="Mô hình JAMstack" style="max-width:100%;"></p>
+<h2><span style="font-size: 18px;">🛠 Mô Hình Công Nghệ</span></h2>
 <ul>
   <li><strong>Frontend:</strong> Astro, Next.js, Nuxt.js</li>
   <li><strong>Nội dung:</strong> Markdown quản lý qua Git + DecapCMS</li>
-  <li><strong>Hosting:</strong> Netlify, Vercel (Free)</li>
+  <li><strong>Hosting:</strong> GitHub Page, Cloudflare Page (Free)</li>
   <li><strong>Form &amp; Data:</strong> Google Sheet, Supabase, App Script</li>
 </ul>
 
@@ -74,41 +71,11 @@ tags:
 
 <hr>
 
-<h2>🎯 Phù Hợp Với Ai?</h2>
+<h2><span style="font-size: 18px;">🎯 Phù Hợp Với Ai?</span></h2>
 <ul>
   <li>Freelancer, Influencer, Coach</li>
-  <li>Doanh nghiệp nhỏ, đơn vị đào tạo</li>
+  <li>Doanh nghiệp nhỏ, đơn vị đào tạo</li><li>Shop Online cá nhân tối&nbsp;</li>
   <li>Blogger, cá nhân viết nội dung</li>
 </ul>
 
-<hr>
-
-<h2>💰 Bảng Giá Tham Khảo</h2>
-<table border="1" cellpadding="6" cellspacing="0">
-  <tbody><tr><th>Gói</th><th>Phí Trọn Đời</th><th>Bao Gồm</th></tr>
-  <tr><td>Landing Page</td><td>1.499.000đ</td><td>Thiết kế đẹp, form liên hệ, tối ưu SEO</td></tr>
-  <tr><td>Blog/Portfolio</td><td>1.899.000đ</td><td>Viết bài Markdown, DecapCMS quản lý</td></tr>
-  <tr><td>Giao Diện Theo Yêu Cầu</td><td>Liên hệ</td><td>Theo ngành &amp; yêu cầu thương hiệu</td></tr>
-</tbody></table>
-
-<hr>
-
-<h2>📸 Hình Ảnh Minh Họa</h2>
-<h3>Blog đơn giản với Astro</h3>
-<p><img src="https://astro.build/assets/blog-cover.png" style="max-width:100%;" alt="Blog Astro"></p>
-<h3>Form gửi Google Sheet</h3>
-<p><img src="https://developers.google.com/apps-script/images/formsheets_1.svg" alt="Form Google Sheet" style="max-width:100%;"></p>
-
-<hr>
-
-<h2>📞 Liên Hệ Và Demo</h2>
-<ul>
-  <li>💬 Zalo / Facebook: <a href="#">link fanpage</a></li>
-  <li>🌐 Xem demo: <a href="#">link demo web</a></li>
-  <li>📧 Nhận tư vấn &amp; báo giá theo ngành của bạn</li>
-</ul>
-
-<blockquote>
-  🔑 Website hiện đại, không tốn phí về sau.<br>
-  👉 Đầu tư một lần – dùng mãi mãi – chuẩn SEO &amp; hiệu năng!
-</blockquote>
+<h2><br></h2>
