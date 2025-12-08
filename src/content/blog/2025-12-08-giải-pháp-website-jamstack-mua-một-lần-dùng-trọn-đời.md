@@ -14,7 +14,7 @@ tags:
 ---
 <h2 class=""><span style="font-size: 18px;">﻿</span><span style="font-size: 24px;">🚀 Giải Pháp Website JAMstack - Mua Một Lần, Dùng Trọn Đời</span></h2>
 
-<h2><span style="font-size: 18px;">🌐 Giới Thiệu</span></h2>
+<h2><span style="font-size: 18px;"><b>🌐 Giới Thiệu</b></span></h2>
 <p>Bạn đang tìm kiếm một giải pháp website hiện đại, nhanh, bảo mật và không phải trả phí hằng tháng? JAMstack chính là câu trả lời.</p>
 <blockquote>
   JAMstack là mô hình phát triển web dựa trên <strong>JavaScript</strong>, <strong>API</strong>, và <strong>Markup</strong>, giúp tạo ra các website tĩnh với hiệu suất cao và bảo mật vượt trội.
@@ -22,7 +22,7 @@ tags:
 
 <hr>
 
-<h2><span style="font-size: 18px;">✅ Vì Sao Nên Chọn Website JAMstack?</span></h2>
+<h2><span style="font-size: 18px;"><b>✅ Vì Sao Nên Chọn Website JAMstack?</b></span></h2>
 <h3>💸 Trả Một Lần, Dùng Trọn Đời</h3>
 <ul>
   <li>Hosting miễn phí với <b>GitHub Page&nbsp;</b>hoặc <strong>Cloudflare Pages</strong>.</li>
@@ -49,7 +49,7 @@ tags:
 
 <hr>
 
-<h2><span style="font-size: 18px;">🛠 Mô Hình Công Nghệ</span></h2>
+<h2><span style="font-size: 18px;"><b>🛠 Mô Hình Công Nghệ</b></span></h2>
 <ul>
   <li><strong>Frontend:</strong> Astro, Next.js, Nuxt.js</li>
   <li><strong>Nội dung:</strong> Markdown quản lý qua Git + DecapCMS</li>
@@ -59,7 +59,7 @@ tags:
 
 <hr>
 
-<h2>📝 Tính Năng Nổi Bật</h2>
+<h2><b><span style="font-size: 18px;">📝 Tính Năng Nổi Bật</span></b></h2>
 <table border="1" cellpadding="6" cellspacing="0">
   <tbody><tr><th>Tính Năng</th><th>Mô Tả</th></tr>
   <tr><td>SEO chuẩn</td><td>Metadata đầy đủ, sitemap.xml, tốc độ cao</td></tr>
@@ -71,7 +71,7 @@ tags:
 
 <hr>
 
-<h2><span style="font-size: 18px;">🎯 Phù Hợp Với Ai?</span></h2>
+<h2><span style="font-size: 18px;"><b>🎯 Phù Hợp Với Ai?</b></span></h2>
 <ul>
   <li>Freelancer, Influencer, Coach</li>
   <li>Doanh nghiệp nhỏ, đơn vị đào tạo</li><li>Shop Online cá nhân tối&nbsp;</li>
