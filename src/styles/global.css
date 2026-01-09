@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Necosmic Font */
+@font-face {
+  font-family: 'Necosmic';
+  src: url('/fonts/Necosmic-PersonalUse.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-necosmic {
+  font-family: 'Necosmic', sans-serif;
+}
+
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
