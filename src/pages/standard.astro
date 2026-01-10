@@ -12,29 +12,50 @@ import QuoteForm from '../components/QuoteForm.astro';
 	<Navigation />
 	
 	<!-- Hero Section -->
-	<section class="min-h-screen bg-cover bg-center bg-no-repeat" style="background: #F0F7FE url('/images/hero-bg.png') no-repeat bottom -20px left; background-size: 100%;">
-		<div class="container mx-auto px-4 grid min-h-screen items-center pt-20">
-			<div class="mb-20 text-center mt-20 lg:mt-0">
-				<h1 class="text-4xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-8 leading-tight">
+	<section class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-slate-50">
+		<!-- Background Elements -->
+		<div class="absolute inset-0 z-0">
+			<div class="absolute inset-0 bg-[radial-gradient(#e0e7ff_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+			<div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-white to-transparent"></div>
+		</div>
+
+		<div class="container relative z-10 mx-auto px-4">
+			<div class="max-w-4xl mx-auto text-center">
+				<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-sm font-medium mb-8 animate-fade-in-up">
+					<span class="relative flex h-2 w-2">
+						<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+						<span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+					</span>
+					Giải pháp Website tối ưu 2026
+				</div>
+				
+				<h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-8 leading-[1.1]">
 					Website Tiêu Chuẩn
-					<span class="text-purple-600"> hiệu quả cho cá nhân và doanh nghiệp nhỏ</span>
+					<span class="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mt-2">Dành Cho Người Dẫn Đầu</span>
 				</h1>
-				<p class="text-lg text-gray-600 mx-auto lg:mx-0 leading-relaxed mb-8">
+				
+				<p class="text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl mx-auto">
 					"Website bền bỉ - Không phí duy trì - Hiệu năng cao"
-					Chúng tôi xử lý mọi thứ từ A-Z, bạn chỉ cần tập trung kinh doanh và thu về kết quả.
+					<br class="hidden md:block" />
+					Chúng tôi xử lý mọi thứ từ A-Z. Bạn chỉ cần tập trung kinh doanh.
 				</p>
-				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+				
+				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
 					<button 
 						onclick="document.getElementById('quote-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })"
-						class="bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white font-semibold text-lg py-4 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+						class="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-indigo-600 px-8 font-medium text-white transition-all duration-300 hover:bg-indigo-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2"
 					>
-						Đặt lịch tư vấn
+						<span>Đặt lịch tư vấn ngay</span>
+						<svg class="ml-2 -mr-1 w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+						</svg>
 					</button>
+					
 					<button 
 						onclick="document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' })"
-						class="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-semibold text-lg py-4 px-8 rounded-full transition-all duration-300"
+						class="text-slate-600 hover:text-indigo-600 font-medium px-8 py-3 transition-colors duration-200"
 					>
-						Tìm hiểu thêm
+						Xem bảng giá chi tiết →
 					</button>
 				</div>
 			</div>
@@ -53,55 +74,59 @@ import QuoteForm from '../components/QuoteForm.astro';
 			</div>
 
 			<!-- Reasons Grid -->
-			<div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+			<div class="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
 				<!-- Reason 1 -->
-				<div class="bg-gray-800 rounded-2xl p-8 relative overflow-hidden group hover:bg-gray-750 transition-all duration-300">
-					<div class="absolute top-6 left-6 text-8xl font-bold text-gray-700 opacity-30 leading-none">1</div>
-					<div class="relative z-10 pt-12">
-						<h3 class="text-2xl font-bold text-white mb-4">
-							Trả tiền một lần – Sở hữu trọn đời
+				<div class="group relative bg-slate-800 rounded-3xl p-8 lg:p-10 overflow-hidden hover:shadow-2xl hover:shadow-indigo-500/20 transition-all duration-500 border border-slate-700 hover:border-indigo-500/50">
+					<div class="absolute -right-10 -top-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-all duration-500"></div>
+					<div class="relative z-10">
+						<span class="inline-block px-4 py-2 bg-slate-700/50 rounded-lg text-indigo-400 font-mono text-sm mb-6 border border-slate-600">01. Cost Efficiency</span>
+						<h3 class="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-indigo-300 transition-colors">
+							Trả tiền một lần – <br/>Sở hữu trọn đời
 						</h3>
-						<p class="text-gray-300 leading-relaxed">
-							Không phí duy trì hàng tháng, không lo cắt dịch vụ. Website thuộc toàn quyền sở hữu của bạn, bạn chỉ cần trả phí duy trì domain hàng năm.
+						<p class="text-slate-400 leading-relaxed text-lg">
+							Không phí duy trì hàng tháng. Website thuộc <span class="text-white font-medium">100% quyền sở hữu</span> của bạn. Bạn chỉ cần thanh toán phí tên miền hàng năm.
 						</p>
 					</div>
 				</div>
 
 				<!-- Reason 2 -->
-				<div class="bg-gray-800 rounded-2xl p-8 relative overflow-hidden group hover:bg-gray-750 transition-all duration-300">
-					<div class="absolute top-6 left-6 text-8xl font-bold text-gray-700 opacity-30 leading-none">2</div>
-					<div class="relative z-10 pt-12">
-						<h3 class="text-2xl font-bold text-white mb-4">
-							Hạ tầng toàn cầu – Miễn phí vĩnh viễn
+				<div class="group relative bg-slate-800 rounded-3xl p-8 lg:p-10 overflow-hidden hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 border border-slate-700 hover:border-purple-500/50">
+					<div class="absolute -right-10 -top-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl group-hover:bg-purple-500/20 transition-all duration-500"></div>
+					<div class="relative z-10">
+						<span class="inline-block px-4 py-2 bg-slate-700/50 rounded-lg text-purple-400 font-mono text-sm mb-6 border border-slate-600">02. Infrastructure</span>
+						<h3 class="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors">
+							Hạ tầng toàn cầu – <br/>Miễn phí vĩnh viễn
 						</h3>
-						<p class="text-gray-300 leading-relaxed">
-							Lưu trữ trên CDN toàn cầu, tốc độ tải nhanh ở cả Việt Nam và quốc tế. Đảm bảo website luôn online ổn định, không mất thêm chi phí hosting.
+						<p class="text-slate-400 leading-relaxed text-lg">
+							Lưu trữ trên <span class="text-white font-medium">CDN toàn cầu</span>, tốc độ tải siêu tốc. Cam kết uptime 99.9%, bảo mật SSL tự động và không tốn chi phí hosting.
 						</p>
 					</div>
 				</div>
 
 				<!-- Reason 3 -->
-				<div class="bg-gray-800 rounded-2xl p-8 relative overflow-hidden group hover:bg-gray-750 transition-all duration-300">
-					<div class="absolute top-6 left-6 text-8xl font-bold text-gray-700 opacity-30 leading-none">3</div>
-					<div class="relative z-10 pt-12">
-						<h3 class="text-2xl font-bold text-white mb-4">
-							Ngay cả ông bà của bạn cũng có thể sử dụng landing pages của chúng tôi
+				<div class="group relative bg-slate-800 rounded-3xl p-8 lg:p-10 overflow-hidden hover:shadow-2xl hover:shadow-pink-500/20 transition-all duration-500 border border-slate-700 hover:border-pink-500/50">
+					<div class="absolute -right-10 -top-10 w-40 h-40 bg-pink-500/10 rounded-full blur-3xl group-hover:bg-pink-500/20 transition-all duration-500"></div>
+					<div class="relative z-10">
+						<span class="inline-block px-4 py-2 bg-slate-700/50 rounded-lg text-pink-400 font-mono text-sm mb-6 border border-slate-600">03. Usability</span>
+						<h3 class="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-pink-300 transition-colors">
+							Dễ dùng cho mọi lứa tuổi
 						</h3>
-						<p class="text-gray-300 leading-relaxed">
-							Landing pages của chúng tôi vượt qua bài kiểm tra "ông bà cổ điển". Chúng không chỉ dễ theo dõi và điều hướng, mà còn tải cực kỳ nhanh. Nếu khách truy cập có dịch vụ di động kém, landing pages WEBACELA vẫn tải ngay lập tức.
+						<p class="text-slate-400 leading-relaxed text-lg">
+							Ngay cả người lớn tuổi cũng dùng được dễ dàng. Giao diện trực quan, rõ ràng, tối ưu trải nghiệm (UX) để giữ chân khách hàng lâu nhất có thể.
 						</p>
 					</div>
 				</div>
 
 				<!-- Reason 4 -->
-				<div class="bg-gray-800 rounded-2xl p-8 relative overflow-hidden group hover:bg-gray-750 transition-all duration-300">
-					<div class="absolute top-6 left-6 text-8xl font-bold text-gray-700 opacity-30 leading-none">4</div>
-					<div class="relative z-10 pt-12">
-						<h3 class="text-2xl font-bold text-white mb-4">
-							Thiết kế tối ưu – Dễ quản lý nội dung
+				<div class="group relative bg-slate-800 rounded-3xl p-8 lg:p-10 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 border border-slate-700 hover:border-emerald-500/50">
+					<div class="absolute -right-10 -top-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/20 transition-all duration-500"></div>
+					<div class="relative z-10">
+						<span class="inline-block px-4 py-2 bg-slate-700/50 rounded-lg text-emerald-400 font-mono text-sm mb-6 border border-slate-600">04. Content Management</span>
+						<h3 class="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-emerald-300 transition-colors">
+							Quản trị nội dung dễ dàng
 						</h3>
-						<p class="text-gray-300 leading-relaxed">
-							Website chuẩn SEO, responsive trên mọi thiết bị. Dễ dàng đăng bài, chỉnh sửa nội dung mà không cần biết code. Không lo bị chèn quảng cáo hay giới hạn chức năng như các nền tảng miễn phí khác
+						<p class="text-slate-400 leading-relaxed text-lg">
+							Hệ thống CMS thân thiện, cho phép bạn tự sửa bài viết, hình ảnh mà không cần biết code. Chuẩn SEO Google ngay từ khi bàn giao.
 						</p>
 					</div>
 				</div>
@@ -109,74 +134,85 @@ import QuoteForm from '../components/QuoteForm.astro';
 		</div>
 	</section>
 
-	<!-- Process Section -->
-	<section class="py-20 bg-gray-50">
-		<div class="mx-auto">
-			<h2 class="text-4xl lg:text-5xl font-bold text-gray-800 text-center mb-16">
-				Các tính năng khi bạn <span class="text-purple-600">sở hữu Website của chúng tôi</span>
-			</h2>
+	<!-- Feature Highlights Section -->
+	<section class="py-24 bg-white overflow-hidden">
+		<div class="container mx-auto px-4 max-w-7xl">
+			<div class="text-center mb-20">
+				<h2 class="text-4xl lg:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
+					Sức mạnh của công nghệ <br/>
+					<span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Jamstack Hiện Đại</span>
+				</h2>
+				<p class="text-lg text-slate-600 max-w-2xl mx-auto">
+					Chúng tôi không sử dụng Wordpress hay các nền tảng cũ kỹ. Website của bạn được xây dựng bằng công nghệ mới nhất, đảm bảo tốc độ và bảo mật tuyệt đối.
+				</p>
+			</div>
 			
-			<div class="grid grid-cols-1">
-				<div class="flex  overflow-hidden items-center">
-					<div class="w-1/2 h-auto visible slide-in-left">
-						<img src="/images/custome_code.gif" class="mx-auto" alt="" srcset="">
+			<div class="space-y-24">
+				<!-- Feature 1 -->
+				<div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20 group">
+					<div class="w-full md:w-1/2 relative">
+						<div class="absolute inset-0 bg-indigo-500/5 rounded-3xl transform rotate-3 transition-transform group-hover:rotate-6"></div>
+						<img src="/images/custome_code.gif" class="relative rounded-3xl shadow-2xl w-full transform transition-transform group-hover:-translate-y-2" alt="Tùy biến không giới hạn">
 					</div>
-					<div class="flex flex-col items-start px-4 md:px-[60px] w-1/2 gap-5 lg:gap-10 visible slide-in-right">
-						<div class="flex items-center gap-[14px]">
-							<h3 class="text-xl text-indigo-600 font-medium leading-normal">FEATURE 1</h3>
+					<div class="w-full md:w-1/2">
+						<div class="flex items-center gap-3 mb-4">
+							<span class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold">01</span>
+							<h3 class="text-lg font-semibold text-indigo-600 tracking-wide uppercase">Tùy biến không giới hạn</h3>
 						</div>
-						<div class="flex flex-col gap-3 md:gap-5">
-							<h2 class="text-zinc-950 text-base sm:text-2xl md:text-3xl xl:text-4xl font-semibold leading-normal">
-								Tuỳ biến không giới hạn
-							</h2>
-							<p class="text-sm font-normal leading-tight md:leading-normal md:text-xl text-zinc-500">
-								Tùy chỉnh giao diện, bố cục và nội dung theo ý muốn mà không bị giới hạn bởi các Template có sẵn.
-							</p>
-						</div>
+						<h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 leading-tight">
+							Thoát khỏi lối mòn của <br/>Template có sẵn
+						</h2>
+						<p class="text-lg text-slate-600 leading-relaxed">
+							Không bị gò bó bởi các giao diện mẫu nhàm chán. Chúng tôi code tay (custom code) từng thành phần để website mang đậm dấu ấn thương hiệu của riêng bạn. Mọi ý tưởng thiết kế đều có thể trở thành hiện thực.
+						</p>
 					</div>
 				</div>
-				<div class="flex flex-row-reverse overflow-hidden items-center">
-					<div class="w-1/2 h-auto visible slide-in-right">
+
+				<!-- Feature 2 -->
+				<div class="flex flex-col md:flex-row-reverse items-center gap-12 lg:gap-20 group">
+					<div class="w-full md:w-1/2 relative">
+						<div class="absolute inset-0 bg-purple-500/5 rounded-3xl transform -rotate-3 transition-transform group-hover:-rotate-6"></div>
 						<img 
 							src="/images/landing_page.png" 
 							alt="Không giới hạn tạo landing page"
 							loading="lazy"
-							width="2016"
-							height="988"
-							class="w-full h-auto">
+							class="relative rounded-3xl shadow-2xl w-full transform transition-transform group-hover:-translate-y-2 border border-slate-100">
 					</div>
-					<div class="flex flex-col items-start px-4 md:px-[60px] w-1/2 gap-5 lg:gap-10 visible slide-in-left">
-						<div class="flex items-center gap-[14px]">
-							<h3 class="text-xl text-indigo-600 font-medium leading-normal">FEATURE 2</h3>
+					<div class="w-full md:w-1/2">
+						<div class="flex items-center gap-3 mb-4">
+							<span class="flex h-10 w-10 items-center justify-center rounded-full bg-purple-100 text-purple-600 font-bold">02</span>
+							<h3 class="text-lg font-semibold text-purple-600 tracking-wide uppercase">Không giới hạn Landing Page</h3>
 						</div>
-						<div class="flex flex-col gap-3 md:gap-5">
-							<h2 class="text-zinc-950 text-base sm:text-2xl md:text-3xl xl:text-4xl font-semibold leading-normal">Không giới hạn tạo landing page</h2>
-							<p class="text-sm font-normal leading-tight md:leading-normal md:text-xl text-zinc-500">
-								Với 10GB dung lượng gói tiêu chuẩn. Hãy thoải mái tạo vô số landing page tùy thích để phục vụ các chiến dịch marketing khác nhau mà không phát sinh thêm chi phí.
-							</p>
-						</div>
+						<h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 leading-tight">
+							Tự do mở rộng chiến dịch <br/>Marketing
+						</h2>
+						<p class="text-lg text-slate-600 leading-relaxed">
+							Với 10GB dung lượng lưu trữ (gấp 10 lần mức trung bình), bạn có thể tạo hàng trăm landing page cho các chiến dịch quảng cáo khác nhau. A/B testing thoải mái mà không lo phát sinh chi phí hạ tầng.
+						</p>
 					</div>
 				</div>
-				<div class="flex overflow-hidden items-center">
-					<div class="w-1/2 h-auto slide-in-left">
+
+				<!-- Feature 3 -->
+				<div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20 group">
+					<div class="w-full md:w-1/2 relative">
+						<div class="absolute inset-0 bg-green-500/5 rounded-3xl transform rotate-3 transition-transform group-hover:rotate-6"></div>
 						<img 
 							src="/images/page_speed.png" 
 							alt="Tốc độ tải cao với Jamstack và CDN"
 							loading="lazy"
-							width="2016"
-							height="988"
-							class="w-full h-auto">
+							class="relative rounded-3xl shadow-2xl w-full transform transition-transform group-hover:-translate-y-2 border border-slate-100">
 					</div>
-					<div class="flex flex-col items-start px-4 md:px-[60px] w-1/2 gap-5 lg:gap-10 visible slide-in-right">
-						<div class="flex items-center gap-[14px]">
-							<h3 class="text-xl text-indigo-600 font-medium leading-normal">FEATURE 3</h3>
+					<div class="w-full md:w-1/2">
+						<div class="flex items-center gap-3 mb-4">
+							<span class="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-green-600 font-bold">03</span>
+							<h3 class="text-lg font-semibold text-green-600 tracking-wide uppercase">Hiệu năng vượt trội</h3>
 						</div>
-						<div class="flex flex-col gap-3 md:gap-5">
-							<h2 class="text-zinc-950 text-base sm:text-2xl md:text-3xl xl:text-4xl font-semibold leading-normal">Tốc độ tải cao</h2>
-							<p class="text-sm font-normal leading-tight md:leading-normal md:text-xl text-zinc-500">
-								Với cấu trúc Jamstack hiện đại và mạng lưới phân phối nội dung (CDN) toàn cầu, website của bạn sẽ tải nhanh chóng trên mọi thiết bị và vị trí địa lý, mang lại trải nghiệm người dùng tuyệt vời.
-							</p>
-						</div>
+						<h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 leading-tight">
+							Nhanh như chớp với <br/>CDN Toàn Cầu
+						</h2>
+						<p class="text-lg text-slate-600 leading-relaxed">
+							Website được phân phối qua mạng lưới Edge Network toàn cầu. Dù khách hàng của bạn ở Hà Nội, New York hay London, website đều tải ngay lập tức. Điểm Google PageSpeed xanh lè là tiêu chuẩn mặc định của chúng tôi.
+						</p>
 					</div>
 				</div>
 			</div>
@@ -184,43 +220,47 @@ import QuoteForm from '../components/QuoteForm.astro';
 	</section>
 
 	<!-- Landing Page Process Timeline Section -->
-	<section class="py-20 bg-gray-900">
-		<div class="container mx-auto px-4">
-			<h2 class="text-4xl lg:text-5xl font-bold text-white text-center mb-20">
-				Quy trình bắt đầu <br>
-				<span class="text-green-400">mua một Landing Page</span>
+	<section class="py-24 bg-slate-900 relative overflow-hidden">
+		<!-- Background Accents -->
+		<div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent"></div>
+		<div class="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent"></div>
+		
+		<div class="container mx-auto px-4 relative z-10">
+			<h2 class="text-4xl lg:text-5xl font-bold text-white text-center mb-20 tracking-tight">
+				Quy trình đơn giản <br>
+				<span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500">Đặt Mua Website</span>
 			</h2>
 			
 			<!-- Timeline Container -->
-			<div class="relative max-w-6xl mx-auto">
+			<div class="relative max-w-5xl mx-auto">
 				<!-- Central Timeline Line -->
-				<div class="b-timeline__line"></div>
+				<div class="b-timeline__line bg-slate-700"></div>
 				
 				<!-- Timeline Item 1 - Left Side -->
 				<div class="relative mb-20 lg:mb-32">
 					<div class="flex flex-col lg:flex-row items-start">
 						<!-- Content Left -->
-						<div class="w-full lg:w-5/12 md:w-5/12 lg:pr-8 mb-8 lg:mb-0 text-center lg:text-right">
-							<div class="bg-gray-800 p-8 rounded-2xl shadow-xl">
-								<!-- Placeholder for image -->
-								<div class="w-40 h-40 rounded-xl mb-6 mx-auto lg:ml-auto lg:mr-0 flex items-center justify-center">
-									<img src="/images/Frame.png" alt="Điền vào form đăng ký">
+						<div class="w-full lg:w-5/12 md:w-5/12 lg:pr-12 mb-8 lg:mb-0 text-center lg:text-right group">
+							<div class="bg-slate-800 p-8 rounded-3xl shadow-xl border border-slate-700 hover:border-indigo-500/50 transition-all duration-300 relative overflow-hidden">
+								<div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+								<div class="w-24 h-24 bg-slate-700 rounded-2xl mb-6 mx-auto lg:ml-auto lg:mr-0 flex items-center justify-center text-4xl transform group-hover:scale-110 transition-transform duration-300">
+									📝
 								</div>
-								<h3 class="text-2xl font-bold text-white mb-4">Điền vào form đăng ký</h3>
-								<p class="text-gray-300 leading-relaxed">Form này mất vài phút để hoàn thành và cho phép chúng tôi thu thập thông tin cần thiết để xây dựng trang của bạn.</p>
+								<h3 class="text-xl font-bold text-white mb-3">1. Điền form đăng ký</h3>
+								<p class="text-slate-400 leading-relaxed text-sm">Chỉ mất 2 phút để chúng tôi hiểu rõ nhu cầu và thương hiệu của bạn. Đây là bước đệm quan trọng nhất.</p>
 							</div>
 						</div>
 						
 						<!-- Timeline Dot -->
 						<div class="b-timeline__bead">
-							<svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<circle cx="17" cy="17" r="16" fill="#262420" stroke="#BDFD6D" stroke-width="2"></circle>
-								<circle cx="17" cy="17" r="7" fill="#BDFD6D"></circle>
-							</svg>
+							<div class="relative w-8 h-8 flex items-center justify-center">
+								<div class="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-20"></div>
+								<div class="relative w-4 h-4 bg-green-500 rounded-full shadow-lg shadow-green-500/50"></div>
+							</div>
 						</div>
 						
 						<!-- Space Right -->
-						<div class="w-full lg:w-5/12 lg:pl-8"></div>
+						<div class="w-full lg:w-5/12 lg:pl-12"></div>
 					</div>
 				</div>
 
@@ -228,25 +268,24 @@ import QuoteForm from '../components/QuoteForm.astro';
 				<div class="relative mb-20 lg:mb-32">
 					<div class="flex flex-col lg:flex-row items-end justify-end">
 						<!-- Space Left -->
-						<div class="w-full lg:w-5/12 lg:pr-8"></div>
+						<div class="w-full lg:w-5/12 lg:pr-12"></div>
 						
 						<!-- Timeline Dot -->
 						<div class="b-timeline__bead">
-							<svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<circle cx="17" cy="17" r="16" fill="#262420" stroke="#BDFD6D" stroke-width="2"></circle>
-								<circle cx="17" cy="17" r="7" fill="#BDFD6D"></circle>
-							</svg>
+							<div class="relative w-8 h-8 flex items-center justify-center">
+								<div class="relative w-4 h-4 bg-slate-700 border-2 border-green-500 rounded-full"></div>
+							</div>
 						</div>
 						
 						<!-- Content Right -->
-						<div class="w-full lg:w-5/12 md:w-5/12 lg:pl-8 sm:ml-20 text-center lg:text-left">
-							<div class="bg-gray-800 p-8 rounded-2xl shadow-xl">
-								<!-- Placeholder for image -->
-								<div class="w-40 h-40 rounded-xl mb-6 mx-auto lg:mr-auto lg:ml-0 flex items-center justify-center">
-									<img src="/images/trial.png" alt="Dùng thử các tính năng được quảng cáo">
+						<div class="w-full lg:w-5/12 md:w-5/12 lg:pl-12 text-center lg:text-left group">
+							<div class="bg-slate-800 p-8 rounded-3xl shadow-xl border border-slate-700 hover:border-indigo-500/50 transition-all duration-300 relative overflow-hidden">
+								<div class="absolute inset-0 bg-gradient-to-bl from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+								<div class="w-24 h-24 bg-slate-700 rounded-2xl mb-6 mx-auto lg:mr-auto lg:ml-0 flex items-center justify-center text-4xl transform group-hover:scale-110 transition-transform duration-300">
+									✨
 								</div>
-								<h3 class="text-2xl font-bold text-white mb-4">Dùng thử các tính năng được quảng cáo</h3>
-								<p class="text-gray-300 leading-relaxed">Chúng tôi cung cấp cho bạn quyền truy cập vào tất cả các tính năng mà chúng tôi quảng cáo để bạn có thể trải nghiệm trước khi xuống tiền đặt cọc.</p>
+								<h3 class="text-xl font-bold text-white mb-3">2. Trải nghiệm Demo</h3>
+								<p class="text-slate-400 leading-relaxed text-sm">Bạn được quyền xem trước bản demo, trải nghiệm mọi tính năng như người dùng thật trước khi quyết định.</p>
 							</div>
 						</div>
 					</div>
@@ -256,27 +295,26 @@ import QuoteForm from '../components/QuoteForm.astro';
 				<div class="relative mb-20 lg:mb-32">
 					<div class="flex flex-col lg:flex-row items-start">
 						<!-- Content Left -->
-						<div class="w-full lg:w-5/12 md:w-5/12 lg:pr-8 mb-8 lg:mb-0 text-center lg:text-right">
-							<div class="bg-gray-800 p-8 rounded-2xl shadow-xl">
-								<!-- Placeholder for image -->
-								<div class="w-40 h-40 rounded-xl mb-6 mx-auto lg:ml-auto lg:mr-0 flex items-center justify-center">
-									<img src="/images/Frame3.png" alt="Thực hiện sau khi đặt cọc 50%">
+						<div class="w-full lg:w-5/12 md:w-5/12 lg:pr-12 mb-8 lg:mb-0 text-center lg:text-right group">
+							<div class="bg-slate-800 p-8 rounded-3xl shadow-xl border border-slate-700 hover:border-indigo-500/50 transition-all duration-300 relative overflow-hidden">
+								<div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+								<div class="w-24 h-24 bg-slate-700 rounded-2xl mb-6 mx-auto lg:ml-auto lg:mr-0 flex items-center justify-center text-4xl transform group-hover:scale-110 transition-transform duration-300">
+									💳
 								</div>
-								<h3 class="text-2xl font-bold text-white mb-4">Thực hiện sau khi đặt cọc 50%</h3>
-								<p class="text-gray-300 leading-relaxed">Sau khi bạn đặt cọc, chúng tôi có chi phí triển khai mua domain, chuẩn bị hạ tầng, nhân sự phát triển và thiết kế theo yêu cầu của bạn.</p>
+								<h3 class="text-xl font-bold text-white mb-3">3. Đặt cọc triển khai</h3>
+								<p class="text-slate-400 leading-relaxed text-sm">Sau khi ưng ý với Demo, bạn đặt cọc 50%. Chúng tôi tiến hành mua domain, setup hạ tầng và code chính thức.</p>
 							</div>
 						</div>
 						
 						<!-- Timeline Dot -->
 						<div class="b-timeline__bead">
-							<svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<circle cx="17" cy="17" r="16" fill="#262420" stroke="#BDFD6D" stroke-width="2"></circle>
-								<circle cx="17" cy="17" r="7" fill="#BDFD6D"></circle>
-							</svg>
+							<div class="relative w-8 h-8 flex items-center justify-center">
+								<div class="relative w-4 h-4 bg-slate-700 border-2 border-green-500 rounded-full"></div>
+							</div>
 						</div>
 						
 						<!-- Space Right -->
-						<div class="w-full lg:w-5/12 lg:pl-8"></div>
+						<div class="w-full lg:w-5/12 lg:pl-12"></div>
 					</div>
 				</div>
 
@@ -284,25 +322,25 @@ import QuoteForm from '../components/QuoteForm.astro';
 				<div class="relative">
 					<div class="flex flex-col lg:flex-row items-end justify-end">
 						<!-- Space Left -->
-						<div class="w-full lg:w-5/12 md:w-5/12 lg:pr-8"></div>
+						<div class="w-full lg:w-5/12 md:w-5/12 lg:pr-12"></div>
 						
 						<!-- Timeline Dot -->
 						<div class="b-timeline__bead">
-							<svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<circle cx="17" cy="17" r="16" fill="#262420" stroke="#BDFD6D" stroke-width="2"></circle>
-								<circle cx="17" cy="17" r="7" fill="#BDFD6D"></circle>
-							</svg>
+							<div class="relative w-8 h-8 flex items-center justify-center">
+								<div class="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-20"></div>
+								<div class="relative w-4 h-4 bg-green-500 rounded-full shadow-lg shadow-green-500/50"></div>
+							</div>
 						</div>
 						
 						<!-- Content Right -->
-						<div class="w-full lg:w-5/12 md:w-5/12 lg:pl-8 text-center lg:text-left">
-							<div class="bg-gray-800 p-8 rounded-2xl shadow-xl">
-								<!-- Placeholder for image -->
-								<div class="w-40 h-40 rounded-xl mb-6 mx-auto lg:mr-auto lg:ml-0 flex items-center justify-center">
-									<img src="/images/Frame4.png" alt="Web của bạn đã sẵn sàng!">
+						<div class="w-full lg:w-5/12 md:w-5/12 lg:pl-12 text-center lg:text-left group">
+							<div class="bg-slate-800 p-8 rounded-3xl shadow-xl border border-slate-700 hover:border-indigo-500/50 transition-all duration-300 relative overflow-hidden">
+								<div class="absolute inset-0 bg-gradient-to-bl from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+								<div class="w-24 h-24 bg-slate-700 rounded-2xl mb-6 mx-auto lg:mr-auto lg:ml-0 flex items-center justify-center text-4xl transform group-hover:scale-110 transition-transform duration-300">
+									🚀
 								</div>
-								<h3 class="text-2xl font-bold text-white mb-4">Web của bạn đã sẵn sàng!</h3>
-								<p class="text-gray-300 leading-relaxed">Sau 2 - 3 ngày làm việc website được hoàn thiện với tên miền riêng của bạn. Bạn không cần lo lắng về chi phí hosting mỗi tháng hay bất cứ yếu tố kỹ thuật nào khác, hãy tận hưởng và tập chung vào chiến dịch quảng cáo của bạn</p>
+								<h3 class="text-xl font-bold text-white mb-3">4. Go Live & Bàn giao</h3>
+								<p class="text-slate-400 leading-relaxed text-sm">Sau 2-3 ngày, website chính thức chạy trên tên miền của bạn. Bàn giao toàn bộ tài khoản quản trị và hướng dẫn sử dụng.</p>
 							</div>
 						</div>
 					</div>
@@ -326,236 +364,114 @@ import QuoteForm from '../components/QuoteForm.astro';
 			</div>
 
 			<!-- Pricing Cards -->
-			<div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+			<div class="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto isolate">
 				
 				<!-- Landing Page Plan -->
-				<div class="bg-white rounded-3xl p-8 shadow-lg border-2 border-blue-200 relative hover:shadow-2xl transition-all duration-300">
-					<div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-						<span class="bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-semibold">
-							Phổ biến nhất
-						</span>
+				<div class="bg-white rounded-[2rem] p-8 lg:p-10 shadow-xl ring-1 ring-slate-200 relative hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 z-10">
+					<div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+						<svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor" class="text-blue-600">
+							<path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"/>
+						</svg>
 					</div>
-					
-					<div class="text-center mb-8 mt-4">
-						<h3 class="text-2xl font-bold text-gray-800 mb-4">Gói Landing Page</h3>
-						<div class="mb-4">
-							<span class="text-5xl font-bold text-blue-600">3.500.000₫</span>
-							<span class="text-gray-600 ml-2">/ một lần</span>
+
+					<div class="text-center mb-8 mt-4 relative">
+						<h3 class="text-lg font-semibold text-slate-500 mb-2 uppercase tracking-wide">Gói Landing Page</h3>
+						<div class="flex items-baseline justify-center gap-1 mb-4">
+							<span class="text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">3.5tr</span>
+							<span class="text-slate-500 font-medium">/ trọn gói</span>
 						</div>
-						<p class="text-gray-600">
-							Dành cho chiến dịch marketing, sản phẩm đơn lẻ hoặc dịch vụ cụ thể
+						<p class="text-slate-600">
+							Hoàn hảo cho chiến dịch marketing, <br/>giới thiệu sản phẩm, sự kiện.
 						</p>
 					</div>
 
 					<button 
-						class="w-full bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white font-semibold py-4 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 mb-8"
+						class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-slate-900/10 transition-all duration-300 transform hover:-translate-y-1 mb-10"
 						onclick="scrollToQuoteForm('landing')"
 					>
 						Chọn Gói Landing Page
 					</button>
 
 					<div class="space-y-4">
-						<h4 class="font-semibold text-gray-800 mb-4">Gói Landing Page bao gồm:</h4>
+						<div class="text-sm font-semibold text-slate-900 uppercase tracking-widest mb-6 border-b pb-2">Tính năng nổi bật</div>
 						
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700"><strong>2 trang landing page</strong> được thiết kế theo yêu cầu</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">1 Tên miền .com</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Thiết kế UI/UX tối ưu chuyển đổi</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Responsive 100% mọi thiết bị</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Tối ưu SEO cơ bản</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Hosting 10GB miễn phí vĩnh viễn</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">SSL miễn phí (HTTPS)</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">CDN toàn cầu - tốc độ cao</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700"><strong>Không phí duy trì hàng tháng</strong></span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Tùy chỉnh nội dung, layout qua CMS</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Bàn giao trong 1-2 ngày</span>
-						</div>
+						<ul class="space-y-4 text-slate-600">
+							{[
+								['2 Landing Pages', 'Thiết kế riêng biệt'],
+								['CMS Quản trị', 'Tự động cập nhật nội dung'],
+								['Tên miền .com', 'Miễn phí năm đầu'],
+								['Thiết kế UI/UX', 'Tối ưu chuyển đổi cao'],
+								['Responsive 100%', 'Tương thích mọi thiết bị'],
+								['Hosting 10GB', 'Miễn phí trọn đời'],
+								['SSL (HTTPS)', 'An toàn tuyệt đối'],
+								['CDN Global', 'Tốc độ tải trang < 1s'],
+								['Không phí duy trì', 'Thanh toán 1 lần']
+							].map(([main, sub]) => (
+								<li class="flex items-start gap-3">
+									<svg class="w-6 h-6 text-indigo-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+									</svg>
+									<div>
+										<strong class="text-slate-900">{main}</strong>
+										{sub && <span class="block text-sm text-slate-500">{sub}</span>}
+									</div>
+								</li>
+							))}
+						</ul>
 					</div>
 				</div>
 
 				<!-- Standard Website Plan -->
-				<div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 relative hover:shadow-2xl transition-all duration-300">
-					<div class="text-center mb-8">
-						<h3 class="text-2xl font-bold text-gray-800 mb-4">Gói Tiêu Chuẩn</h3>
-						<div class="mb-4">
-							<span class="text-5xl font-bold text-purple-600">7.000.000₫</span>
-							<span class="text-gray-600 ml-2">/ một lần</span>
+				<div class="bg-slate-900 rounded-[2rem] p-8 lg:p-10 shadow-2xl relative hover:scale-[1.02] transition-all duration-300 ring-4 ring-indigo-500/20 z-20">
+					<div class="absolute -top-5 left-0 right-0 flex justify-center">
+						<span class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg uppercase tracking-wide">
+							Khuyên dùng
+						</span>
+					</div>
+
+					<div class="text-center mb-8 mt-6 relative">
+						<h3 class="text-lg font-semibold text-indigo-300 mb-2 uppercase tracking-wide">Gói Doanh Nghiệp</h3>
+						<div class="flex items-baseline justify-center gap-1 mb-4">
+							<span class="text-5xl lg:text-6xl font-bold text-white tracking-tight">7.0tr</span>
+							<span class="text-slate-400 font-medium">/ trọn gói</span>
 						</div>
-						<p class="text-gray-600">
-							Giải pháp đầy đủ cho doanh nghiệp nhỏ, giải pháp bán hàng và cá nhân cần website hoàn chỉnh
+						<p class="text-slate-300">
+							Giải pháp toàn diện cho doanh nghiệp nhỏ. <br/>Website đa trang chuyên nghiệp.
 						</p>
 					</div>
 
 					<button 
-						class="w-full bg-gradient-to-r from-purple-600 to-indigo-700 hover:from-purple-700 hover:to-indigo-800 text-white font-semibold py-4 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 mb-8"
+						class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-indigo-500/25 transition-all duration-300 transform hover:-translate-y-1 mb-10"
 						onclick="scrollToQuoteForm('basic')"
 					>
-						Chọn Gói Tiêu Chuẩn
+						Bắt đầu ngay hôm nay
 					</button>
 
 					<div class="space-y-4">
-						<h4 class="font-semibold text-gray-800 mb-4">Gói Tiêu Chuẩn bao gồm:</h4>
+						<div class="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-6 border-b border-slate-700 pb-2">Tất cả tính năng gói Landing +</div>
 						
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700"><strong>Website 5 trang</strong> theo yêu cầu</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">1 Tên miền .com</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Tốc độ tải cho hiệu xuất cao</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Thiết kế theo Figma (nếu có)</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Hỗ trợ kỹ thuật cho SEO</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Hosting 10GB vĩnh viễn</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">SSL miễn phí (HTTPS)</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700"><strong>Không phí duy trì hàng tháng</strong></span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">CMS quản lý nội dung dễ dàng</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Đăng bài viết, Blog</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700"><strong>Không giới hạn tạo landing page</strong></span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Thanh toán online (Liên hệ tích hợp)</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Hướng dẫn sử dụng chi tiết</span>
-						</div>
-
-						<div class="flex items-start space-x-3">
-							<svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-							</svg>
-							<span class="text-gray-700">Bàn giao trong 3-4 ngày</span>
-						</div>
+						<ul class="space-y-4 text-slate-300">
+							{[
+								['Website 5-7 trang', 'Trang chủ, Giới thiệu, v.v.'],
+								['Không giới hạn tạo trang', 'Tùy theo nhu cầu mở rộng'],
+								['Blog / Tin tức', 'Tối ưu SEO'],
+								['Cửa hàng trực tuyến', 'Tích hợp giỏ hàng và thanh toán cơ bản'],
+								['Hỗ trợ SEO', 'Setup Google Console, Analytics'],
+								['Tích hợp Chat/Form', 'Zalo, Messenger, Email'],
+								['Bàn giao Source', 'Toàn quyền chỉnh sửa'],
+								['Bảo hành trọn đời', 'Hỗ trợ kỹ thuật 24/7']
+							].map(([main, sub]) => (
+								<li class="flex items-start gap-3">
+									<svg class="w-6 h-6 text-green-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+									</svg>
+									<div>
+										<strong class="text-white">{main}</strong>
+										{sub && <span class="block text-sm text-slate-500">{sub}</span>}
+									</div>
+								</li>
+							))}
+						</ul>
 					</div>
 				</div>
 
@@ -588,39 +504,11 @@ import QuoteForm from '../components/QuoteForm.astro';
 
 <!-- Custom Styles for Carousel -->
 <style>
-	.b-hero__slider {
-		--gap: 2rem;
-		display: flex;
-		gap: var(--gap);
-		overflow: hidden;
-		position: relative;
-		user-select: none;
-		max-width: 600px;
-		margin: 0 auto;
-	}
-	
-	.b-hero__slider:hover .b-hero__slider-wrapper {
-		animation-play-state: paused;
-	}
-	
-	.b-hero__slider-wrapper {
-		animation: scroll 20s linear infinite;
-		display: flex;
-		flex-shrink: 0;
-		gap: var(--gap);
-	}
-	
-	.b-hero__slide {
-		height: 24rem;
-		width: 11rem;
-		flex-shrink: 0;
-	}
+/* 
+	b-hero styles removed as they were not used in the updated design 
+*/
 	
 	@media (min-width: 768px) {
-		.b-hero__slide {
-			height: 28rem;
-			width: 13rem;
-		}
 		.b-timeline__line {
 			left: calc(50% - .4rem);
 		}
@@ -632,45 +520,6 @@ import QuoteForm from '../components/QuoteForm.astro';
 		}
 	}
 	
-	.b-hero__slide img {
-		border-radius: 1rem;
-		height: 100%;
-		width: 100%;
-		object-fit: cover;
-		transition: transform 0.3s ease;
-		box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-	}
-	
-	.b-hero__slide:hover img {
-		transform: scale(1.05);
-	}
-	
-	.b-hero__shadow {
-		background: linear-gradient(180deg, rgba(240, 247, 254, 0), #F0F7FE);
-		bottom: 0;
-		height: 8rem;
-		position: absolute;
-		width: 100%;
-		z-index: 9;
-		pointer-events: none;
-	}
-	
-	@keyframes scroll {
-		0% {
-			transform: translateZ(0);
-			visibility: visible;
-		}
-		100% {
-			transform: translate3d(calc(-100% - var(--gap)), 0, 0);
-		}
-	}
-	
-	.c-image {
-		width: 100%;
-		height: 100%;
-		display: block;
-	}
-
 	.b-timeline__line {
 		background-color: #403d37;
 		border-radius: .6rem;
