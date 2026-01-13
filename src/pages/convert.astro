@@ -1,0 +1,378 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="JSON/YAML Converter - WEBACELA Tools" description="Free online JSON to YAML converter. Convert JSON, YAML, and String formats instantly.">
+  <Navigation />
+  
+  <main class="min-h-screen bg-slate-950 pt-20 pb-16">
+    <div class="container mx-auto px-4">
+      <!-- Tool Container -->
+      <div class="bg-slate-900 rounded-2xl shadow-2xl overflow-hidden border border-slate-800">
+        <div class="grid lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-slate-700">
+          
+          <!-- Input Panel -->
+          <div class="flex flex-col">
+            <!-- Input Header -->
+            <div class="flex items-center justify-between px-4 py-3 border-b border-slate-700 bg-slate-800/50">
+              <div class="flex items-center gap-1">
+                <button 
+                  id="input-json-tab" 
+                  class="input-tab px-4 py-2 text-sm font-medium rounded-lg transition-colors bg-slate-700 text-white"
+                  data-format="json"
+                >
+                  JSON
+                </button>
+                <button 
+                  id="input-yaml-tab" 
+                  class="input-tab px-4 py-2 text-sm font-medium rounded-lg transition-colors text-slate-400 hover:text-white hover:bg-slate-700/50"
+                  data-format="yaml"
+                >
+                  YAML
+                </button>
+                <button 
+                  id="input-string-tab" 
+                  class="input-tab px-4 py-2 text-sm font-medium rounded-lg transition-colors text-slate-400 hover:text-white hover:bg-slate-700/50"
+                  data-format="string"
+                >
+                  String
+                </button>
+              </div>
+              <div>
+                <label class="cursor-pointer inline-flex items-center gap-2 px-4 text-sm font-medium text-slate-300 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors border border-slate-600">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                  </svg>
+                  Load File
+                  <input type="file" id="file-input" accept=".json,.yaml,.yml,.txt" class="hidden">
+                </label>
+              </div>
+            </div>
+            
+            <!-- Input Editor -->
+            <div class="relative flex-1 min-h-[500px]">
+              <div class="absolute left-0 top-0 bottom-0 w-12 bg-slate-800/30 border-r border-slate-700 flex flex-col items-end pr-3 pt-4 text-slate-500 text-sm font-mono select-none overflow-hidden" id="line-numbers">
+                <span>1</span>
+              </div>
+              <textarea 
+                id="input-editor"
+                class="w-full h-full pl-14 pr-4 py-4 bg-transparent text-slate-300 font-mono text-sm resize-none focus:outline-none placeholder:text-slate-500 placeholder:italic"
+                placeholder="Paste your JSON here"
+                spellcheck="false"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Output Panel -->
+          <div class="flex flex-col">
+            <!-- Output Header -->
+            <div class="flex items-center justify-between px-4 py-3 border-b border-slate-700 bg-slate-800/50">
+              <div class="flex items-center gap-1">
+                <button 
+                  id="output-yaml-tab" 
+                  class="output-tab px-4 py-2 text-sm font-medium rounded-lg transition-colors bg-slate-700 text-white"
+                  data-format="yaml"
+                >
+                  YAML
+                </button>
+                <button 
+                  id="output-json-tab" 
+                  class="output-tab px-4 py-2 text-sm font-medium rounded-lg transition-colors text-slate-400 hover:text-white hover:bg-slate-700/50"
+                  data-format="json"
+                >
+                  JSON
+                </button>
+                <button 
+                  id="output-string-tab" 
+                  class="output-tab px-4 py-2 text-sm font-medium rounded-lg transition-colors text-slate-400 hover:text-white hover:bg-slate-700/50"
+                  data-format="string"
+                >
+                  String
+                </button>
+              </div>
+              <div class="flex items-center gap-2">
+                <button 
+                  id="download-btn"
+                  class="px-4 py-2 text-sm font-medium text-slate-400 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled
+                >
+                  Download
+                </button>
+                <button 
+                  id="copy-btn"
+                  class="p-2 text-slate-400 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled
+                  title="Copy to clipboard"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Output Display -->
+            <div class="relative flex-1 min-h-[500px] flex items-center justify-center">
+              <pre id="output-display" class="hidden w-full h-full p-4 bg-transparent text-slate-300 font-mono text-sm overflow-auto whitespace-pre-wrap"></pre>
+              <p id="output-placeholder" class="text-slate-500 text-lg">Your result will be shown here.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script is:inline>
+  // YAML library (js-yaml CDN)
+  const yamlScript = document.createElement('script');
+  yamlScript.src = 'https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js';
+  document.head.appendChild(yamlScript);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const inputEditor = document.getElementById('input-editor');
+    const outputDisplay = document.getElementById('output-display');
+    const outputPlaceholder = document.getElementById('output-placeholder');
+    const lineNumbers = document.getElementById('line-numbers');
+    const fileInput = document.getElementById('file-input');
+    const downloadBtn = document.getElementById('download-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    
+    const inputTabs = document.querySelectorAll('.input-tab');
+    const outputTabs = document.querySelectorAll('.output-tab');
+    
+    let inputFormat = 'json';
+    let outputFormat = 'yaml';
+    let parsedData = null;
+
+    // Update line numbers
+    function updateLineNumbers() {
+      const lines = inputEditor.value.split('\n').length;
+      lineNumbers.innerHTML = Array.from({ length: lines }, (_, i) => `<span>${i + 1}</span>`).join('');
+    }
+
+    // Parse input based on format
+    function parseInput(text, format) {
+      if (!text.trim()) return null;
+      
+      try {
+        if (format === 'json') {
+          return JSON.parse(text);
+        } else if (format === 'yaml') {
+          return jsyaml.load(text);
+        } else if (format === 'string') {
+            console.log("string convert");
+            
+          // Handle escaped JSON strings (e.g., strings with \" instead of ")
+          let processedText = text.trim();
+          
+          // Strategy 1: Try direct parse first (maybe it's already valid JSON)
+          try {
+            return JSON.parse(processedText);
+          } catch (e1) {
+            // Continue to other strategies
+          }
+          
+          // Strategy 2: Remove surrounding quotes and unescape
+          let unescaped = processedText;
+          
+          // Remove surrounding quotes if present
+          if ((unescaped.startsWith('"') && unescaped.endsWith('"')) ||
+              (unescaped.startsWith("'") && unescaped.endsWith("'"))) {
+            unescaped = unescaped.slice(1, -1);
+          }
+          
+          // Replace escaped quotes \" with actual quotes "
+          unescaped = unescaped.replace(/\\"/g, '"');
+          
+          // Replace escaped backslashes \\ with single backslash \
+          unescaped = unescaped.replace(/\\\\/g, '\\');
+          
+          // Replace escaped newlines
+          unescaped = unescaped.replace(/\\n/g, '\n');
+          unescaped = unescaped.replace(/\\r/g, '\r');
+          unescaped = unescaped.replace(/\\t/g, '\t');
+          
+          try {
+            return JSON.parse(unescaped);
+          } catch (e2) {
+            // Continue to other strategies
+          }
+          
+          // Strategy 3: Try parsing as a JSON string value (wrap and parse)
+          try {
+            // This handles cases like: [{\"key\":\"value\"}]
+            // by wrapping it as a JSON string and parsing
+            const wrapped = '"' + processedText.replace(/"/g, '\\"') + '"';
+            const parsed = JSON.parse(wrapped);
+            // Now parsed is a string, parse it again as JSON
+            return JSON.parse(parsed);
+          } catch (e3) {
+            // Continue to other strategies
+          }
+          
+          // Strategy 4: Use Function to evaluate (handles JS-style escapes)
+          try {
+            // Remove surrounding quotes for eval-style parsing
+            let evalText = processedText;
+            if ((evalText.startsWith('"') && evalText.endsWith('"')) ||
+                (evalText.startsWith("'") && evalText.endsWith("'"))) {
+              evalText = evalText.slice(1, -1);
+            }
+            // Replace \" with " using a different approach
+            evalText = evalText.split('\\"').join('"');
+            return JSON.parse(evalText);
+          } catch (e4) {
+            // Continue to other strategies
+          }
+          
+          // Strategy 5: Try YAML as fallback
+          try {
+            return jsyaml.load(processedText);
+          } catch (e5) {
+            // All strategies failed
+            return { error: 'Could not parse string. Make sure the input is a valid escaped JSON string.' };
+          }
+        }
+      } catch (e) {
+        return { error: e.message };
+      }
+    }
+
+    // Format output based on format
+    function formatOutput(data, format) {
+      if (!data) return '';
+      if (data.error) return `Error: ${data.error}`;
+      
+      try {
+        if (format === 'json') {
+          return JSON.stringify(data, null, 2);
+        } else if (format === 'yaml') {
+          return jsyaml.dump(data);
+        } else if (format === 'string') {
+          return JSON.stringify(data);
+        }
+      } catch (e) {
+        return `Error: ${e.message}`;
+      }
+    }
+
+    // Convert and display
+    function convert() {
+      const text = inputEditor.value;
+      parsedData = parseInput(text, inputFormat);
+      
+      if (parsedData && !parsedData.error) {
+        const output = formatOutput(parsedData, outputFormat);
+        outputDisplay.textContent = output;
+        outputDisplay.classList.remove('hidden');
+        outputPlaceholder.classList.add('hidden');
+        downloadBtn.disabled = false;
+        copyBtn.disabled = false;
+      } else if (parsedData && parsedData.error) {
+        outputDisplay.textContent = `Error: ${parsedData.error}`;
+        outputDisplay.classList.remove('hidden');
+        outputPlaceholder.classList.add('hidden');
+        downloadBtn.disabled = true;
+        copyBtn.disabled = true;
+      } else {
+        outputDisplay.classList.add('hidden');
+        outputPlaceholder.classList.remove('hidden');
+        downloadBtn.disabled = true;
+        copyBtn.disabled = true;
+      }
+    }
+
+    // Tab switching
+    function setActiveTab(tabs, activeTab) {
+      tabs.forEach(tab => {
+        if (tab === activeTab) {
+          tab.classList.add('bg-slate-700', 'text-white');
+          tab.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-700/50');
+        } else {
+          tab.classList.remove('bg-slate-700', 'text-white');
+          tab.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-slate-700/50');
+        }
+      });
+    }
+
+    inputTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        inputFormat = tab.dataset.format;
+        setActiveTab(inputTabs, tab);
+        inputEditor.placeholder = `Paste your ${inputFormat.toUpperCase()} here`;
+        convert();
+      });
+    });
+
+    outputTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        outputFormat = tab.dataset.format;
+        setActiveTab(outputTabs, tab);
+        convert();
+      });
+    });
+
+    // Input events
+    inputEditor.addEventListener('input', () => {
+      updateLineNumbers();
+      convert();
+    });
+
+    inputEditor.addEventListener('scroll', () => {
+      lineNumbers.scrollTop = inputEditor.scrollTop;
+    });
+
+    // File input
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          inputEditor.value = event.target.result;
+          updateLineNumbers();
+          convert();
+        };
+        reader.readAsText(file);
+      }
+    });
+
+    // Download
+    downloadBtn.addEventListener('click', () => {
+      if (!parsedData || parsedData.error) return;
+      
+      const output = formatOutput(parsedData, outputFormat);
+      const ext = outputFormat === 'yaml' ? 'yaml' : outputFormat === 'json' ? 'json' : 'txt';
+      const blob = new Blob([output], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `converted.${ext}`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Copy
+    copyBtn.addEventListener('click', async () => {
+      if (!parsedData || parsedData.error) return;
+      
+      const output = formatOutput(parsedData, outputFormat);
+      await navigator.clipboard.writeText(output);
+      
+      // Show feedback
+      const originalHTML = copyBtn.innerHTML;
+      copyBtn.innerHTML = `<svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>`;
+      setTimeout(() => {
+        copyBtn.innerHTML = originalHTML;
+      }, 1500);
+    });
+
+    // Initialize
+    updateLineNumbers();
+  });
+</script>
