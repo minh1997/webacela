@@ -33,7 +33,21 @@ All commands are run from the root of the project, from a terminal:
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run start`           | Run the production Node server with `.env`       |
 | `npm run dev:cms`         | Start Decap CMS Proxy Server                     | 
+
+## AI Image Studio
+
+The image creation and editing tool lives at `/tools/image-editor`. Its server endpoint proxies requests to OmniRouter so the API key is never included in browser code.
+
+Copy `.env.example` to `.env`, then configure:
+
+```text
+OMNIROUTER_API_BASE_URL=https://api.webacela.com
+OMNIROUTER_API_KEY=your-key-here
+```
+
+For production, deploy the Node server and set the same values as runtime environment variables. Do not expose the API key through a `PUBLIC_` environment variable.
 
 ## 📝 Decap CMS Setup (Local Development)
 
