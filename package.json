@@ -6,7 +6,6 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "start": "node --env-file=.env ./dist/server/entry.mjs",
     "astro": "astro",
     "cms:proxy": "npx decap-server",
     "dev:cms": "npm run cms:proxy & npm run dev",
@@ -15,7 +14,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/node": "^9.5.5",
+    "@astrojs/netlify": "^6.6.5",
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/tailwind": "^6.0.2",
     "@tailwindcss/vite": "^4.1.10",

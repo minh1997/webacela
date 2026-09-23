@@ -2,12 +2,12 @@
 import { defineConfig, envField } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
-import node from '@astrojs/node';
+import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://your-domain.com', // Replace with your actual domain
-  adapter: node({ mode: 'standalone' }),
+  site: 'https://webacela.com',
+  adapter: netlify(),
   env: {
     schema: {
       OMNIROUTER_API_KEY: envField.string({

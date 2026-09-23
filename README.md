@@ -33,7 +33,6 @@ All commands are run from the root of the project, from a terminal:
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run start`           | Run the production Node server with `.env`       |
 | `npm run dev:cms`         | Start Decap CMS Proxy Server                     | 
 
 ## AI Image Studio
@@ -47,7 +46,9 @@ OMNIROUTER_API_BASE_URL=https://api.webacela.com
 OMNIROUTER_API_KEY=your-key-here
 ```
 
-For production, deploy the Node server and set the same values as runtime environment variables. Do not expose the API key through a `PUBLIC_` environment variable.
+For production on Netlify, add the same values under **Project configuration → Environment variables**, then redeploy. Do not expose the API key through a `PUBLIC_` environment variable.
+
+The repository includes `netlify.toml` with the expected build command and publish directory. The Astro Netlify adapter packages `/api/image-tool` as an on-demand function while keeping the other pages prerendered.
 
 ## 📝 Decap CMS Setup (Local Development)
 
