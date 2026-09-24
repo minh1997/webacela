@@ -55,7 +55,7 @@ import Layout from '../../layouts/Layout.astro';
                   <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 16V4m0 0L7 9m5-5 5 5"/><path d="M4 15v4a1 1 0 001 1h14a1 1 0 001-1v-4"/></svg>
                 </span>
                 <span class="mt-4 block font-semibold text-slate-800">Drop an image here or click to browse</span>
-                <span class="mt-1 block text-sm text-slate-500">PNG, JPEG or WebP · up to 30 MB</span>
+                <span class="mt-1 block text-sm text-slate-500">PNG, JPEG or WebP · source up to 30 MB · large files are optimized</span>
               </div>
               <img id="source-preview" class="hidden max-h-72 w-full rounded-xl object-contain" alt="Selected source preview" />
             </label>
@@ -188,7 +188,20 @@ import Layout from '../../layouts/Layout.astro';
   const downloadResult = document.querySelector<HTMLAnchorElement>('#download-result');
   const tryAgain = document.querySelector<HTMLButtonElement>('#try-again');
 
+  const MAX_SOURCE_BYTES = 30 * 1024 * 1024;
+  const SAFE_UPLOAD_BYTES = 4 * 1024 * 1024;
+  const TARGET_UPLOAD_BYTES = Math.floor(3.75 * 1024 * 1024);
+  const MAX_IMAGE_DIMENSION = 4096;
+
   let previewUrl = '';
+  let selectedImageFile: File | null = null;
+  let fileTaskId = 0;
+  let isProcessingFile = false;
+  let isSubmitting = false;
+
+  function updateSubmitState() {
+    if (submitButton) submitButton.disabled = isProcessingFile || isSubmitting;
+  }
 
   function setOptions(mode: 'generate' | 'edit') {
     if (!modelSelect || !sizeSelect) return;
@@ -226,6 +239,10 @@ import Layout from '../../layouts/Layout.astro';
   }
 
   function resetFile() {
+    fileTaskId += 1;
+    selectedImageFile = null;
+    isProcessingFile = false;
+    updateSubmitState();
     if (fileInput) fileInput.value = '';
     if (previewUrl) URL.revokeObjectURL(previewUrl);
     previewUrl = '';
@@ -236,29 +253,115 @@ import Layout from '../../layouts/Layout.astro';
     fileRow?.classList.remove('flex');
   }
 
-  function handleFile(file?: File) {
+  function canvasToWebp(canvas: HTMLCanvasElement, quality: number) {
+    return new Promise<Blob>((resolve, reject) => {
+      canvas.toBlob((blob) => {
+        if (blob) resolve(blob);
+        else reject(new Error('This browser could not optimize the image.'));
+      }, 'image/webp', quality);
+    });
+  }
+
+  async function optimizeImage(file: File) {
+    if (file.size <= SAFE_UPLOAD_BYTES) return file;
+
+    const bitmap = await createImageBitmap(file);
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+
+    if (!context) {
+      bitmap.close();
+      throw new Error('This browser could not optimize the image.');
+    }
+
+    let scale = Math.min(1, MAX_IMAGE_DIMENSION / Math.max(bitmap.width, bitmap.height));
+    let quality = 0.88;
+
+    try {
+      for (let attempt = 0; attempt < 14; attempt += 1) {
+        canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+        canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+
+        const blob = await canvasToWebp(canvas, quality);
+        if (blob.size <= TARGET_UPLOAD_BYTES) {
+          const baseName = file.name.replace(/\.[^.]+$/, '') || 'source-image';
+          return new File([blob], `${baseName}-optimized.webp`, {
+            type: 'image/webp',
+            lastModified: Date.now(),
+          });
+        }
+
+        if (quality > 0.58) {
+          quality -= 0.1;
+        } else {
+          scale *= 0.8;
+          quality = 0.82;
+        }
+      }
+    } finally {
+      bitmap.close();
+    }
+
+    throw new Error('The image could not be reduced enough. Try a smaller source image.');
+  }
+
+  async function handleFile(file?: File) {
     if (!file) return;
     if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) {
       resetFile();
       showError('Choose a PNG, JPEG, or WebP image.');
       return;
     }
-    if (file.size > 30 * 1024 * 1024) {
+    if (file.size > MAX_SOURCE_BYTES) {
       resetFile();
       showError('The source image must be 30 MB or smaller.');
       return;
     }
+
+    const taskId = ++fileTaskId;
+    selectedImageFile = null;
+    isProcessingFile = true;
+    updateSubmitState();
     clearError();
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
-    previewUrl = URL.createObjectURL(file);
-    if (sourcePreview) {
-      sourcePreview.src = previewUrl;
-      sourcePreview.classList.remove('hidden');
-    }
-    uploadEmpty?.classList.add('hidden');
-    if (fileName) fileName.textContent = `${file.name} · ${(file.size / 1024 / 1024).toFixed(1)} MB`;
     fileRow?.classList.remove('hidden');
     fileRow?.classList.add('flex');
+    if (fileName) {
+      fileName.textContent = file.size > SAFE_UPLOAD_BYTES
+        ? `Optimizing ${file.name}…`
+        : `${file.name} · ${(file.size / 1024 / 1024).toFixed(1)} MB`;
+    }
+
+    try {
+      const uploadFile = await optimizeImage(file);
+      if (taskId !== fileTaskId) return;
+
+      selectedImageFile = uploadFile;
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+      previewUrl = URL.createObjectURL(uploadFile);
+      if (sourcePreview) {
+        sourcePreview.src = previewUrl;
+        sourcePreview.classList.remove('hidden');
+      }
+      uploadEmpty?.classList.add('hidden');
+      if (fileName) {
+        const originalSize = (file.size / 1024 / 1024).toFixed(1);
+        const uploadSize = (uploadFile.size / 1024 / 1024).toFixed(1);
+        fileName.textContent = uploadFile === file
+          ? `${file.name} · ${originalSize} MB`
+          : `${file.name} · ${originalSize} MB → ${uploadSize} MB`;
+      }
+    } catch (error) {
+      if (taskId !== fileTaskId) return;
+      resetFile();
+      showError(error instanceof Error ? error.message : 'The image could not be optimized.');
+    } finally {
+      if (taskId === fileTaskId) {
+        isProcessingFile = false;
+        updateSubmitState();
+      }
+    }
   }
 
   modeButtons.forEach((button) => {
@@ -279,7 +382,7 @@ import Layout from '../../layouts/Layout.astro';
     });
   });
 
-  fileInput?.addEventListener('change', () => handleFile(fileInput.files?.[0]));
+  fileInput?.addEventListener('change', () => void handleFile(fileInput.files?.[0]));
   removeImage?.addEventListener('click', resetFile);
 
   ['dragenter', 'dragover'].forEach((eventName) => {
@@ -300,7 +403,7 @@ import Layout from '../../layouts/Layout.astro';
     const transfer = new DataTransfer();
     transfer.items.add(file);
     fileInput.files = transfer.files;
-    handleFile(file);
+    void handleFile(file);
   });
 
   form?.addEventListener('submit', async (event) => {
@@ -312,12 +415,13 @@ import Layout from '../../layouts/Layout.astro';
       prompt?.focus();
       return;
     }
-    if (modeInput?.value === 'edit' && !fileInput?.files?.length) {
+    if (modeInput?.value === 'edit' && !selectedImageFile) {
       showError('Choose a source image to edit.');
       return;
     }
 
-    submitButton?.setAttribute('disabled', 'true');
+    isSubmitting = true;
+    updateSubmitState();
     emptyResult?.classList.add('hidden');
     completedResult?.classList.add('hidden');
     completedResult?.classList.remove('flex');
@@ -326,9 +430,13 @@ import Layout from '../../layouts/Layout.astro';
     if (loadingTitle) loadingTitle.textContent = modeInput?.value === 'edit' ? 'Transforming your image' : 'Creating your image';
 
     try {
+      const requestData = new FormData(form);
+      if (modeInput?.value === 'edit' && selectedImageFile) {
+        requestData.set('image', selectedImageFile, selectedImageFile.name);
+      }
       const response = await fetch('/api/image-tool', {
         method: 'POST',
-        body: new FormData(form),
+        body: requestData,
       });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || 'The image request failed.');
@@ -349,7 +457,8 @@ import Layout from '../../layouts/Layout.astro';
       emptyResult?.classList.remove('hidden');
       showError(error instanceof Error ? error.message : 'The image request failed.');
     } finally {
-      submitButton?.removeAttribute('disabled');
+      isSubmitting = false;
+      updateSubmitState();
     }
   });
 

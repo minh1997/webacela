@@ -3,7 +3,7 @@ import { OMNIROUTER_API_BASE_URL, OMNIROUTER_API_KEY } from 'astro:env/server';
 
 export const prerender = false;
 
-const MAX_IMAGE_BYTES = 30 * 1024 * 1024;
+const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 6;
 
@@ -137,7 +137,7 @@ export const POST: APIRoute = async ({ request }) => {
       }
 
       if (image.size > MAX_IMAGE_BYTES) {
-        return json({ error: 'The source image must be 30 MB or smaller.' }, 413);
+        return json({ error: 'The processed image must be 20 MB or smaller.' }, 413);
       }
 
       endpoint = `${baseUrl}/v1/images/edits`;
