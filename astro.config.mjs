@@ -7,7 +7,9 @@ import netlify from '@astrojs/netlify';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://webacela.com',
-  adapter: netlify(),
+  adapter: netlify({
+    devFeatures: false,
+  }),
   env: {
     schema: {
       OMNIROUTER_API_KEY: envField.string({
